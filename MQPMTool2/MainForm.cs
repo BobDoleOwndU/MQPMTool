@@ -1,0 +1,231 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Windows.Forms;
+using System.Xml.Serialization;
+
+namespace MQPMTool2
+{
+    public partial class MainForm : Form
+    {
+        static XmlSerializer componentSerializer = new XmlSerializer(typeof(MQPMComponent));
+        static XmlSerializer addonSerializer = new XmlSerializer(typeof(MQPMAddon));
+        static MQPMComponent mqpmComponents;
+
+        PlayerType selectedPlayerType = new PlayerType();
+        PlayerOutfit selectedPlayerOutfit = new PlayerOutfit();
+        QuietOutfit selectedQuietOutfit = new QuietOutfit();
+        Head selectedHead = new Head();
+
+        public MainForm()
+        {
+            InitializeComponent();
+            LoadXml();
+        } //constructor ends
+
+        /*
+         * LoadXml
+         * Loads the components.xml file's entries into options for the User Interface.
+         */
+        private void LoadXml()
+        {
+            try
+            {
+                //load and deserialize the components file to get options in the UI.
+                using (FileStream xmlStream = new FileStream(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\components.xml", FileMode.Open))
+                {
+                    mqpmComponents = componentSerializer.Deserialize(xmlStream) as MQPMComponent;
+                } //using ends
+            } //try ends
+            catch
+            {
+                MessageBox.Show("Could not read components.xml! Please ensure it exists in the folder with the MQPM Tool.", "FileStream Exception!");
+                Environment.Exit(1);
+            } //catch ends
+
+            foreach (string file in Directory.EnumerateFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\addons", "*.xml"))
+            {
+                MQPMAddon addon = new MQPMAddon();
+
+                using (FileStream xmlStream = new FileStream(file, FileMode.Open))
+                {
+                    addon = addonSerializer.Deserialize(xmlStream) as MQPMAddon;
+                } //using ends
+
+                Console.WriteLine(file);
+
+                Console.WriteLine(addon.quietOutfits[0].name);
+
+                //add additional excluded Snake outfits.
+                for (int i = 0; i < addon.snakeExcludedOutfits.Count; i++)
+                    for (int j = 0; j < mqpmComponents.playerTypes.Count; j++)
+                        if (mqpmComponents.playerTypes[j].name == "snake")
+                            mqpmComponents.playerTypes[j].excludedOutfits.Add(addon.snakeExcludedOutfits[i]);
+
+                //add additional excluded female outfits.
+                for (int i = 0; i < addon.femaleExcludedOutfits.Count; i++)
+                    for (int j = 0; j < mqpmComponents.playerTypes.Count; j++)
+                        if (mqpmComponents.playerTypes[j].name == "female")
+                            mqpmComponents.playerTypes[j].excludedOutfits.Add(addon.femaleExcludedOutfits[i]);
+
+                //add additional Quiet outfits.
+                for (int i = 0; i < addon.quietOutfits.Count; i++)
+                    mqpmComponents.quietOutfits.Add(addon.quietOutfits[i]);
+
+                //add additional heads.
+                for (int i = 0; i < addon.heads.Count; i++)
+                    mqpmComponents.heads.Add(addon.heads[i]);
+
+                foreach(Head head in mqpmComponents.heads)
+                {
+                    Console.WriteLine(head.name);
+                }
+            } //foreach ends
+        } //method LoadXml ends
+
+        /*
+         * snakeRadioButton_CheckedChanged
+         * Sets the selected outfit based on the selected radio button. Also loads the list of compatible player outfits for the character.
+         */
+        private void snakeRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            //check which player type we need to load the outfits for.
+            for (int i = 0; i < mqpmComponents.playerTypes.Count; i++)
+                if (snakeRadioButton.Checked && mqpmComponents.playerTypes[i].name == "snake")
+                    selectedPlayerType = mqpmComponents.playerTypes[i];
+                else if (femaleRadioButton.Checked && mqpmComponents.playerTypes[i].name == "female")
+                    selectedPlayerType = mqpmComponents.playerTypes[i];
+
+            Dictionary<string, string> playerOutfitSource = new Dictionary<string, string>(0);
+
+            //add all of the player outfits to the combo box.
+            for (int i = 0; i < mqpmComponents.playerOutfits.Count; i++)
+                for (int j = 0; j < selectedPlayerType.playerOutfits.Count; j++)
+                    if (mqpmComponents.playerOutfits[i].name == selectedPlayerType.playerOutfits[j])
+                        playerOutfitSource.Add(mqpmComponents.playerOutfits[i].name, mqpmComponents.playerOutfits[i].display);
+
+            playerOutfitComboBox.DataSource = new BindingSource(playerOutfitSource, null);
+            playerOutfitComboBox.ValueMember = "Key";
+            playerOutfitComboBox.DisplayMember = "Value";
+        } //snakeRadioButton_CheckedChanged ends
+
+        /*
+         * playerOutfitComboBox_SelectedIndexChanged
+         * Loads the list of Quiet's compatible outfits for a selected player outfit.
+         */
+        private void playerOutfitComboBox_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            //set the outfit selected in the combo box as the selected outfit.
+            for (int i = 0; i < mqpmComponents.playerOutfits.Count; i++)
+                if (mqpmComponents.playerOutfits[i].name == ((KeyValuePair<string, string>)playerOutfitComboBox.SelectedItem).Key)
+                    selectedPlayerOutfit = mqpmComponents.playerOutfits[i];
+
+            Dictionary<string, string> quietOutfitSource = new Dictionary<string, string>(0);
+
+            //match the outfit's compatible outfit list names to the component's outfit list names. get the matches' display entries as combo box options.
+            for (int i = 0; i < mqpmComponents.quietOutfits.Count; i++)
+                for (int j = 0; j < selectedPlayerOutfit.quietOutfits.Count; j++)
+                    if (mqpmComponents.quietOutfits[i].name == selectedPlayerOutfit.quietOutfits[j])
+                    {
+                        bool add = true;
+
+                        //make sure the outfit isn't excluded for the player type.
+                        for (int h = 0; h < selectedPlayerType.excludedOutfits.Count; h++)
+                            if (mqpmComponents.quietOutfits[i].name == selectedPlayerType.excludedOutfits[h])
+                                add = false;
+
+                        if(add)
+                            quietOutfitSource.Add(mqpmComponents.quietOutfits[i].name, mqpmComponents.quietOutfits[i].display);
+                    } //if ends
+
+            quietOutfitComboBox.DataSource = new BindingSource(quietOutfitSource, null);
+            quietOutfitComboBox.ValueMember = "Key";
+            quietOutfitComboBox.DisplayMember = "Value";
+        } //playerOutfitComboBox_SelectedIndexChanged
+
+        /*
+         * quietOutfitComboBox_SelectedIndexChanged
+         * Loads the list of Quiet's compatible heads for a selected Quiet outfit.
+         */
+        private void quietOutfitComboBox_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            //set the outfit selected in the combo box as the selected outfit.
+            for (int i = 0; i < mqpmComponents.quietOutfits.Count; i++)
+                if (mqpmComponents.quietOutfits[i].name == ((KeyValuePair<string, string>)quietOutfitComboBox.SelectedItem).Key)
+                    selectedQuietOutfit = mqpmComponents.quietOutfits[i];
+
+            Dictionary<string, string> headSource = new Dictionary<string, string>(0);
+
+            //if the player's outfit limits heads, only the default head should be selectable. else, load the list of heads compatible with the outfit.
+            if (selectedPlayerOutfit.limitHeads)
+            {
+                for (int i = 0; i < mqpmComponents.heads.Count; i++)
+                    if (mqpmComponents.heads[i].name == selectedQuietOutfit.defaultHead)
+                        headSource.Add(mqpmComponents.heads[i].name, mqpmComponents.heads[i].display);
+            } //if ends
+            else
+                for (int i = 0; i < mqpmComponents.heads.Count; i++)
+                    for (int j = 0; j < selectedQuietOutfit.heads.Count; j++)
+                        if (mqpmComponents.heads[i].name == selectedQuietOutfit.heads[j])
+                            headSource.Add(mqpmComponents.heads[i].name, mqpmComponents.heads[i].display);
+
+            headComboBox.DataSource = new BindingSource(headSource, null);
+            headComboBox.ValueMember = "Key";
+            headComboBox.DisplayMember = "Value";
+        } //quietOutfitComboBox_SelectedIndexChanged ends
+
+        /*
+         * headComboBox_SelectedIndexChanged
+         * Sets the head chosen in the combo box as the selected head.
+         */
+        private void headComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //set the head selected in the combo box as the selected head.
+            for (int i = 0; i < mqpmComponents.heads.Count; i++)
+                if (mqpmComponents.heads[i].name == ((KeyValuePair<string, string>)headComboBox.SelectedItem).Key)
+                    selectedHead = mqpmComponents.heads[i];
+        } //headComboBox_SelectedIndexChanged
+
+        /*
+         * processButton_Click
+         * Sends the selected options to the outfit builder.
+         */
+        private void processButton_Click(object sender, System.EventArgs e)
+        {
+            if (!Verify())
+            {
+                MessageBox.Show("Please ensure all options have been selected", "Select all options!");
+                return;
+            } //if ends
+
+            OutfitBuilder.Build(outputTextBox.Text, snakeRadioButton.Checked, selectedPlayerOutfit.name, selectedQuietOutfit.name, selectedHead.name, selectedQuietOutfit.fcnp, selectedQuietOutfit.sims.ToArray(), selectedQuietOutfit.includePftxs, selectedQuietOutfit.useBody, selectedQuietOutfit.extraFmdl);
+        } //processButton_Click ends
+
+        /*
+         * outputButton_Click
+         * Opens a folder browser dialog to select the output folder.
+         */
+        private void outputButton_Click(object sender, System.EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+
+            fbd.ShowDialog();
+
+            if (!string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                outputTextBox.Text = fbd.SelectedPath;
+        } //outputButton_Click ends
+
+        /*
+         * Verify
+         * Checks to make sure all options have been selected before building an outfit.
+         */
+        private bool Verify()
+        {
+            if (string.IsNullOrEmpty(outputTextBox.Text) || (!snakeRadioButton.Checked && !femaleRadioButton.Checked) || playerOutfitComboBox.SelectedIndex == -1 || quietOutfitComboBox.SelectedIndex == -1 || headComboBox.SelectedIndex == -1)
+                return false;
+
+            return true;
+        } //method Verify ends
+    } //partial class MainForm ends
+} //namespace MQPMTool2 ends
