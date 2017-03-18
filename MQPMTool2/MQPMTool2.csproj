@@ -64,6 +64,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\AddonHead.cs" />
+    <Compile Include="Components\AddonOutfit.cs" />
     <Compile Include="Components\MQPMAddon.cs" />
     <Compile Include="Components\MQPMComponent.cs" />
     <Compile Include="Components\Head.cs" />

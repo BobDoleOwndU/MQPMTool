@@ -53,10 +53,6 @@ namespace MQPMTool2
                     addon = addonSerializer.Deserialize(xmlStream) as MQPMAddon;
                 } //using ends
 
-                Console.WriteLine(file);
-
-                Console.WriteLine(addon.quietOutfits[0].name);
-
                 //add additional excluded Snake outfits.
                 for (int i = 0; i < addon.snakeExcludedOutfits.Count; i++)
                     for (int j = 0; j < mqpmComponents.playerTypes.Count; j++)
@@ -70,17 +66,29 @@ namespace MQPMTool2
                             mqpmComponents.playerTypes[j].excludedOutfits.Add(addon.femaleExcludedOutfits[i]);
 
                 //add additional Quiet outfits.
-                for (int i = 0; i < addon.quietOutfits.Count; i++)
-                    mqpmComponents.quietOutfits.Add(addon.quietOutfits[i]);
+                for (int i = 0; i < addon.addonOutfits.Count; i++)
+                {
+                    mqpmComponents.quietOutfits.Add(addon.addonOutfits[i]);
+
+                    //add the entry to the player outfits so the new outfit can be selected.
+                    for (int j = 0; j < addon.addonOutfits[i].playerOutfits.Count; j++)
+                        for (int h = 0; h < mqpmComponents.playerOutfits.Count; h++)
+                            if (addon.addonOutfits[i].playerOutfits[j] == mqpmComponents.playerOutfits[h].name)
+                                mqpmComponents.playerOutfits[h].quietOutfits.Add(addon.addonOutfits[i].name);
+                } //for ends
 
                 //add additional heads.
-                for (int i = 0; i < addon.heads.Count; i++)
-                    mqpmComponents.heads.Add(addon.heads[i]);
-
-                foreach(Head head in mqpmComponents.heads)
+                for (int i = 0; i < addon.addonHeads.Count; i++)
                 {
-                    Console.WriteLine(head.name);
-                }
+                    mqpmComponents.heads.Add(addon.addonHeads[i]);
+
+                    //add the entry to the Quiet outfits so the new head can be selected.
+                    for (int j = 0; j < addon.addonHeads[i].quietOutfits.Count; j++)
+                        for (int h = 0; h < mqpmComponents.quietOutfits.Count; h++)
+                            if (addon.addonHeads[i].quietOutfits[j] == mqpmComponents.quietOutfits[h].name)
+                                mqpmComponents.quietOutfits[h].heads.Add(addon.addonHeads[i].name);
+                } //for ends
+                    
             } //foreach ends
         } //method LoadXml ends
 

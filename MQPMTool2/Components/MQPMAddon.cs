@@ -12,10 +12,10 @@ namespace MQPMTool2
         [XmlArray("FemaleExcludedOutfits")]
         public List<string> femaleExcludedOutfits = new List<string>(0);
 
-        [XmlArray("QuietOutfits")]
-        public List<QuietOutfit> quietOutfits = new List<QuietOutfit>(0);
+        [XmlArray("AddonOutfits")]
+        public List<AddonOutfit> addonOutfits = new List<AddonOutfit>(0);
 
-        [XmlArray("Heads")]
-        public List<Head> heads = new List<Head>(0);
+        [XmlArray("AddonHeads")]
+        public List<AddonHead> addonHeads = new List<AddonHead>(0);
     } //class Addon ends
 }
