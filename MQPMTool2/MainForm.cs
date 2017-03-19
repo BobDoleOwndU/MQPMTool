@@ -207,7 +207,7 @@ namespace MQPMTool2
                 return;
             } //if ends
 
-            OutfitBuilder.Build(outputTextBox.Text, snakeRadioButton.Checked, selectedPlayerOutfit.name, selectedQuietOutfit.name, selectedHead.name, selectedQuietOutfit.fcnp, selectedQuietOutfit.sims.ToArray(), selectedQuietOutfit.includePftxs, selectedQuietOutfit.useBody, selectedQuietOutfit.extraFmdl);
+            OutfitBuilder.Build(outputTextBox.Text, snakeRadioButton.Checked, selectedPlayerOutfit.name, selectedQuietOutfit.name, selectedHead.name, selectedQuietOutfit.fcnp, selectedQuietOutfit.sims.ToArray(), selectedQuietOutfit.includePftxs, selectedQuietOutfit.useBody, selectedQuietOutfit.extraFmdl, selectedHead.includePftxs);
         } //processButton_Click ends
 
         /*

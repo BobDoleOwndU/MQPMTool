@@ -10,5 +10,8 @@ namespace MQPMTool2
 
         [XmlAttribute("Display")]
         public string display;
+
+        [XmlAttribute("IncludePftxs")]
+        public bool includePftxs;
     } //class Head ends
 } //namespace MQPMTool2 ends

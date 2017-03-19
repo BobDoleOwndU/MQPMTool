@@ -51,6 +51,14 @@
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CityHash, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\CityHash.dll</HintPath>
+    </Reference>
+    <Reference Include="GzsTool.Core, Version=0.5.2.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\GzsTool.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -66,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Components\AddonHead.cs" />
     <Compile Include="Components\AddonOutfit.cs" />
+    <Compile Include="Components\ArchiveHandler.cs" />
     <Compile Include="Components\MQPMAddon.cs" />
     <Compile Include="Components\MQPMComponent.cs" />
     <Compile Include="Components\Head.cs" />

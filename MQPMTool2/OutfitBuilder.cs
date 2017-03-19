@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using GzsTool.Core.Pftxs;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -27,7 +29,7 @@ namespace MQPMTool2
 
         static List<Outfit> outfits = new List<Outfit>(0);
 
-        public static void Build(string outputPath, bool isSnake, string playerOutfit, string quietOutfit, string quietHead, string fcnp, string[] sims, bool includePftxs, bool useBody, string extraFmdl)
+        public static void Build(string outputPath, bool isSnake, string playerOutfit, string quietOutfit, string quietHead, string fcnp, string[] sims, bool includeOutfitPftxs, bool useBody, string extraFmdl, bool includeHeadPftxs)
         {
             string playerOutfitName = "";
             string fpkOutputPath = "";
@@ -61,8 +63,31 @@ namespace MQPMTool2
             File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\fcnp\" + fcnp + ".fcnp", fpkOutputPath + outfit.outfitPath + ".fcnp", true);
 
             //if the outfit needs a .pftxs, copy it over.
-            if(includePftxs)
+            if(includeOutfitPftxs)
                 File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\pftxs\" + quietOutfit + ".pftxs", Path.GetDirectoryName(fpkOutputPath) + "\\" + playerOutfitName + ".pftxs", true);
+
+            //if the head needs a .pftxs copy it over.
+            if(includeHeadPftxs)
+            {
+                //if there's no outfit .pftxs, copy the head one. otherwise, merge the .pftxs files.
+                if(!includeOutfitPftxs)
+                    File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\pftxs\" + quietHead + ".pftxs", Path.GetDirectoryName(fpkOutputPath) + "\\" + playerOutfitName + ".pftxs", true);
+                else if(quietOutfit != quietHead)
+                {
+                    string mainPftxs = Path.GetDirectoryName(fpkOutputPath) + "\\" + playerOutfitName + ".pftxs";
+                    string outputFolder = Path.GetDirectoryName(fpkOutputPath) + "\\" + playerOutfitName + "_pftxs";
+                    string extraPftxs = Path.GetDirectoryName(fpkOutputPath) + "\\" + quietHead + ".pftxs";
+
+                    File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\pftxs\" + quietHead + ".pftxs", extraPftxs, true);
+
+                    ArchiveHandler.ExtractArchive<PftxsFile>(mainPftxs, outputFolder);
+                    ArchiveHandler.ExtractArchive<PftxsFile>(extraPftxs, outputFolder);
+                    ArchiveHandler.WritePftxsArchive(mainPftxs, outputFolder);
+
+                    File.Delete(extraPftxs);
+                    DeleteDirectory(outputFolder);
+                } //else if ends
+            } //if ends
 
             //determine whether we need a full model or a separate head and body model.
             if (quietOutfit == quietHead)
@@ -289,5 +314,28 @@ namespace MQPMTool2
             plparts_ddf_swimwear.outfitType = (int)OutfitType.HEAD_NO_ARM;
             outfits.Add(plparts_ddf_swimwear);
         } //method GetOutfits ends
+
+        /*
+         * DeleteDirectory
+         * This function ensures a specified directory will be deleted.
+         */
+        public static void DeleteDirectory(string path)
+        {
+            foreach (string directory in Directory.GetDirectories(path))
+                DeleteDirectory(directory);
+
+            try
+            {
+                Directory.Delete(path, true);
+            } //try ends
+            catch (IOException)
+            {
+                Directory.Delete(path, true);
+            } //catch ends
+            catch (UnauthorizedAccessException)
+            {
+                Directory.Delete(path, true);
+            } //catch ends
+        } //function DeleteDirectory ends
     } //class OutfitBuilder ends
 } //namespace MQPMTool2 ends
