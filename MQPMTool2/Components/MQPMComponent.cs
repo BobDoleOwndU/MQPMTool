@@ -17,5 +17,8 @@ namespace MQPMTool2
 
         [XmlArray("Heads")]
         public List<Head> heads = new List<Head>(0);
+
+        [XmlArray("ExtraLists")]
+        public List<ExtraList> extraLists = new List<ExtraList>(0);
     } //class MQPMComponent ends
 } //namespace MQPMTool2 ends

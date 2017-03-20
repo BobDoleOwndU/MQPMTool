@@ -21,8 +21,8 @@ namespace MQPMTool2
         [XmlAttribute("UseBody")]
         public bool useBody;
 
-        [XmlAttribute("ExtraFmdl")]
-        public string extraFmdl;
+        [XmlAttribute("ExtraList")]
+        public string extraList;
 
         [XmlAttribute("DefaultHead")]
         public string defaultHead;

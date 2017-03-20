@@ -17,5 +17,8 @@ namespace MQPMTool2
 
         [XmlArray("AddonHeads")]
         public List<AddonHead> addonHeads = new List<AddonHead>(0);
+
+        [XmlArray("ExtraLists")]
+        public List<ExtraList> extraLists = new List<ExtraList>(0);
     } //class Addon ends
 }

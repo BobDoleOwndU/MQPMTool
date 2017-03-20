@@ -3,19 +3,16 @@ using System.Xml.Serialization;
 
 namespace MQPMTool2
 {
-    [XmlType("Head")]
-    public class Head
+    [XmlType("ExtraList")]
+    public class ExtraList
     {
         [XmlAttribute("Name")]
         public string name;
 
-        [XmlAttribute("Display")]
-        public string display;
-
-        [XmlAttribute("IncludePftxs")]
-        public bool includePftxs;
+        [XmlAttribute("IncludeFrdv")]
+        public bool includeFrdv;
 
         [XmlArray("Values")]
         public List<string> values = new List<string>(0);
-    } //class Head ends
+    } //class ExtraList ends
 } //namespace MQPMTool2 ends

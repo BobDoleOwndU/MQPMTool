@@ -16,6 +16,7 @@ namespace MQPMTool2
         PlayerType selectedPlayerType = new PlayerType();
         PlayerOutfit selectedPlayerOutfit = new PlayerOutfit();
         QuietOutfit selectedQuietOutfit = new QuietOutfit();
+        ExtraList selectedExtraList = new ExtraList();
         Head selectedHead = new Head();
 
         public MainForm()
@@ -40,7 +41,7 @@ namespace MQPMTool2
             } //try ends
             catch
             {
-                MessageBox.Show("Could not read components.xml! Please ensure it exists in the folder with the MQPM Tool.", "FileStream Exception!");
+                MessageBox.Show("There was an error with components.xml! Please ensure it exists in the folder with the MQPM Tool.", "FileStream Exception!");
                 Environment.Exit(1);
             } //catch ends
 
@@ -88,7 +89,12 @@ namespace MQPMTool2
                             if (addon.addonHeads[i].quietOutfits[j] == mqpmComponents.quietOutfits[h].name)
                                 mqpmComponents.quietOutfits[h].heads.Add(addon.addonHeads[i].name);
                 } //for ends
-                    
+
+                //add new extra lists.
+                for (int i = 0; i < addon.extraLists.Count; i++)
+                    mqpmComponents.extraLists.Add(addon.extraLists[i]);
+
+
             } //foreach ends
         } //method LoadXml ends
 
@@ -163,6 +169,13 @@ namespace MQPMTool2
                 if (mqpmComponents.quietOutfits[i].name == ((KeyValuePair<string, string>)quietOutfitComboBox.SelectedItem).Key)
                     selectedQuietOutfit = mqpmComponents.quietOutfits[i];
 
+            //get the outfits extra list.
+            for (int i = 0; i < mqpmComponents.extraLists.Count; i++)
+                if (mqpmComponents.extraLists[i].name == selectedQuietOutfit.extraList)
+                    selectedExtraList = mqpmComponents.extraLists[i];
+
+            Console.WriteLine(selectedExtraList.name);
+
             Dictionary<string, string> headSource = new Dictionary<string, string>(0);
 
             //if the player's outfit limits heads, only the default head should be selectable. else, load the list of heads compatible with the outfit.
@@ -207,7 +220,7 @@ namespace MQPMTool2
                 return;
             } //if ends
 
-            OutfitBuilder.Build(outputTextBox.Text, snakeRadioButton.Checked, selectedPlayerOutfit.name, selectedQuietOutfit.name, selectedHead.name, selectedQuietOutfit.fcnp, selectedQuietOutfit.sims.ToArray(), selectedQuietOutfit.includePftxs, selectedQuietOutfit.useBody, selectedQuietOutfit.extraFmdl, selectedHead.includePftxs);
+            OutfitBuilder.Build(outputTextBox.Text, snakeRadioButton.Checked, selectedPlayerOutfit.name, selectedQuietOutfit.name, selectedHead.name, selectedHead.values, selectedQuietOutfit.fcnp, selectedQuietOutfit.sims, selectedQuietOutfit.includePftxs, selectedQuietOutfit.useBody, selectedExtraList.values, selectedHead.includePftxs);
         } //processButton_Click ends
 
         /*
