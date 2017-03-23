@@ -12,9 +12,6 @@ namespace MQPMTool2
         [XmlAttribute("Display")]
         public string display;
 
-        [XmlAttribute("Fcnp")]
-        public string fcnp;
-
         [XmlAttribute("IncludePftxs")]
         public bool includePftxs;
 
@@ -29,6 +26,9 @@ namespace MQPMTool2
 
         [XmlArray("Heads")]
         public List<string> heads = new List<string>(0);
+
+        [XmlArray("Fcnps")]
+        public List<string> fcnps = new List<string>(0);
 
         [XmlArray("Sims")]
         public List<string> sims = new List<string>(0);

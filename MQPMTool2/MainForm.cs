@@ -18,6 +18,7 @@ namespace MQPMTool2
         QuietOutfit selectedQuietOutfit = new QuietOutfit();
         ExtraList selectedExtraList = new ExtraList();
         Head selectedHead = new Head();
+        Fcnp selectedFcnp = new Fcnp();
 
         public MainForm()
         {
@@ -89,6 +90,10 @@ namespace MQPMTool2
                             if (addon.addonHeads[i].quietOutfits[j] == mqpmComponents.quietOutfits[h].name)
                                 mqpmComponents.quietOutfits[h].heads.Add(addon.addonHeads[i].name);
                 } //for ends
+
+                //add new fcnps.
+                for (int i = 0; i < addon.fcnps.Count; i++)
+                    mqpmComponents.fcnps.Add(addon.fcnps[i]);
 
                 //add new extra lists.
                 for (int i = 0; i < addon.extraLists.Count; i++)
@@ -174,8 +179,6 @@ namespace MQPMTool2
                 if (mqpmComponents.extraLists[i].name == selectedQuietOutfit.extraList)
                     selectedExtraList = mqpmComponents.extraLists[i];
 
-            Console.WriteLine(selectedExtraList.name);
-
             Dictionary<string, string> headSource = new Dictionary<string, string>(0);
 
             //if the player's outfit limits heads, only the default head should be selectable. else, load the list of heads compatible with the outfit.
@@ -194,6 +197,18 @@ namespace MQPMTool2
             headComboBox.DataSource = new BindingSource(headSource, null);
             headComboBox.ValueMember = "Key";
             headComboBox.DisplayMember = "Value";
+
+            Dictionary<string, string> hipSource = new Dictionary<string, string>(0);
+
+            //get the list of compatible fcnps and add them to the hip combo box.
+            for (int i = 0; i < mqpmComponents.fcnps.Count; i++)
+                for (int j = 0; j < selectedQuietOutfit.fcnps.Count; j++)
+                    if (mqpmComponents.fcnps[i].name == selectedQuietOutfit.fcnps[j])
+                        hipSource.Add(mqpmComponents.fcnps[i].name, mqpmComponents.fcnps[i].display);
+
+            hipComboBox.DataSource = new BindingSource(hipSource, null);
+            hipComboBox.ValueMember = "Key";
+            hipComboBox.DisplayMember = "Value";
         } //quietOutfitComboBox_SelectedIndexChanged ends
 
         /*
@@ -209,6 +224,18 @@ namespace MQPMTool2
         } //headComboBox_SelectedIndexChanged
 
         /*
+         * hipComboBox_SelectedIndexChanged
+         * Sets the fcnp chosen in the combo box as the selected fcnp.
+         */
+        private void hipComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //set the fcnp selected in the combo box as the selected fcnp.
+            for (int i = 0; i < mqpmComponents.fcnps.Count; i++)
+                if (mqpmComponents.fcnps[i].name == ((KeyValuePair<string, string>)hipComboBox.SelectedItem).Key)
+                    selectedFcnp = mqpmComponents.fcnps[i];
+        } //headComboBox_SelectedIndexChanged
+
+        /*
          * processButton_Click
          * Sends the selected options to the outfit builder.
          */
@@ -220,7 +247,7 @@ namespace MQPMTool2
                 return;
             } //if ends
 
-            OutfitBuilder.Build(outputTextBox.Text, snakeRadioButton.Checked, selectedPlayerOutfit.name, selectedQuietOutfit.name, selectedHead.name, selectedHead.values, selectedQuietOutfit.fcnp, selectedQuietOutfit.sims, selectedQuietOutfit.includePftxs, selectedQuietOutfit.useBody, selectedExtraList.values, selectedHead.includePftxs);
+            OutfitBuilder.Build(outputTextBox.Text, snakeRadioButton.Checked, selectedPlayerOutfit.name, selectedQuietOutfit.name, selectedHead.name, selectedHead.values, selectedFcnp.name, selectedQuietOutfit.sims, selectedQuietOutfit.includePftxs, selectedQuietOutfit.useBody, selectedExtraList.values, selectedHead.includePftxs);
         } //processButton_Click ends
 
         /*

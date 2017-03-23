@@ -39,7 +39,7 @@
             this.quietHeadLabel = new System.Windows.Forms.Label();
             this.hipWeaponLabel = new System.Windows.Forms.Label();
             this.headComboBox = new System.Windows.Forms.ComboBox();
-            this.hipWeaponComboBox = new System.Windows.Forms.ComboBox();
+            this.hipComboBox = new System.Windows.Forms.ComboBox();
             this.processButton = new System.Windows.Forms.Button();
             this.creditTextBox = new System.Windows.Forms.TextBox();
             this.outputTextBox = new System.Windows.Forms.TextBox();
@@ -148,15 +148,15 @@
             this.headComboBox.TabIndex = 7;
             this.headComboBox.SelectedIndexChanged += new System.EventHandler(this.headComboBox_SelectedIndexChanged);
             // 
-            // hipWeaponComboBox
+            // hipComboBox
             // 
-            this.hipWeaponComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.hipWeaponComboBox.Enabled = false;
-            this.hipWeaponComboBox.FormattingEnabled = true;
-            this.hipWeaponComboBox.Location = new System.Drawing.Point(139, 168);
-            this.hipWeaponComboBox.Name = "hipWeaponComboBox";
-            this.hipWeaponComboBox.Size = new System.Drawing.Size(121, 21);
-            this.hipWeaponComboBox.TabIndex = 8;
+            this.hipComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.hipComboBox.FormattingEnabled = true;
+            this.hipComboBox.Location = new System.Drawing.Point(139, 168);
+            this.hipComboBox.Name = "hipComboBox";
+            this.hipComboBox.Size = new System.Drawing.Size(121, 21);
+            this.hipComboBox.TabIndex = 8;
+            this.hipComboBox.SelectedIndexChanged += new System.EventHandler(this.hipComboBox_SelectedIndexChanged);
             // 
             // processButton
             // 
@@ -214,7 +214,7 @@
             this.Controls.Add(this.outputTextBox);
             this.Controls.Add(this.creditTextBox);
             this.Controls.Add(this.processButton);
-            this.Controls.Add(this.hipWeaponComboBox);
+            this.Controls.Add(this.hipComboBox);
             this.Controls.Add(this.headComboBox);
             this.Controls.Add(this.hipWeaponLabel);
             this.Controls.Add(this.quietHeadLabel);
@@ -248,7 +248,7 @@
         private System.Windows.Forms.Label quietHeadLabel;
         private System.Windows.Forms.Label hipWeaponLabel;
         private System.Windows.Forms.ComboBox headComboBox;
-        private System.Windows.Forms.ComboBox hipWeaponComboBox;
+        private System.Windows.Forms.ComboBox hipComboBox;
         private System.Windows.Forms.Button processButton;
         private System.Windows.Forms.TextBox creditTextBox;
         private System.Windows.Forms.TextBox outputTextBox;
