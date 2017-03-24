@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.characterGroupBox = new System.Windows.Forms.GroupBox();
-            this.femaleRadioButton = new System.Windows.Forms.RadioButton();
-            this.snakeRadioButton = new System.Windows.Forms.RadioButton();
             this.playerOutfitLabel = new System.Windows.Forms.Label();
             this.playerOutfitComboBox = new System.Windows.Forms.ComboBox();
             this.quietOutfitComboBox = new System.Windows.Forms.ComboBox();
@@ -45,47 +42,15 @@
             this.outputTextBox = new System.Windows.Forms.TextBox();
             this.outputButton = new System.Windows.Forms.Button();
             this.outputLabel = new System.Windows.Forms.Label();
-            this.characterGroupBox.SuspendLayout();
+            this.characterComboBox = new System.Windows.Forms.ComboBox();
+            this.CharacterGroupBox = new System.Windows.Forms.GroupBox();
+            this.CharacterGroupBox.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // characterGroupBox
-            // 
-            this.characterGroupBox.Controls.Add(this.femaleRadioButton);
-            this.characterGroupBox.Controls.Add(this.snakeRadioButton);
-            this.characterGroupBox.Location = new System.Drawing.Point(12, 56);
-            this.characterGroupBox.Name = "characterGroupBox";
-            this.characterGroupBox.Size = new System.Drawing.Size(248, 48);
-            this.characterGroupBox.TabIndex = 0;
-            this.characterGroupBox.TabStop = false;
-            this.characterGroupBox.Text = "Character";
-            // 
-            // femaleRadioButton
-            // 
-            this.femaleRadioButton.AutoSize = true;
-            this.femaleRadioButton.Location = new System.Drawing.Point(69, 20);
-            this.femaleRadioButton.Name = "femaleRadioButton";
-            this.femaleRadioButton.Size = new System.Drawing.Size(127, 17);
-            this.femaleRadioButton.TabIndex = 1;
-            this.femaleRadioButton.TabStop = true;
-            this.femaleRadioButton.Text = "Female Diamond Dog";
-            this.femaleRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // snakeRadioButton
-            // 
-            this.snakeRadioButton.AutoSize = true;
-            this.snakeRadioButton.Location = new System.Drawing.Point(7, 20);
-            this.snakeRadioButton.Name = "snakeRadioButton";
-            this.snakeRadioButton.Size = new System.Drawing.Size(56, 17);
-            this.snakeRadioButton.TabIndex = 0;
-            this.snakeRadioButton.TabStop = true;
-            this.snakeRadioButton.Text = "Snake";
-            this.snakeRadioButton.UseVisualStyleBackColor = true;
-            this.snakeRadioButton.CheckedChanged += new System.EventHandler(this.snakeRadioButton_CheckedChanged);
             // 
             // playerOutfitLabel
             // 
             this.playerOutfitLabel.AutoSize = true;
-            this.playerOutfitLabel.Location = new System.Drawing.Point(9, 112);
+            this.playerOutfitLabel.Location = new System.Drawing.Point(10, 111);
             this.playerOutfitLabel.Name = "playerOutfitLabel";
             this.playerOutfitLabel.Size = new System.Drawing.Size(71, 13);
             this.playerOutfitLabel.TabIndex = 1;
@@ -95,7 +60,7 @@
             // 
             this.playerOutfitComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.playerOutfitComboBox.FormattingEnabled = true;
-            this.playerOutfitComboBox.Location = new System.Drawing.Point(12, 128);
+            this.playerOutfitComboBox.Location = new System.Drawing.Point(13, 127);
             this.playerOutfitComboBox.Name = "playerOutfitComboBox";
             this.playerOutfitComboBox.Size = new System.Drawing.Size(121, 21);
             this.playerOutfitComboBox.TabIndex = 2;
@@ -105,7 +70,7 @@
             // 
             this.quietOutfitComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.quietOutfitComboBox.FormattingEnabled = true;
-            this.quietOutfitComboBox.Location = new System.Drawing.Point(139, 128);
+            this.quietOutfitComboBox.Location = new System.Drawing.Point(140, 127);
             this.quietOutfitComboBox.Name = "quietOutfitComboBox";
             this.quietOutfitComboBox.Size = new System.Drawing.Size(121, 21);
             this.quietOutfitComboBox.TabIndex = 3;
@@ -114,7 +79,7 @@
             // quietOutfitLabel
             // 
             this.quietOutfitLabel.AutoSize = true;
-            this.quietOutfitLabel.Location = new System.Drawing.Point(136, 112);
+            this.quietOutfitLabel.Location = new System.Drawing.Point(137, 111);
             this.quietOutfitLabel.Name = "quietOutfitLabel";
             this.quietOutfitLabel.Size = new System.Drawing.Size(67, 13);
             this.quietOutfitLabel.TabIndex = 4;
@@ -123,7 +88,7 @@
             // quietHeadLabel
             // 
             this.quietHeadLabel.AutoSize = true;
-            this.quietHeadLabel.Location = new System.Drawing.Point(9, 152);
+            this.quietHeadLabel.Location = new System.Drawing.Point(10, 151);
             this.quietHeadLabel.Name = "quietHeadLabel";
             this.quietHeadLabel.Size = new System.Drawing.Size(68, 13);
             this.quietHeadLabel.TabIndex = 5;
@@ -132,7 +97,7 @@
             // hipWeaponLabel
             // 
             this.hipWeaponLabel.AutoSize = true;
-            this.hipWeaponLabel.Location = new System.Drawing.Point(136, 152);
+            this.hipWeaponLabel.Location = new System.Drawing.Point(137, 151);
             this.hipWeaponLabel.Name = "hipWeaponLabel";
             this.hipWeaponLabel.Size = new System.Drawing.Size(72, 13);
             this.hipWeaponLabel.TabIndex = 6;
@@ -142,7 +107,7 @@
             // 
             this.headComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.headComboBox.FormattingEnabled = true;
-            this.headComboBox.Location = new System.Drawing.Point(12, 168);
+            this.headComboBox.Location = new System.Drawing.Point(13, 167);
             this.headComboBox.Name = "headComboBox";
             this.headComboBox.Size = new System.Drawing.Size(121, 21);
             this.headComboBox.TabIndex = 7;
@@ -152,7 +117,7 @@
             // 
             this.hipComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.hipComboBox.FormattingEnabled = true;
-            this.hipComboBox.Location = new System.Drawing.Point(139, 168);
+            this.hipComboBox.Location = new System.Drawing.Point(140, 167);
             this.hipComboBox.Name = "hipComboBox";
             this.hipComboBox.Size = new System.Drawing.Size(121, 21);
             this.hipComboBox.TabIndex = 8;
@@ -160,7 +125,7 @@
             // 
             // processButton
             // 
-            this.processButton.Location = new System.Drawing.Point(12, 195);
+            this.processButton.Location = new System.Drawing.Point(13, 194);
             this.processButton.Name = "processButton";
             this.processButton.Size = new System.Drawing.Size(75, 23);
             this.processButton.TabIndex = 9;
@@ -170,7 +135,7 @@
             // 
             // creditTextBox
             // 
-            this.creditTextBox.Location = new System.Drawing.Point(9, 224);
+            this.creditTextBox.Location = new System.Drawing.Point(10, 223);
             this.creditTextBox.Multiline = true;
             this.creditTextBox.Name = "creditTextBox";
             this.creditTextBox.ReadOnly = true;
@@ -204,11 +169,32 @@
             this.outputLabel.TabIndex = 13;
             this.outputLabel.Text = "Output Folder";
             // 
+            // characterComboBox
+            // 
+            this.characterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.characterComboBox.FormattingEnabled = true;
+            this.characterComboBox.Location = new System.Drawing.Point(64, 19);
+            this.characterComboBox.Name = "characterComboBox";
+            this.characterComboBox.Size = new System.Drawing.Size(121, 21);
+            this.characterComboBox.TabIndex = 15;
+            this.characterComboBox.SelectedIndexChanged += new System.EventHandler(this.characterComboBox_SelectedIndexChanged);
+            // 
+            // CharacterGroupBox
+            // 
+            this.CharacterGroupBox.Controls.Add(this.characterComboBox);
+            this.CharacterGroupBox.Location = new System.Drawing.Point(10, 56);
+            this.CharacterGroupBox.Name = "CharacterGroupBox";
+            this.CharacterGroupBox.Size = new System.Drawing.Size(251, 52);
+            this.CharacterGroupBox.TabIndex = 16;
+            this.CharacterGroupBox.TabStop = false;
+            this.CharacterGroupBox.Text = "Character";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(276, 308);
+            this.ClientSize = new System.Drawing.Size(273, 314);
+            this.Controls.Add(this.CharacterGroupBox);
             this.Controls.Add(this.outputLabel);
             this.Controls.Add(this.outputButton);
             this.Controls.Add(this.outputTextBox);
@@ -222,25 +208,19 @@
             this.Controls.Add(this.quietOutfitComboBox);
             this.Controls.Add(this.playerOutfitComboBox);
             this.Controls.Add(this.playerOutfitLabel);
-            this.Controls.Add(this.characterGroupBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MQPM Tool v2.1";
-            this.characterGroupBox.ResumeLayout(false);
-            this.characterGroupBox.PerformLayout();
+            this.CharacterGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox characterGroupBox;
-        private System.Windows.Forms.RadioButton femaleRadioButton;
-        private System.Windows.Forms.RadioButton snakeRadioButton;
         private System.Windows.Forms.Label playerOutfitLabel;
         private System.Windows.Forms.ComboBox playerOutfitComboBox;
         private System.Windows.Forms.ComboBox quietOutfitComboBox;
@@ -254,6 +234,8 @@
         private System.Windows.Forms.TextBox outputTextBox;
         private System.Windows.Forms.Button outputButton;
         private System.Windows.Forms.Label outputLabel;
+        private System.Windows.Forms.ComboBox characterComboBox;
+        private System.Windows.Forms.GroupBox CharacterGroupBox;
     }
 }
 

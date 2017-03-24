@@ -12,6 +12,9 @@ namespace MQPMTool2
         [XmlArray("FemaleExcludedOutfits")]
         public List<string> femaleExcludedOutfits = new List<string>(0);
 
+        [XmlArray("MaleExcludedOutfits")]
+        public List<string> maleExcludedOutfits = new List<string>(0);
+
         [XmlArray("AddonOutfits")]
         public List<AddonOutfit> addonOutfits = new List<AddonOutfit>(0);
 

@@ -9,6 +9,9 @@ namespace MQPMTool2
         [XmlAttribute("Name")]
         public string name;
 
+        [XmlAttribute("Display")]
+        public string display;
+
         [XmlArray("PlayerOutfits")]
         public List<string> playerOutfits = new List<string>(0);
 

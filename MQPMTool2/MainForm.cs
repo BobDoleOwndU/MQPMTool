@@ -67,6 +67,12 @@ namespace MQPMTool2
                         if (mqpmComponents.playerTypes[j].name == "female")
                             mqpmComponents.playerTypes[j].excludedOutfits.Add(addon.femaleExcludedOutfits[i]);
 
+                //add additional excluded male outfits.
+                for (int i = 0; i < addon.maleExcludedOutfits.Count; i++)
+                    for (int j = 0; j < mqpmComponents.playerTypes.Count; j++)
+                        if (mqpmComponents.playerTypes[j].name == "male")
+                            mqpmComponents.playerTypes[j].excludedOutfits.Add(addon.maleExcludedOutfits[i]);
+
                 //add additional Quiet outfits.
                 for (int i = 0; i < addon.addonOutfits.Count; i++)
                 {
@@ -99,21 +105,27 @@ namespace MQPMTool2
                 for (int i = 0; i < addon.extraLists.Count; i++)
                     mqpmComponents.extraLists.Add(addon.extraLists[i]);
 
+                Dictionary<string, string> characterSource = new Dictionary<string, string>(0);
 
+                //get the list of compatible fcnps and add them to the hip combo box.
+                for (int i = 0; i < mqpmComponents.playerTypes.Count; i++)
+                    characterSource.Add(mqpmComponents.playerTypes[i].name, mqpmComponents.playerTypes[i].display);
+
+                characterComboBox.DataSource = new BindingSource(characterSource, null);
+                characterComboBox.ValueMember = "Key";
+                characterComboBox.DisplayMember = "Value";
             } //foreach ends
         } //method LoadXml ends
 
         /*
-         * snakeRadioButton_CheckedChanged
-         * Sets the selected outfit based on the selected radio button. Also loads the list of compatible player outfits for the character.
+         * characterComboBox_SelectedIndexChanged
+         * Sets the selected outfit based on the selected character. Also loads the list of compatible player outfits for the character.
          */
-        private void snakeRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void characterComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             //check which player type we need to load the outfits for.
             for (int i = 0; i < mqpmComponents.playerTypes.Count; i++)
-                if (snakeRadioButton.Checked && mqpmComponents.playerTypes[i].name == "snake")
-                    selectedPlayerType = mqpmComponents.playerTypes[i];
-                else if (femaleRadioButton.Checked && mqpmComponents.playerTypes[i].name == "female")
+                if (mqpmComponents.playerTypes[i].name == ((KeyValuePair<string, string>)characterComboBox.SelectedItem).Key)
                     selectedPlayerType = mqpmComponents.playerTypes[i];
 
             Dictionary<string, string> playerOutfitSource = new Dictionary<string, string>(0);
@@ -247,7 +259,13 @@ namespace MQPMTool2
                 return;
             } //if ends
 
-            OutfitBuilder.Build(outputTextBox.Text, snakeRadioButton.Checked, selectedPlayerOutfit.name, selectedQuietOutfit.name, selectedHead.name, selectedHead.values, selectedFcnp.name, selectedQuietOutfit.sims, selectedQuietOutfit.includePftxs, selectedQuietOutfit.useBody, selectedExtraList.values, selectedHead.includePftxs);
+            //have to copy list values to new lists because C# passes Lists by reference.
+            List<string> headOutputList = new List<string>(0);
+            headOutputList.AddRange(selectedHead.values.ToArray());
+            List<string> extraListOuputList = new List<string>(0);
+            extraListOuputList.AddRange(selectedExtraList.values.ToArray());
+
+            OutfitBuilder.Build(outputTextBox.Text, selectedPlayerType.name, selectedPlayerOutfit.name, selectedQuietOutfit.name, selectedHead.name, headOutputList, selectedFcnp.name, selectedQuietOutfit.sims, selectedQuietOutfit.includePftxs, selectedQuietOutfit.useBody, extraListOuputList, selectedHead.includePftxs);
         } //processButton_Click ends
 
         /*
@@ -270,7 +288,7 @@ namespace MQPMTool2
          */
         private bool Verify()
         {
-            if (string.IsNullOrEmpty(outputTextBox.Text) || (!snakeRadioButton.Checked && !femaleRadioButton.Checked) || playerOutfitComboBox.SelectedIndex == -1 || quietOutfitComboBox.SelectedIndex == -1 || headComboBox.SelectedIndex == -1)
+            if (string.IsNullOrEmpty(outputTextBox.Text) || characterComboBox.SelectedIndex == -1 || playerOutfitComboBox.SelectedIndex == -1 || quietOutfitComboBox.SelectedIndex == -1 || headComboBox.SelectedIndex == -1)
                 return false;
 
             return true;
