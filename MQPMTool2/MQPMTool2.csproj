@@ -88,7 +88,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\PlayerOutfit.cs" />
-    <Compile Include="Components\QuietOutfit.cs" />
+    <Compile Include="Components\CharacterOutfit.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="OutfitBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

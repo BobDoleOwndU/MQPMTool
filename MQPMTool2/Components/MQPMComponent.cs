@@ -12,8 +12,8 @@ namespace MQPMTool2
         [XmlArray("PlayerOutfits")]
         public List<PlayerOutfit> playerOutfits = new List<PlayerOutfit>(0);
 
-        [XmlArray("QuietOutfits")]
-        public List<QuietOutfit> quietOutfits = new List<QuietOutfit>(0);
+        [XmlArray("CharacterOutfits")]
+        public List<CharacterOutfit> characterOutfits = new List<CharacterOutfit>(0);
 
         [XmlArray("Heads")]
         public List<Head> heads = new List<Head>(0);

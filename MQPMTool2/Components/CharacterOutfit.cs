@@ -3,8 +3,8 @@ using System.Xml.Serialization;
 
 namespace MQPMTool2
 {
-    [XmlType("QuietOutfit")]
-    public class QuietOutfit
+    [XmlType("CharacterOutfit")]
+    public class CharacterOutfit
     {
         [XmlAttribute("Name")]
         public string name;
@@ -32,5 +32,5 @@ namespace MQPMTool2
 
         [XmlArray("Sims")]
         public List<string> sims = new List<string>(0);
-    } //class QuietOutfit ends
+    } //class CharacterOutfit ends
 } //namespace MQPMTool2 ends

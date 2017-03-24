@@ -15,7 +15,7 @@ namespace MQPMTool2
 
         PlayerType selectedPlayerType = new PlayerType();
         PlayerOutfit selectedPlayerOutfit = new PlayerOutfit();
-        QuietOutfit selectedQuietOutfit = new QuietOutfit();
+        CharacterOutfit selectedCharacterOutfit = new CharacterOutfit();
         ExtraList selectedExtraList = new ExtraList();
         Head selectedHead = new Head();
         Fcnp selectedFcnp = new Fcnp();
@@ -24,6 +24,7 @@ namespace MQPMTool2
         {
             InitializeComponent();
             LoadXml();
+            LoadCharacterComboBoxValues();
         } //constructor ends
 
         /*
@@ -52,7 +53,15 @@ namespace MQPMTool2
 
                 using (FileStream xmlStream = new FileStream(file, FileMode.Open))
                 {
-                    addon = addonSerializer.Deserialize(xmlStream) as MQPMAddon;
+                    try
+                    {
+                        addon = addonSerializer.Deserialize(xmlStream) as MQPMAddon;
+                    }
+                    catch
+                    {
+                        MessageBox.Show("There was an error while reading " + file + "!", "FileStream Exception!");
+                        Environment.Exit(1);
+                    } //catch ends
                 } //using ends
 
                 //add additional excluded Snake outfits.
@@ -73,16 +82,16 @@ namespace MQPMTool2
                         if (mqpmComponents.playerTypes[j].name == "male")
                             mqpmComponents.playerTypes[j].excludedOutfits.Add(addon.maleExcludedOutfits[i]);
 
-                //add additional Quiet outfits.
+                //add additional character outfits.
                 for (int i = 0; i < addon.addonOutfits.Count; i++)
                 {
-                    mqpmComponents.quietOutfits.Add(addon.addonOutfits[i]);
+                    mqpmComponents.characterOutfits.Add(addon.addonOutfits[i]);
 
                     //add the entry to the player outfits so the new outfit can be selected.
                     for (int j = 0; j < addon.addonOutfits[i].playerOutfits.Count; j++)
                         for (int h = 0; h < mqpmComponents.playerOutfits.Count; h++)
                             if (addon.addonOutfits[i].playerOutfits[j] == mqpmComponents.playerOutfits[h].name)
-                                mqpmComponents.playerOutfits[h].quietOutfits.Add(addon.addonOutfits[i].name);
+                                mqpmComponents.playerOutfits[h].characterOutfits.Add(addon.addonOutfits[i].name);
                 } //for ends
 
                 //add additional heads.
@@ -90,11 +99,11 @@ namespace MQPMTool2
                 {
                     mqpmComponents.heads.Add(addon.addonHeads[i]);
 
-                    //add the entry to the Quiet outfits so the new head can be selected.
-                    for (int j = 0; j < addon.addonHeads[i].quietOutfits.Count; j++)
-                        for (int h = 0; h < mqpmComponents.quietOutfits.Count; h++)
-                            if (addon.addonHeads[i].quietOutfits[j] == mqpmComponents.quietOutfits[h].name)
-                                mqpmComponents.quietOutfits[h].heads.Add(addon.addonHeads[i].name);
+                    //add the entry to the character outfits so the new head can be selected.
+                    for (int j = 0; j < addon.addonHeads[i].characterOutfits.Count; j++)
+                        for (int h = 0; h < mqpmComponents.characterOutfits.Count; h++)
+                            if (addon.addonHeads[i].characterOutfits[j] == mqpmComponents.characterOutfits[h].name)
+                                mqpmComponents.characterOutfits[h].heads.Add(addon.addonHeads[i].name);
                 } //for ends
 
                 //add new fcnps.
@@ -104,18 +113,25 @@ namespace MQPMTool2
                 //add new extra lists.
                 for (int i = 0; i < addon.extraLists.Count; i++)
                     mqpmComponents.extraLists.Add(addon.extraLists[i]);
-
-                Dictionary<string, string> characterSource = new Dictionary<string, string>(0);
-
-                //get the list of compatible fcnps and add them to the hip combo box.
-                for (int i = 0; i < mqpmComponents.playerTypes.Count; i++)
-                    characterSource.Add(mqpmComponents.playerTypes[i].name, mqpmComponents.playerTypes[i].display);
-
-                characterComboBox.DataSource = new BindingSource(characterSource, null);
-                characterComboBox.ValueMember = "Key";
-                characterComboBox.DisplayMember = "Value";
             } //foreach ends
         } //method LoadXml ends
+
+        /*
+         * LoadCharacterComboBoxValues
+         * Loads the character values from mqpmComponents into the combo box.
+         */
+        private void LoadCharacterComboBoxValues()
+        {
+            Dictionary<string, string> characterSource = new Dictionary<string, string>(0);
+
+            //get the list of player types and add them to the character combo box.
+            for (int i = 0; i < mqpmComponents.playerTypes.Count; i++)
+                characterSource.Add(mqpmComponents.playerTypes[i].name, mqpmComponents.playerTypes[i].display);
+
+            characterComboBox.DataSource = new BindingSource(characterSource, null);
+            characterComboBox.ValueMember = "Key";
+            characterComboBox.DisplayMember = "Value";
+        } //loadCharacterComboBoxValues ends
 
         /*
          * characterComboBox_SelectedIndexChanged
@@ -143,7 +159,7 @@ namespace MQPMTool2
 
         /*
          * playerOutfitComboBox_SelectedIndexChanged
-         * Loads the list of Quiet's compatible outfits for a selected player outfit.
+         * Loads the list of the character's compatible outfits for a selected player outfit.
          */
         private void playerOutfitComboBox_SelectedIndexChanged(object sender, System.EventArgs e)
         {
@@ -152,43 +168,43 @@ namespace MQPMTool2
                 if (mqpmComponents.playerOutfits[i].name == ((KeyValuePair<string, string>)playerOutfitComboBox.SelectedItem).Key)
                     selectedPlayerOutfit = mqpmComponents.playerOutfits[i];
 
-            Dictionary<string, string> quietOutfitSource = new Dictionary<string, string>(0);
+            Dictionary<string, string> characterOutfitSource = new Dictionary<string, string>(0);
 
             //match the outfit's compatible outfit list names to the component's outfit list names. get the matches' display entries as combo box options.
-            for (int i = 0; i < mqpmComponents.quietOutfits.Count; i++)
-                for (int j = 0; j < selectedPlayerOutfit.quietOutfits.Count; j++)
-                    if (mqpmComponents.quietOutfits[i].name == selectedPlayerOutfit.quietOutfits[j])
+            for (int i = 0; i < mqpmComponents.characterOutfits.Count; i++)
+                for (int j = 0; j < selectedPlayerOutfit.characterOutfits.Count; j++)
+                    if (mqpmComponents.characterOutfits[i].name == selectedPlayerOutfit.characterOutfits[j])
                     {
                         bool add = true;
 
                         //make sure the outfit isn't excluded for the player type.
                         for (int h = 0; h < selectedPlayerType.excludedOutfits.Count; h++)
-                            if (mqpmComponents.quietOutfits[i].name == selectedPlayerType.excludedOutfits[h])
+                            if (mqpmComponents.characterOutfits[i].name == selectedPlayerType.excludedOutfits[h])
                                 add = false;
 
                         if(add)
-                            quietOutfitSource.Add(mqpmComponents.quietOutfits[i].name, mqpmComponents.quietOutfits[i].display);
+                            characterOutfitSource.Add(mqpmComponents.characterOutfits[i].name, mqpmComponents.characterOutfits[i].display);
                     } //if ends
 
-            quietOutfitComboBox.DataSource = new BindingSource(quietOutfitSource, null);
-            quietOutfitComboBox.ValueMember = "Key";
-            quietOutfitComboBox.DisplayMember = "Value";
+            characterOutfitComboBox.DataSource = new BindingSource(characterOutfitSource, null);
+            characterOutfitComboBox.ValueMember = "Key";
+            characterOutfitComboBox.DisplayMember = "Value";
         } //playerOutfitComboBox_SelectedIndexChanged
 
         /*
-         * quietOutfitComboBox_SelectedIndexChanged
-         * Loads the list of Quiet's compatible heads for a selected Quiet outfit.
+         * characterOutfitComboBox_SelectedIndexChanged
+         * Loads the list of the characters's compatible heads for a selected character outfit.
          */
-        private void quietOutfitComboBox_SelectedIndexChanged(object sender, System.EventArgs e)
+        private void characterOutfitComboBox_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             //set the outfit selected in the combo box as the selected outfit.
-            for (int i = 0; i < mqpmComponents.quietOutfits.Count; i++)
-                if (mqpmComponents.quietOutfits[i].name == ((KeyValuePair<string, string>)quietOutfitComboBox.SelectedItem).Key)
-                    selectedQuietOutfit = mqpmComponents.quietOutfits[i];
+            for (int i = 0; i < mqpmComponents.characterOutfits.Count; i++)
+                if (mqpmComponents.characterOutfits[i].name == ((KeyValuePair<string, string>)characterOutfitComboBox.SelectedItem).Key)
+                    selectedCharacterOutfit = mqpmComponents.characterOutfits[i];
 
             //get the outfits extra list.
             for (int i = 0; i < mqpmComponents.extraLists.Count; i++)
-                if (mqpmComponents.extraLists[i].name == selectedQuietOutfit.extraList)
+                if (mqpmComponents.extraLists[i].name == selectedCharacterOutfit.extraList)
                     selectedExtraList = mqpmComponents.extraLists[i];
 
             Dictionary<string, string> headSource = new Dictionary<string, string>(0);
@@ -197,13 +213,13 @@ namespace MQPMTool2
             if (selectedPlayerOutfit.limitHeads)
             {
                 for (int i = 0; i < mqpmComponents.heads.Count; i++)
-                    if (mqpmComponents.heads[i].name == selectedQuietOutfit.defaultHead)
+                    if (mqpmComponents.heads[i].name == selectedCharacterOutfit.defaultHead)
                         headSource.Add(mqpmComponents.heads[i].name, mqpmComponents.heads[i].display);
             } //if ends
             else
                 for (int i = 0; i < mqpmComponents.heads.Count; i++)
-                    for (int j = 0; j < selectedQuietOutfit.heads.Count; j++)
-                        if (mqpmComponents.heads[i].name == selectedQuietOutfit.heads[j])
+                    for (int j = 0; j < selectedCharacterOutfit.heads.Count; j++)
+                        if (mqpmComponents.heads[i].name == selectedCharacterOutfit.heads[j])
                             headSource.Add(mqpmComponents.heads[i].name, mqpmComponents.heads[i].display);
 
             headComboBox.DataSource = new BindingSource(headSource, null);
@@ -214,14 +230,14 @@ namespace MQPMTool2
 
             //get the list of compatible fcnps and add them to the hip combo box.
             for (int i = 0; i < mqpmComponents.fcnps.Count; i++)
-                for (int j = 0; j < selectedQuietOutfit.fcnps.Count; j++)
-                    if (mqpmComponents.fcnps[i].name == selectedQuietOutfit.fcnps[j])
+                for (int j = 0; j < selectedCharacterOutfit.fcnps.Count; j++)
+                    if (mqpmComponents.fcnps[i].name == selectedCharacterOutfit.fcnps[j])
                         hipSource.Add(mqpmComponents.fcnps[i].name, mqpmComponents.fcnps[i].display);
 
             hipComboBox.DataSource = new BindingSource(hipSource, null);
             hipComboBox.ValueMember = "Key";
             hipComboBox.DisplayMember = "Value";
-        } //quietOutfitComboBox_SelectedIndexChanged ends
+        } //characterOutfitComboBox_SelectedIndexChanged ends
 
         /*
          * headComboBox_SelectedIndexChanged
@@ -265,7 +281,7 @@ namespace MQPMTool2
             List<string> extraListOuputList = new List<string>(0);
             extraListOuputList.AddRange(selectedExtraList.values.ToArray());
 
-            OutfitBuilder.Build(outputTextBox.Text, selectedPlayerType.name, selectedPlayerOutfit.name, selectedQuietOutfit.name, selectedHead.name, headOutputList, selectedFcnp.name, selectedQuietOutfit.sims, selectedQuietOutfit.includePftxs, selectedQuietOutfit.useBody, extraListOuputList, selectedHead.includePftxs);
+            OutfitBuilder.Build(outputTextBox.Text, selectedPlayerType.name, selectedPlayerOutfit.name, selectedCharacterOutfit.name, selectedHead.name, headOutputList, selectedFcnp.name, selectedCharacterOutfit.sims, selectedCharacterOutfit.includePftxs, selectedCharacterOutfit.useBody, extraListOuputList, selectedHead.includePftxs);
         } //processButton_Click ends
 
         /*
@@ -288,7 +304,7 @@ namespace MQPMTool2
          */
         private bool Verify()
         {
-            if (string.IsNullOrEmpty(outputTextBox.Text) || characterComboBox.SelectedIndex == -1 || playerOutfitComboBox.SelectedIndex == -1 || quietOutfitComboBox.SelectedIndex == -1 || headComboBox.SelectedIndex == -1)
+            if (string.IsNullOrEmpty(outputTextBox.Text) || characterComboBox.SelectedIndex == -1 || playerOutfitComboBox.SelectedIndex == -1 || characterOutfitComboBox.SelectedIndex == -1 || headComboBox.SelectedIndex == -1)
                 return false;
 
             return true;

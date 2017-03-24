@@ -15,7 +15,7 @@ namespace MQPMTool2
         [XmlAttribute("LimitHeads")]
         public bool limitHeads;
 
-        [XmlArray("QuietOutfits")]
-        public List<string> quietOutfits = new List<string>(0);
+        [XmlArray("CharacterOutfits")]
+        public List<string> characterOutfits = new List<string>(0);
     } //class PlayerOutfit ends
 } //namespace MQPMTool2 ends
