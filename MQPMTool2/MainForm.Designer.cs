@@ -173,9 +173,9 @@
             // 
             this.characterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.characterComboBox.FormattingEnabled = true;
-            this.characterComboBox.Location = new System.Drawing.Point(64, 19);
+            this.characterComboBox.Location = new System.Drawing.Point(32, 19);
             this.characterComboBox.Name = "characterComboBox";
-            this.characterComboBox.Size = new System.Drawing.Size(121, 21);
+            this.characterComboBox.Size = new System.Drawing.Size(188, 21);
             this.characterComboBox.TabIndex = 15;
             this.characterComboBox.SelectedIndexChanged += new System.EventHandler(this.characterComboBox_SelectedIndexChanged);
             // 
