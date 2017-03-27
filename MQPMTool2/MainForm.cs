@@ -281,7 +281,7 @@ namespace MQPMTool2
             List<string> extraListOuputList = new List<string>(0);
             extraListOuputList.AddRange(selectedExtraList.values.ToArray());
 
-            OutfitBuilder.Build(outputTextBox.Text, selectedPlayerType.name, selectedPlayerOutfit.name, selectedCharacterOutfit.name, selectedHead.name, headOutputList, selectedFcnp.name, selectedCharacterOutfit.sims, selectedCharacterOutfit.includePftxs, selectedCharacterOutfit.useBody, extraListOuputList, selectedHead.includePftxs);
+            OutfitBuilder.Build(outputTextBox.Text, selectedPlayerType.name, selectedPlayerOutfit.name, selectedCharacterOutfit.name, selectedHead.name, headOutputList, selectedFcnp.name, selectedCharacterOutfit.sims, selectedCharacterOutfit.includePftxs, selectedCharacterOutfit.useBody, extraListOuputList, selectedHead.includePftxs, selectedHead.useFv2);
         } //processButton_Click ends
 
         /*

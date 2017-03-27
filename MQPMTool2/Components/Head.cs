@@ -15,6 +15,9 @@ namespace MQPMTool2
         [XmlAttribute("IncludePftxs")]
         public bool includePftxs;
 
+        [XmlAttribute("UseFv2")]
+        public bool useFv2;
+
         [XmlArray("Values")]
         public List<string> values = new List<string>(0);
     } //class Head ends
