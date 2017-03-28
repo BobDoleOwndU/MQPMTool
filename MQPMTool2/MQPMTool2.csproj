@@ -74,10 +74,10 @@
   <ItemGroup>
     <Compile Include="Components\AddonHead.cs" />
     <Compile Include="Components\AddonOutfit.cs" />
-    <Compile Include="Components\ArchiveHandler.cs" />
+    <Compile Include="Tools\ArchiveHandler.cs" />
     <Compile Include="Components\ExtraList.cs" />
     <Compile Include="Components\Fcnp.cs" />
-    <Compile Include="Components\HexSwapper.cs" />
+    <Compile Include="Tools\HexSwapper.cs" />
     <Compile Include="Components\MQPMAddon.cs" />
     <Compile Include="Components\MQPMComponent.cs" />
     <Compile Include="Components\Head.cs" />
@@ -91,7 +91,7 @@
     <Compile Include="Components\PlayerOutfit.cs" />
     <Compile Include="Components\CharacterOutfit.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="OutfitBuilder.cs" />
+    <Compile Include="Tools\OutfitBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -134,6 +134,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

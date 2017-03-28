@@ -182,7 +182,7 @@ namespace MQPMTool2
                             if (mqpmComponents.characterOutfits[i].name == selectedPlayerType.excludedOutfits[h])
                                 add = false;
 
-                        if(add)
+                        if (add)
                             characterOutfitSource.Add(mqpmComponents.characterOutfits[i].name, mqpmComponents.characterOutfits[i].display);
                     } //if ends
 

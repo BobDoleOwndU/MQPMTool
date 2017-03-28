@@ -48,7 +48,7 @@ namespace MQPMTool2
             foreach (string file in Directory.EnumerateFiles(SourceDirectory))
             {
 
-                if(Path.GetExtension(file) == ".ftex")
+                if (Path.GetExtension(file) == ".ftex")
                 {
                     string nameWithoutExtension = Path.GetFileNameWithoutExtension(file);
                     PftxsFtexFile pf = new PftxsFtexFile();
@@ -59,7 +59,7 @@ namespace MQPMTool2
                     pf.Entries.Add(pfe1);
 
 
-                    if(File.Exists(SourceDirectory + "\\" + nameWithoutExtension + ".2.ftexs"))
+                    if (File.Exists(SourceDirectory + "\\" + nameWithoutExtension + ".2.ftexs"))
                     {
                         PftxsFtexsFileEntry pfe2 = new PftxsFtexsFileEntry() { FilePath = nameWithoutExtension + ".2.ftexs" };
                         pf.Entries.Add(pfe2);

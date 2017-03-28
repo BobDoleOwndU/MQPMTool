@@ -49,7 +49,7 @@ namespace MQPMTool2
 
             //determine the outfit path, fpk path and fpkd path.
             if (character == "snake")
-                switch(playerOutfit)
+                switch (playerOutfit)
                 {
                     case "dla0":
                         playerOutfitName = "plparts_dla0_main0_def_v00";
@@ -130,16 +130,16 @@ namespace MQPMTool2
             File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\fcnp\" + fcnp + ".fcnp", fpkOutputPath + outfit.outfitPath + ".fcnp", true);
 
             //if the outfit needs a .pftxs, copy it over.
-            if(includeOutfitPftxs)
+            if (includeOutfitPftxs)
                 File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\pftxs\" + characterOutfit + ".pftxs", Path.GetDirectoryName(fpkOutputPath) + "\\" + playerOutfitName + ".pftxs", true);
 
             //if the head needs a .pftxs copy it over.
-            if(includeHeadPftxs)
+            if (includeHeadPftxs)
             {
                 //if there's no outfit .pftxs, copy the head one. otherwise, merge the .pftxs files.
-                if(!includeOutfitPftxs)
+                if (!includeOutfitPftxs)
                     File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\pftxs\" + characterHead + ".pftxs", Path.GetDirectoryName(fpkOutputPath) + "\\" + playerOutfitName + ".pftxs", true);
-                else if(characterOutfit != characterHead)
+                else if (characterOutfit != characterHead)
                 {
                     string mainPftxs = Path.GetDirectoryName(fpkOutputPath) + "\\" + playerOutfitName + ".pftxs";
                     string outputFolder = Path.GetDirectoryName(fpkOutputPath) + "\\" + playerOutfitName + "_pftxs";
@@ -170,7 +170,7 @@ namespace MQPMTool2
             } //if ends
             else
             {
-                if(useBody)
+                if (useBody)
                 {
                     File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\frdv\" + characterOutfit + ".frdv", fpkOutputPath + outfit.outfitPath + ".frdv", true);
                     characterOutfit = "body-" + characterOutfit;
@@ -181,7 +181,7 @@ namespace MQPMTool2
                     arm = extraList;
                     armFrdv = extraList;
                 } //if ends
-                else if(!useBody && outfit.outfitType != (int)OutfitType.HEAD_NO_ARM && outfit.outfitType != (int)OutfitType.NO_HEAD_NO_ARM)
+                else if (!useBody && outfit.outfitType != (int)OutfitType.HEAD_NO_ARM && outfit.outfitType != (int)OutfitType.NO_HEAD_NO_ARM)
                 {
                     File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\frdv\" + characterHead + ".frdv", fpkOutputPath + outfit.outfitPath + ".frdv", true);
                     for (int i = 0; i < 7; i++)
@@ -202,7 +202,7 @@ namespace MQPMTool2
                     string tempOutfit = characterOutfit;
                     characterOutfit = "head-" + characterHead;
 
-                    for(int i = 0; i < characterHeadValues.Count; i++)
+                    for (int i = 0; i < characterHeadValues.Count; i++)
                         characterHeadValues[i] = "body-" + tempOutfit;
 
                     arm = extraList;
@@ -214,12 +214,11 @@ namespace MQPMTool2
             File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\fmdl\" + characterOutfit + ".fmdl", fpkOutputPath + outfit.outfitPath + ".fmdl", true);
 
             //copy the head if one is needed.
-            if(outfit.outfitType != (int)OutfitType.NO_HEAD_ARM && outfit.outfitType != (int)OutfitType.NO_HEAD_NO_ARM)
+            if (outfit.outfitType != (int)OutfitType.NO_HEAD_ARM && outfit.outfitType != (int)OutfitType.NO_HEAD_NO_ARM)
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(fpkOutputPath + outfit.headPath));
-                
+
                 File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\fmdl\" + characterHeadValues[0] + ".fmdl", fpkOutputPath + outfit.headPath, true);
-                
 
                 //if the character is Snake, we need to copy the head a bunch of times.
                 if (character == "snake")
@@ -242,7 +241,7 @@ namespace MQPMTool2
 
                     for (int i = 0; i < 7; i++)
                     {
-                        if(useFv2)
+                        if (useFv2)
                         {
                             Directory.CreateDirectory(fv2Path);
 
@@ -253,12 +252,12 @@ namespace MQPMTool2
                                 if (characterHeadValues.Count > 1)
                                     HexSwapper.Swap(fv2Path + "\\sna0_face" + i + "_v00.fv2", "2BEC9C7EE5A3A284", faceFv2Values[i]);
                             } //if ends
-                                
+
                         } //if ends
-                            
+
                         if (i != 0 && i != 3)
                         {
-                            if(!useFv2 || characterHeadValues.Count > 1)
+                            if (!useFv2 || characterHeadValues.Count > 1)
                                 File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\fmdl\" + characterHeadValues[headNum] + ".fmdl", Path.GetDirectoryName(fpkOutputPath + outfit.headPath) + "\\sna0_face" + i + "_cov.fmdl", true);
 
                             if (characterHeadValues.Count > 1)
@@ -266,11 +265,11 @@ namespace MQPMTool2
                         } //if ends
                     } //for ends
                 } //if ends
-                            
+
             } //if ends
 
             //copy the arm if one is needed.
-            if(outfit.outfitType != (int)OutfitType.HEAD_NO_ARM && outfit.outfitType != (int)OutfitType.NO_HEAD_NO_ARM)
+            if (outfit.outfitType != (int)OutfitType.HEAD_NO_ARM && outfit.outfitType != (int)OutfitType.NO_HEAD_NO_ARM)
             {
                 bool empty = true;
                 bool isBody = true;
@@ -279,12 +278,11 @@ namespace MQPMTool2
                 {
                     if (arm[i] != "empty")
                         empty = false;
-                    if (arm[i].Substring(0, 5) != "body-"  && arm[i] != "empty")
+                    if (arm[i].Substring(0, 5) != "body-" && arm[i] != "empty")
                         isBody = false;
                 } //for ends
 
-
-                if(!empty && !isBody)
+                if (!empty && !isBody)
                 {
                     File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\fmdl\" + arm[7] + ".fmdl", Path.GetDirectoryName(fpkOutputPath + outfit.headPath) + "\\sna0_rkt1_cov.fmdl", true);
                     File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\fmdl\" + arm[8] + ".fmdl", Path.GetDirectoryName(fpkOutputPath + outfit.headPath) + "\\sna0_rkt2_cov.fmdl", true);
@@ -295,7 +293,7 @@ namespace MQPMTool2
                 for (int i = 0; i < 8; i++)
                     if (i != 5)
                     {
-                        if(!empty && !isBody)
+                        if (!empty && !isBody)
                         {
                             File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\fmdl\" + arm[armNum] + ".fmdl", Path.GetDirectoryName(fpkOutputPath + outfit.headPath) + "\\sna0_arm" + i + "_cov.fmdl", true);
                             File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\frdv\" + armFrdv[armNum] + ".frdv", Path.GetDirectoryName(fpkOutputPath + outfit.headPath) + "\\sna0_arm" + i + "_cov.frdv", true);
@@ -307,7 +305,7 @@ namespace MQPMTool2
                             {
                                 File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\fmdl\" + arm[armNum] + ".fmdl", Path.GetDirectoryName(fpkOutputPath + outfit.headPath) + "\\sna0_arm" + i + "_cov.fmdl", true);
 
-                                if(isBody)
+                                if (isBody)
                                     File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\frdv\" + armFrdv[armNum] + ".frdv", Path.GetDirectoryName(fpkOutputPath + outfit.headPath) + "\\sna0_arm" + i + "_cov.frdv", true);
                             } //if ends
 
@@ -319,7 +317,7 @@ namespace MQPMTool2
             } //if ends
 
             //if there's a .sim, copy it.
-            if(sims.Count != 0)
+            if (sims.Count != 0)
             {
                 //create the directory to copy .sims to.
                 Directory.CreateDirectory(Path.GetDirectoryName(fpkdOutputPath + outfit.simPath));
@@ -327,7 +325,7 @@ namespace MQPMTool2
                 File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\sim\" + sims[0] + ".sim", fpkdOutputPath + outfit.simPath, true);
 
                 //if there's a second .sim and the outfit supports a second one, copy it.
-                if(sims.Count > 1 && outfit.simPath2 != "None")
+                if (sims.Count > 1 && outfit.simPath2 != "None")
                     File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\sim\" + sims[1] + ".sim", fpkdOutputPath + outfit.simPath2, true);
             } //if ends
 
