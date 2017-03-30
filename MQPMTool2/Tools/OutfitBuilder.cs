@@ -225,6 +225,10 @@ namespace MQPMTool2
                     int headNum = 0;
                     bool singleHeadValue = true;
 
+                    //if there are more than six head values, remove any heads after the sixth.
+                    if (characterHeadValues.Count > 6)
+                        characterHeadValues.RemoveRange(6, characterHeadValues.Count - 6);
+
                     //if all of the head values are the same, we only need a single head.
                     for (int i = 0; i < characterHeadValues.Count; i++)
                         for (int j = 0; j < characterHeadValues.Count; j++)
@@ -534,7 +538,7 @@ namespace MQPMTool2
 
             //Naked Fatigues (NS)
             Outfit plparts_dla1_main0_def_v00 = new Outfit();
-            plparts_dla1_main0_def_v00.name = "plparts_dla1_plym0_def_v00";
+            plparts_dla1_main0_def_v00.name = "plparts_dla1_main0_def_v00";
             plparts_dla1_main0_def_v00.outfitPath = @"\Assets\tpp\chara\dla\Scenes\dla1_main0_def";
             plparts_dla1_main0_def_v00.headPath = @"\Assets\tpp\chara\sna\Scenes\sna0_face0_cov.fmdl";
             plparts_dla1_main0_def_v00.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_hair.sim";
