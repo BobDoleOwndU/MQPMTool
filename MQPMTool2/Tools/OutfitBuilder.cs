@@ -446,7 +446,7 @@ namespace MQPMTool2
             outfits.Add(plparts_ddf_venom);
 
             Outfit plparts_ddf_battledress = new Outfit();
-            plparts_ddf_battledress.name = "plparts_ddf_venom";
+            plparts_ddf_battledress.name = "plparts_ddf_battledress";
             plparts_ddf_battledress.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna5_plyf0_def";
             plparts_ddf_battledress.headPath = @"\Assets\tpp\chara\dds\Scenes\dds6_head_z_cov.fmdl";
             plparts_ddf_battledress.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_item.sim";
