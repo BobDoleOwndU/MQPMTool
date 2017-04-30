@@ -320,7 +320,10 @@ namespace MQPMTool2
                                     File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\frdv\" + armFrdv[armNum] + ".frdv", Path.GetDirectoryName(fpkOutputPath + headPath) + "\\sna0_arm" + i + "_cov.frdv", true);
                             } //if ends
 
-                            File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\fv2\arm0.fv2", fv2Path + "\\sna0_arm" + i + "_v00.fv2", true);
+                            if(i == 1 || i == 2)
+                                File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\fv2\arm1.fv2", fv2Path + "\\sna0_arm" + i + "_v00.fv2", true);
+                            else
+                                File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\fv2\arm0.fv2", fv2Path + "\\sna0_arm" + i + "_v00.fv2", true);
                         } //else ends
 
                         armNum++;
@@ -415,7 +418,7 @@ namespace MQPMTool2
 
             Outfit plparts_ninja = new Outfit();
             plparts_ninja.name = "plparts_ninja";
-            plparts_ninja.outfitPath = @"\Assets\tpp\chara\nin\Scenes\sna6_main0_def";
+            plparts_ninja.outfitPath = @"\Assets\tpp\chara\nin\Scenes\nin0_main0_def";
             plparts_ninja.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna2_main0_asr.sim";
             plparts_ninja.simPath2 = "None";
             plparts_ninja.outfitType = (int)OutfitType.NO_HEAD_NO_ARM;
