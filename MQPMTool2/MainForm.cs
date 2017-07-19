@@ -85,35 +85,81 @@ namespace MQPMTool2
                 //add additional character outfits.
                 for (int i = 0; i < addon.addonOutfits.Count; i++)
                 {
-                    mqpmComponents.characterOutfits.Add(addon.addonOutfits[i]);
+                    //ensure there are no duplicates.
+                    bool isDuplicate = false;
 
-                    //add the entry to the player outfits so the new outfit can be selected.
-                    for (int j = 0; j < addon.addonOutfits[i].playerOutfits.Count; j++)
-                        for (int h = 0; h < mqpmComponents.playerOutfits.Count; h++)
-                            if (addon.addonOutfits[i].playerOutfits[j] == mqpmComponents.playerOutfits[h].name)
-                                mqpmComponents.playerOutfits[h].characterOutfits.Add(addon.addonOutfits[i].name);
+                    for (int j = 0; j < mqpmComponents.characterOutfits.Count; j++)
+                        if (addon.addonOutfits[i].name == mqpmComponents.characterOutfits[j].name)
+                            isDuplicate = true;
+
+                    if (!isDuplicate)
+                    {
+                        mqpmComponents.characterOutfits.Add(addon.addonOutfits[i]);
+
+                        //add the entry to the player outfits so the new outfit can be selected.
+                        for (int j = 0; j < addon.addonOutfits[i].playerOutfits.Count; j++)
+                            for (int h = 0; h < mqpmComponents.playerOutfits.Count; h++)
+                                if (addon.addonOutfits[i].playerOutfits[j] == mqpmComponents.playerOutfits[h].name)
+                                    if (!mqpmComponents.playerOutfits[h].characterOutfits.Contains(addon.addonOutfits[i].name))
+                                        mqpmComponents.playerOutfits[h].characterOutfits.Add(addon.addonOutfits[i].name);
+                    } //if
                 } //for ends
 
                 //add additional heads.
                 for (int i = 0; i < addon.addonHeads.Count; i++)
                 {
-                    mqpmComponents.heads.Add(addon.addonHeads[i]);
+                    //ensure there are no duplicates.
+                    bool isDuplicate = false;
 
-                    //add the entry to the character outfits so the new head can be selected.
-                    for (int j = 0; j < addon.addonHeads[i].characterOutfits.Count; j++)
-                        for (int h = 0; h < mqpmComponents.characterOutfits.Count; h++)
-                            if (addon.addonHeads[i].characterOutfits[j] == mqpmComponents.characterOutfits[h].name)
-                                mqpmComponents.characterOutfits[h].heads.Add(addon.addonHeads[i].name);
+                    for (int j = 0; j < mqpmComponents.heads.Count; j++)
+                        if (addon.addonHeads[i].name == mqpmComponents.heads[j].name)
+                            isDuplicate = true;
+
+                    if (!isDuplicate)
+                    {
+                        mqpmComponents.heads.Add(addon.addonHeads[i]);
+
+                        //add the entry to the character outfits so the new head can be selected.
+                        for (int j = 0; j < addon.addonHeads[i].characterOutfits.Count; j++)
+                            for (int h = 0; h < mqpmComponents.characterOutfits.Count; h++)
+                                if (addon.addonHeads[i].characterOutfits[j] == mqpmComponents.characterOutfits[h].name)
+                                    mqpmComponents.characterOutfits[h].heads.Add(addon.addonHeads[i].name);
+                    } //if ends
                 } //for ends
 
                 //add new fcnps.
                 for (int i = 0; i < addon.fcnps.Count; i++)
-                    mqpmComponents.fcnps.Add(addon.fcnps[i]);
+                {
+                    //ensure there are no duplicates.
+                    bool isDuplicate = false;
+
+                    for (int j = 0; j < mqpmComponents.fcnps.Count; j++)
+                        if (addon.fcnps[i].name == mqpmComponents.fcnps[j].name)
+                            isDuplicate = true;
+
+                    if (!isDuplicate)
+                        mqpmComponents.fcnps.Add(addon.fcnps[i]);
+                } //for
 
                 //add new extra lists.
                 for (int i = 0; i < addon.extraLists.Count; i++)
-                    mqpmComponents.extraLists.Add(addon.extraLists[i]);
+                {
+                    //ensure there are no duplicates.
+                    bool isDuplicate = false;
+
+                    for (int j = 0; j < mqpmComponents.extraLists.Count; j++)
+                        if (addon.extraLists[i].name == mqpmComponents.extraLists[j].name)
+                            isDuplicate = true;
+                    if (!isDuplicate)
+                        mqpmComponents.extraLists.Add(addon.extraLists[i]);
+                } //for
             } //foreach ends
+
+            if(mqpmComponents.characterOutfits.Count == 0 ||mqpmComponents.heads.Count == 0 || mqpmComponents.fcnps.Count == 0)
+            {
+                MessageBox.Show("You don't have any outfits (correctly) installed! The MQPM Tool needs some outfits to work with.", "No Outfits!");
+                Environment.Exit(1);
+            } //if ends
         } //method LoadXml ends
 
         /*
