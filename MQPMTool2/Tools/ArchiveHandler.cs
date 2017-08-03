@@ -52,7 +52,7 @@ namespace MQPMTool2
                 {
                     string nameWithoutExtension = Path.GetFileNameWithoutExtension(file);
                     PftxsFtexFile pf = new PftxsFtexFile();
-                    PftxsFtexsFileEntry pfe = new PftxsFtexsFileEntry() { FilePath = file };
+                    PftxsFtexsFileEntry pfe = new PftxsFtexsFileEntry() { FilePath = nameWithoutExtension + ".ftex" };
                     PftxsFtexsFileEntry pfe1 = new PftxsFtexsFileEntry() { FilePath = nameWithoutExtension + ".1.ftexs" };
                     pf.Entries = new List<PftxsFtexsFileEntry>(0);
                     pf.Entries.Add(pfe);

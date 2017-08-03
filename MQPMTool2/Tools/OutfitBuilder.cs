@@ -21,6 +21,8 @@ namespace MQPMTool2
         {
             public string name;
             public string outfitPath;
+            public string fcnpPath;
+            public string frdvPath;
             public string simPath;
             public string simPath2;
             public int outfitType;
@@ -137,7 +139,8 @@ namespace MQPMTool2
 
             //create the output path and copy the .fcnp there.
             Directory.CreateDirectory(Path.GetDirectoryName(fpkOutputPath + outfit.outfitPath));
-            File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\fcnp\" + fcnp + ".fcnp", fpkOutputPath + outfit.outfitPath + ".fcnp", true);
+            Directory.CreateDirectory(Path.GetDirectoryName(fpkOutputPath + outfit.fcnpPath));
+            File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\fcnp\" + fcnp + ".fcnp", fpkOutputPath + outfit.fcnpPath, true);
 
             //if the outfit needs a .pftxs, copy it over.
             if (includeOutfitPftxs)
@@ -169,7 +172,7 @@ namespace MQPMTool2
             //determine whether we need a full model or a separate head and body model.
             if (characterOutfit == characterHead && useBody)
             {
-                File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\frdv\" + characterOutfit + ".frdv", fpkOutputPath + outfit.outfitPath + ".frdv", true);
+                File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\frdv\" + characterOutfit + ".frdv", fpkOutputPath + outfit.frdvPath, true);
                 characterOutfit = "full-" + characterOutfit;
 
                 for (int i = 0; i < characterHeadValues.Count; i++)
@@ -182,7 +185,7 @@ namespace MQPMTool2
             {
                 if (useBody)
                 {
-                    File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\frdv\" + characterOutfit + ".frdv", fpkOutputPath + outfit.outfitPath + ".frdv", true);
+                    File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\frdv\" + characterOutfit + ".frdv", fpkOutputPath + outfit.frdvPath, true);
                     characterOutfit = "body-" + characterOutfit;
 
                     for (int i = 0; i < characterHeadValues.Count; i++)
@@ -193,7 +196,7 @@ namespace MQPMTool2
                 } //if ends
                 else if (!useBody && outfit.outfitType != (int)OutfitType.HEAD_NO_ARM && outfit.outfitType != (int)OutfitType.NO_HEAD_NO_ARM)
                 {
-                    File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\frdv\" + characterHead + ".frdv", fpkOutputPath + outfit.outfitPath + ".frdv", true);
+                    File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\frdv\" + characterHead + ".frdv", fpkOutputPath + outfit.frdvPath, true);
                     for (int i = 0; i < 7; i++)
                         armFrdv.Add(characterOutfit);
 
@@ -209,7 +212,7 @@ namespace MQPMTool2
                 } //else if ends
                 else
                 {
-                    File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\frdv\" + characterHead + ".frdv", fpkOutputPath + outfit.outfitPath + ".frdv", true);
+                    File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\frdv\" + characterHead + ".frdv", fpkOutputPath + outfit.frdvPath, true);
                     string tempOutfit = characterOutfit;
                     characterOutfit = "head-" + characterHead;
 
@@ -222,7 +225,7 @@ namespace MQPMTool2
             } //else ends
 
             //copy the outfit to the output path.
-            File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\fmdl\" + characterOutfit + ".fmdl", fpkOutputPath + outfit.outfitPath + ".fmdl", true);
+            File.Copy(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\fmdl\" + characterOutfit + ".fmdl", fpkOutputPath + outfit.outfitPath, true);
 
             //copy the head if one is needed.
             if (outfit.outfitType != (int)OutfitType.NO_HEAD_ARM && outfit.outfitType != (int)OutfitType.NO_HEAD_NO_ARM)
@@ -354,7 +357,9 @@ namespace MQPMTool2
         {
             Outfit plparts_normal = new Outfit();
             plparts_normal.name = "plparts_normal";
-            plparts_normal.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna0_main0_def";
+            plparts_normal.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna0_main0_def.fmdl";
+            plparts_normal.fcnpPath = @"\Assets\tpp\chara\sna\Scenes\sna0_main0_def.fcnp";
+            plparts_normal.frdvPath = @"\Assets\tpp\chara\sna\Scenes\sna0_main0_def.frdv";
             plparts_normal.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_item.sim";
             plparts_normal.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_hair.sim";
             plparts_normal.outfitType = (int)OutfitType.HEAD_ARM;
@@ -362,7 +367,9 @@ namespace MQPMTool2
 
             Outfit plparts_normal_scarf = new Outfit();
             plparts_normal_scarf.name = "plparts_normal_scarf";
-            plparts_normal_scarf.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna0_main1_def";
+            plparts_normal_scarf.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna0_main1_def.fmdl";
+            plparts_normal_scarf.fcnpPath = @"\Assets\tpp\chara\sna\Scenes\sna0_main1_def.fcnp";
+            plparts_normal_scarf.frdvPath = @"\Assets\tpp\chara\sna\Scenes\sna0_main1_def.frdv";
             plparts_normal_scarf.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna0_main1_item.sim";
             plparts_normal_scarf.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_hair.sim";
             plparts_normal_scarf.outfitType = (int)OutfitType.HEAD_ARM;
@@ -370,7 +377,9 @@ namespace MQPMTool2
 
             Outfit plparts_naked = new Outfit();
             plparts_naked.name = "plparts_naked";
-            plparts_naked.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna8_main0_def";
+            plparts_naked.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna8_main0_def.fmdl";
+            plparts_naked.fcnpPath = @"\Assets\tpp\chara\sna\Scenes\sna8_main0_def.fcnp";
+            plparts_naked.frdvPath = @"\Assets\tpp\chara\sna\Scenes\sna8_main0_def.frdv";
             plparts_naked.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_hair.sim";
             plparts_naked.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna8_main0_item.sim";
             plparts_naked.outfitType = (int)OutfitType.HEAD_ARM;
@@ -378,7 +387,9 @@ namespace MQPMTool2
 
             Outfit plparts_venom = new Outfit();
             plparts_venom.name = "plparts_venom";
-            plparts_venom.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna4_main0_def";
+            plparts_venom.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna4_main0_def.fmdl";
+            plparts_venom.fcnpPath = @"\Assets\tpp\chara\sna\Scenes\sna4_main0_def.fcnp";
+            plparts_venom.frdvPath = @"\Assets\tpp\chara\sna\Scenes\sna4_main0_def.frdv";
             plparts_venom.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_hair.sim";
             plparts_venom.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_body.sim";
             plparts_venom.outfitType = (int)OutfitType.HEAD_ARM;
@@ -386,7 +397,9 @@ namespace MQPMTool2
 
             Outfit plparts_battledress = new Outfit();
             plparts_battledress.name = "plparts_battledress";
-            plparts_battledress.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna5_main0_def";
+            plparts_battledress.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna5_main0_def.fmdl";
+            plparts_battledress.fcnpPath = @"\Assets\tpp\chara\sna\Scenes\sna5_main0_def.fcnp";
+            plparts_battledress.frdvPath = @"\Assets\tpp\chara\sna\Scenes\sna5_main0_def.frdv";
             plparts_battledress.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna5_main0_body.sim";
             plparts_battledress.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_item.sim";
             plparts_battledress.outfitType = (int)OutfitType.HEAD_ARM;
@@ -394,7 +407,9 @@ namespace MQPMTool2
 
             Outfit plparts_parasite = new Outfit();
             plparts_parasite.name = "plparts_parasite";
-            plparts_parasite.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna7_main0_def";
+            plparts_parasite.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna7_main0_def.fmdl";
+            plparts_parasite.fcnpPath = @"\Assets\tpp\chara\sna\Scenes\sna7_main0_def.fcnp";
+            plparts_parasite.frdvPath = @"\Assets\tpp\chara\sna\Scenes\sna7_main0_def.frdv";
             plparts_parasite.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_body.sim";
             plparts_parasite.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_item.sim";
             plparts_parasite.outfitType = (int)OutfitType.NO_HEAD_ARM;
@@ -402,7 +417,9 @@ namespace MQPMTool2
 
             Outfit plparts_gz_suit = new Outfit();
             plparts_gz_suit.name = "plparts_gz_suit";
-            plparts_gz_suit.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna2_main1_def";
+            plparts_gz_suit.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna2_main1_def.fmdl";
+            plparts_gz_suit.fcnpPath = @"\Assets\tpp\chara\sna\Scenes\sna2_main1_def.fcnp";
+            plparts_gz_suit.frdvPath = @"\Assets\tpp\chara\sna\Scenes\sna2_main1_def.frdv";
             plparts_gz_suit.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna2_main0_hair.sim";
             plparts_gz_suit.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna2_main0_asr.sim";
             plparts_gz_suit.outfitType = (int)OutfitType.HEAD_ARM;
@@ -410,7 +427,9 @@ namespace MQPMTool2
 
             Outfit plparts_mgs1 = new Outfit();
             plparts_mgs1.name = "plparts_mgs1";
-            plparts_mgs1.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna6_main0_def";
+            plparts_mgs1.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna6_main0_def.fmdl";
+            plparts_mgs1.fcnpPath = @"\Assets\tpp\chara\sna\Scenes\sna6_main0_def.fcnp";
+            plparts_mgs1.frdvPath = @"\Assets\tpp\chara\sna\Scenes\sna6_main0_def.frdv";
             plparts_mgs1.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna2_main0_asr.sim";
             plparts_mgs1.simPath2 = "None";
             plparts_mgs1.outfitType = (int)OutfitType.NO_HEAD_NO_ARM;
@@ -418,7 +437,9 @@ namespace MQPMTool2
 
             Outfit plparts_ninja = new Outfit();
             plparts_ninja.name = "plparts_ninja";
-            plparts_ninja.outfitPath = @"\Assets\tpp\chara\nin\Scenes\nin0_main0_def";
+            plparts_ninja.outfitPath = @"\Assets\tpp\chara\nin\Scenes\nin0_main0_def.fmdl";
+            plparts_ninja.fcnpPath = @"\Assets\tpp\chara\nin\Scenes\nin0_main0_def.fcnp";
+            plparts_ninja.frdvPath = @"\Assets\tpp\chara\nin\Scenes\nin0_main0_def.frdv";
             plparts_ninja.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna2_main0_asr.sim";
             plparts_ninja.simPath2 = "None";
             plparts_ninja.outfitType = (int)OutfitType.NO_HEAD_NO_ARM;
@@ -426,15 +447,29 @@ namespace MQPMTool2
 
             Outfit plparts_raiden = new Outfit();
             plparts_raiden.name = "plparts_raiden";
-            plparts_raiden.outfitPath = @"\Assets\tpp\chara\rai\Scenes\rai0_main0_def";
+            plparts_raiden.outfitPath = @"\Assets\tpp\chara\rai\Scenes\rai0_main0_def.fmdl";
+            plparts_raiden.fcnpPath = @"\Assets\tpp\chara\rai\Scenes\rai0_main0_def.fcnp";
+            plparts_raiden.frdvPath = @"\Assets\tpp\chara\rai\Scenes\rai0_main0_def.frdv";
             plparts_raiden.simPath = @"\Assets\tpp\chara\rai\Fox_files\rai0_main0_asr.sim";
             plparts_raiden.simPath2 = @"\Assets\tpp\chara\rai\Fox_files\rai0_main0_hair.sim";
             plparts_raiden.outfitType = (int)OutfitType.NO_HEAD_NO_ARM;
             outfits.Add(plparts_raiden);
 
+            Outfit plparts_ocelot = new Outfit();
+            plparts_ocelot.name = "plparts_ocelot";
+            plparts_ocelot.outfitPath = @"\Assets\tpp\chara\ooc\Scenes\ooc0_main1_def.fmdl";
+            plparts_ocelot.fcnpPath = @"\Assets\tpp\chara\ooc\Scenes\ooc0_main1_def.fcnp";
+            plparts_ocelot.frdvPath = @"\Assets\tpp\chara\ooc\Scenes\ooc0_main1_def.frdv";
+            plparts_ocelot.simPath = @"\Assets\tpp\chara\oce\Fox_files\oce0_main0_hair.sim";
+            plparts_ocelot.simPath2 = @"\Assets\tpp\chara\ooc\Fox_files\ooc0_main1_asr.sim";
+            plparts_ocelot.outfitType = (int)OutfitType.NO_HEAD_NO_ARM;
+            outfits.Add(plparts_ocelot);
+
             Outfit plparts_dd_female = new Outfit();
             plparts_dd_female.name = "plparts_dd_female";
-            plparts_dd_female.outfitPath = @"\Assets\tpp\chara\dds\Scenes\dds6_main0_def";
+            plparts_dd_female.outfitPath = @"\Assets\tpp\chara\dds\Scenes\dds6_main0_def.fmdl";
+            plparts_dd_female.fcnpPath = @"\Assets\tpp\chara\dds\Scenes\dds6_main0_def.fcnp";
+            plparts_dd_female.frdvPath = @"\Assets\tpp\chara\dds\Scenes\dds6_main0_def.frdv";
             plparts_dd_female.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_asr.sim";
             plparts_dd_female.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna0_broken_arm_r.sim";
             plparts_dd_female.outfitType = (int)OutfitType.HEAD_NO_ARM;
@@ -442,7 +477,9 @@ namespace MQPMTool2
 
             Outfit plparts_ddf_venom = new Outfit();
             plparts_ddf_venom.name = "plparts_ddf_venom";
-            plparts_ddf_venom.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna4_plyf0_def";
+            plparts_ddf_venom.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna4_plyf0_def.fmdl";
+            plparts_ddf_venom.fcnpPath = @"\Assets\tpp\chara\sna\Scenes\sna4_plyf0_def.fcnp";
+            plparts_ddf_venom.frdvPath = @"\Assets\tpp\chara\sna\Scenes\sna4_plyf0_def.frdv";
             plparts_ddf_venom.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_item.sim";
             plparts_ddf_venom.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_asr.sim";
             plparts_ddf_venom.outfitType = (int)OutfitType.HEAD_NO_ARM;
@@ -450,7 +487,9 @@ namespace MQPMTool2
 
             Outfit plparts_ddf_battledress = new Outfit();
             plparts_ddf_battledress.name = "plparts_ddf_battledress";
-            plparts_ddf_battledress.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna5_plyf0_def";
+            plparts_ddf_battledress.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna5_plyf0_def.fmdl";
+            plparts_ddf_battledress.fcnpPath = @"\Assets\tpp\chara\sna\Scenes\sna5_plyf0_def.fcnp";
+            plparts_ddf_battledress.frdvPath = @"\Assets\tpp\chara\sna\Scenes\sna5_plyf0_def.frdv";
             plparts_ddf_battledress.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_item.sim";
             plparts_ddf_battledress.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_asr.sim";
             plparts_ddf_battledress.outfitType = (int)OutfitType.HEAD_NO_ARM;
@@ -458,7 +497,9 @@ namespace MQPMTool2
 
             Outfit plparts_ddf_parasite = new Outfit();
             plparts_ddf_parasite.name = "plparts_ddf_parasite";
-            plparts_ddf_parasite.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna7_plyf0_def";
+            plparts_ddf_parasite.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna7_plyf0_def.fmdl";
+            plparts_ddf_parasite.fcnpPath = @"\Assets\tpp\chara\sna\Scenes\sna7_plyf0_def.fcnp";
+            plparts_ddf_parasite.frdvPath = @"\Assets\tpp\chara\sna\Scenes\sna7_plyf0_def.frdv";
             plparts_ddf_parasite.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_item.sim";
             plparts_ddf_parasite.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_asr.sim";
             plparts_ddf_parasite.outfitType = (int)OutfitType.NO_HEAD_NO_ARM;
@@ -466,15 +507,39 @@ namespace MQPMTool2
 
             Outfit plparts_ddf_swimwear = new Outfit();
             plparts_ddf_swimwear.name = "plparts_ddf_swimwear";
-            plparts_ddf_swimwear.outfitPath = @"\Assets\tpp\chara\dlf\Scenes\dlf0_main0_def_f";
+            plparts_ddf_swimwear.outfitPath = @"\Assets\tpp\chara\dlf\Scenes\dlf0_main0_def_f.fmdl";
+            plparts_ddf_swimwear.fcnpPath = @"\Assets\tpp\chara\dlf\Scenes\dlf0_main0_def_f.fcnp";
+            plparts_ddf_swimwear.frdvPath = @"\Assets\tpp\chara\dlf\Scenes\dlf0_main0_def_f.frdv";
             plparts_ddf_swimwear.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_asr.sim";
             plparts_ddf_swimwear.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna0_broken_arm_r.sim";
             plparts_ddf_swimwear.outfitType = (int)OutfitType.HEAD_NO_ARM;
             outfits.Add(plparts_ddf_swimwear);
 
+            Outfit plparts_ddf_swimwear_g = new Outfit();
+            plparts_ddf_swimwear_g.name = "plparts_ddf_swimwear_g";
+            plparts_ddf_swimwear_g.outfitPath = @"\Assets\tpp\chara\dlg\Scenes\dlg0_main0_def_f.fmdl";
+            plparts_ddf_swimwear_g.fcnpPath = @"\Assets\tpp\chara\dlg\Scenes\dlg0_main0_def_f.fcnp";
+            plparts_ddf_swimwear_g.frdvPath = @"\Assets\tpp\chara\dlg\Scenes\dlg0_main0_def_f.frdv";
+            plparts_ddf_swimwear_g.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_asr.sim";
+            plparts_ddf_swimwear_g.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna0_broken_arm_r.sim";
+            plparts_ddf_swimwear_g.outfitType = (int)OutfitType.HEAD_NO_ARM;
+            outfits.Add(plparts_ddf_swimwear_g);
+
+            Outfit plparts_ddf_swimwear_h = new Outfit();
+            plparts_ddf_swimwear_h.name = "plparts_ddf_swimwear_h";
+            plparts_ddf_swimwear_h.outfitPath = @"\Assets\tpp\chara\dlh\Scenes\dlh0_main0_def_f.fmdl";
+            plparts_ddf_swimwear_h.fcnpPath = @"\Assets\tpp\chara\dlg\Scenes\dlg0_main0_def_f.fcnp";
+            plparts_ddf_swimwear_h.frdvPath = @"\Assets\tpp\chara\dlg\Scenes\dlg0_main0_def_f.frdv";
+            plparts_ddf_swimwear_h.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_asr.sim";
+            plparts_ddf_swimwear_h.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna0_broken_arm_r.sim";
+            plparts_ddf_swimwear_h.outfitType = (int)OutfitType.HEAD_NO_ARM;
+            outfits.Add(plparts_ddf_swimwear_h);
+
             Outfit plparts_dd_male = new Outfit();
             plparts_dd_male.name = "plparts_dd_male";
-            plparts_dd_male.outfitPath = @"\Assets\tpp\chara\dds\Scenes\dds5_main0_def";
+            plparts_dd_male.outfitPath = @"\Assets\tpp\chara\dds\Scenes\dds5_main0_def.fmdl";
+            plparts_dd_male.fcnpPath = @"\Assets\tpp\chara\dds\Scenes\dds5_main0_def.fcnp";
+            plparts_dd_male.frdvPath = @"\Assets\tpp\chara\dds\Scenes\dds5_main0_def.frdv";
             plparts_dd_male.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_asr.sim";
             plparts_dd_male.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna0_broken_arm_r.sim";
             plparts_dd_male.outfitType = (int)OutfitType.HEAD_NO_ARM;
@@ -482,7 +547,9 @@ namespace MQPMTool2
 
             Outfit plparts_ddm_venom = new Outfit();
             plparts_ddm_venom.name = "plparts_ddm_venom";
-            plparts_ddm_venom.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna4_plym0_def";
+            plparts_ddm_venom.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna4_plym0_def.fmdl";
+            plparts_ddm_venom.fcnpPath = @"\Assets\tpp\chara\sna\Scenes\sna4_plym0_def.fcnp";
+            plparts_ddm_venom.frdvPath = @"\Assets\tpp\chara\sna\Scenes\sna4_plym0_def.frdv";
             plparts_ddm_venom.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_item.sim";
             plparts_ddm_venom.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_asr.sim";
             plparts_ddm_venom.outfitType = (int)OutfitType.HEAD_NO_ARM;
@@ -490,7 +557,9 @@ namespace MQPMTool2
 
             Outfit plparts_ddm_battledress = new Outfit();
             plparts_ddm_battledress.name = "plparts_ddm_battledress";
-            plparts_ddm_battledress.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna5_plym0_def";
+            plparts_ddm_battledress.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna5_plym0_def.fmdl";
+            plparts_ddm_battledress.fcnpPath = @"\Assets\tpp\chara\sna\Scenes\sna5_plym0_def.fcnp";
+            plparts_ddm_battledress.frdvPath = @"\Assets\tpp\chara\sna\Scenes\sna5_plym0_def.frdv";
             plparts_ddm_battledress.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_item.sim";
             plparts_ddm_battledress.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_asr.sim";
             plparts_ddm_battledress.outfitType = (int)OutfitType.HEAD_NO_ARM;
@@ -498,7 +567,9 @@ namespace MQPMTool2
 
             Outfit plparts_ddm_parasite = new Outfit();
             plparts_ddm_parasite.name = "plparts_ddm_parasite";
-            plparts_ddm_parasite.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna7_plym0_def";
+            plparts_ddm_parasite.outfitPath = @"\Assets\tpp\chara\sna\Scenes\sna7_plym0_def.fmdl";
+            plparts_ddm_parasite.fcnpPath = @"\Assets\tpp\chara\sna\Scenes\sna7_plym0_def.fcnp";
+            plparts_ddm_parasite.frdvPath = @"\Assets\tpp\chara\sna\Scenes\sna7_plym0_def.frdv";
             plparts_ddm_parasite.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_item.sim";
             plparts_ddm_parasite.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna4_main0_asr.sim";
             plparts_ddm_parasite.outfitType = (int)OutfitType.NO_HEAD_NO_ARM;
@@ -506,16 +577,40 @@ namespace MQPMTool2
 
             Outfit plparts_ddm_swimwear = new Outfit();
             plparts_ddm_swimwear.name = "plparts_ddm_swimwear";
-            plparts_ddm_swimwear.outfitPath = @"\Assets\tpp\chara\dlf\Scenes\dlf1_main0_def";
+            plparts_ddm_swimwear.outfitPath = @"\Assets\tpp\chara\dlf\Scenes\dlf1_main0_def.fmdl";
+            plparts_ddm_swimwear.fcnpPath = @"\Assets\tpp\chara\dlf\Scenes\dlf1_main0_def.fcnp";
+            plparts_ddm_swimwear.frdvPath = @"\Assets\tpp\chara\dlf\Scenes\dlf1_main0_def.frdv";
             plparts_ddm_swimwear.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_asr.sim";
             plparts_ddm_swimwear.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna0_broken_arm_r.sim";
             plparts_ddm_swimwear.outfitType = (int)OutfitType.HEAD_NO_ARM;
             outfits.Add(plparts_ddm_swimwear);
 
+            Outfit plparts_ddm_swimwear_g = new Outfit();
+            plparts_ddm_swimwear_g.name = "plparts_ddm_swimwear_g";
+            plparts_ddm_swimwear_g.outfitPath = @"\Assets\tpp\chara\dlg\Scenes\dlg1_main0_def.fmdl";
+            plparts_ddm_swimwear_g.fcnpPath = @"\Assets\tpp\chara\dlg\Scenes\dlg1_main0_def.fcnp";
+            plparts_ddm_swimwear_g.frdvPath = @"\Assets\tpp\chara\dlg\Scenes\dlg1_main0_def.frdv";
+            plparts_ddm_swimwear_g.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_asr.sim";
+            plparts_ddm_swimwear_g.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna0_broken_arm_r.sim";
+            plparts_ddm_swimwear_g.outfitType = (int)OutfitType.HEAD_NO_ARM;
+            outfits.Add(plparts_ddm_swimwear_g);
+
+            Outfit plparts_ddm_swimwear_h = new Outfit();
+            plparts_ddm_swimwear_h.name = "plparts_ddm_swimwear_h";
+            plparts_ddm_swimwear_h.outfitPath = @"\Assets\tpp\chara\dlh\Scenes\dlh1_main0_def.fmdl";
+            plparts_ddm_swimwear_h.fcnpPath = @"\Assets\tpp\chara\dlg\Scenes\dlg1_main0_def.fcnp";
+            plparts_ddm_swimwear_h.frdvPath = @"\Assets\tpp\chara\dlg\Scenes\dlg1_main0_def.frdv";
+            plparts_ddm_swimwear_h.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_asr.sim";
+            plparts_ddm_swimwear_h.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna0_broken_arm_r.sim";
+            plparts_ddm_swimwear_h.outfitType = (int)OutfitType.HEAD_NO_ARM;
+            outfits.Add(plparts_ddm_swimwear_h);
+
             //Standard Fatigues (NS)
             Outfit plparts_dla0_main0_def_v00 = new Outfit();
             plparts_dla0_main0_def_v00.name = "plparts_dla0_main0_def_v00";
-            plparts_dla0_main0_def_v00.outfitPath = @"\Assets\tpp\chara\dla\Scenes\dla0_main0_def";
+            plparts_dla0_main0_def_v00.outfitPath = @"\Assets\tpp\chara\dla\Scenes\dla0_main0_def.fmdl";
+            plparts_dla0_main0_def_v00.fcnpPath = @"\Assets\tpp\chara\dla\Scenes\dla0_main0_def.fcnp";
+            plparts_dla0_main0_def_v00.frdvPath = @"\Assets\tpp\chara\dla\Scenes\dla0_main0_def.frdv";
             plparts_dla0_main0_def_v00.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_hair.sim";
             plparts_dla0_main0_def_v00.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_asr.sim";
             plparts_dla0_main0_def_v00.outfitType = (int)OutfitType.HEAD_ARM;
@@ -523,7 +618,9 @@ namespace MQPMTool2
 
             Outfit plparts_dla0_plym0_def_v00 = new Outfit();
             plparts_dla0_plym0_def_v00.name = "plparts_dla0_plym0_def_v00";
-            plparts_dla0_plym0_def_v00.outfitPath = @"\Assets\tpp\chara\dla\Scenes\dla0_plym0_def";
+            plparts_dla0_plym0_def_v00.outfitPath = @"\Assets\tpp\chara\dla\Scenes\dla0_plym0_def.fmdl";
+            plparts_dla0_plym0_def_v00.fcnpPath = @"\Assets\tpp\chara\dla\Scenes\dla0_plym0_def.fcnp";
+            plparts_dla0_plym0_def_v00.frdvPath = @"\Assets\tpp\chara\dla\Scenes\dla0_plym0_def.frdv";
             plparts_dla0_plym0_def_v00.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_hair.sim";
             plparts_dla0_plym0_def_v00.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_asr.sim";
             plparts_dla0_plym0_def_v00.outfitType = (int)OutfitType.HEAD_NO_ARM;
@@ -532,7 +629,9 @@ namespace MQPMTool2
             //Naked Fatigues (NS)
             Outfit plparts_dla1_main0_def_v00 = new Outfit();
             plparts_dla1_main0_def_v00.name = "plparts_dla1_main0_def_v00";
-            plparts_dla1_main0_def_v00.outfitPath = @"\Assets\tpp\chara\dla\Scenes\dla1_main0_def";
+            plparts_dla1_main0_def_v00.outfitPath = @"\Assets\tpp\chara\dla\Scenes\dla1_main0_def.fmdl";
+            plparts_dla1_main0_def_v00.fcnpPath = @"\Assets\tpp\chara\dla\Scenes\dla1_main0_def.fcnp";
+            plparts_dla1_main0_def_v00.frdvPath = @"\Assets\tpp\chara\dla\Scenes\dla1_main0_def.frdv";
             plparts_dla1_main0_def_v00.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_hair.sim";
             plparts_dla1_main0_def_v00.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_asr.sim";
             plparts_dla1_main0_def_v00.outfitType = (int)OutfitType.HEAD_ARM;
@@ -540,7 +639,9 @@ namespace MQPMTool2
 
             Outfit plparts_dla1_plym0_def_v00 = new Outfit();
             plparts_dla1_plym0_def_v00.name = "plparts_dla1_plym0_def_v00";
-            plparts_dla1_plym0_def_v00.outfitPath = @"\Assets\tpp\chara\dla\Scenes\dla1_plym0_def";
+            plparts_dla1_plym0_def_v00.outfitPath = @"\Assets\tpp\chara\dla\Scenes\dla1_plym0_def.fmdl";
+            plparts_dla1_plym0_def_v00.fcnpPath = @"\Assets\tpp\chara\dla\Scenes\dla1_plym0_def.fcnp";
+            plparts_dla1_plym0_def_v00.frdvPath = @"\Assets\tpp\chara\dla\Scenes\dla1_plym0_def.frdv";
             plparts_dla1_plym0_def_v00.simPath = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_hair.sim";
             plparts_dla1_plym0_def_v00.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_asr.sim";
             plparts_dla1_plym0_def_v00.outfitType = (int)OutfitType.HEAD_NO_ARM;
@@ -549,7 +650,9 @@ namespace MQPMTool2
             //Sneaking Suit (NS)
             Outfit plparts_dlb0_main0_def_v00 = new Outfit();
             plparts_dlb0_main0_def_v00.name = "plparts_dlb0_main0_def_v00";
-            plparts_dlb0_main0_def_v00.outfitPath = @"\Assets\tpp\chara\dlb\Scenes\dlb0_main0_def";
+            plparts_dlb0_main0_def_v00.outfitPath = @"\Assets\tpp\chara\dlb\Scenes\dlb0_main0_def.fmdl";
+            plparts_dlb0_main0_def_v00.fcnpPath = @"\Assets\tpp\chara\dlb\Scenes\dlb0_main0_def.fcnp";
+            plparts_dlb0_main0_def_v00.frdvPath = @"\Assets\tpp\chara\dlb\Scenes\dlb0_main0_def.frdv";
             plparts_dlb0_main0_def_v00.simPath = @"\Assets\tpp\chara\dlb\Fox_files\dlb0_main0_hair.sim";
             plparts_dlb0_main0_def_v00.simPath2 = @"\Assets\tpp\chara\dlb\Fox_files\dlb0_main0_item.sim";
             plparts_dlb0_main0_def_v00.outfitType = (int)OutfitType.HEAD_ARM;
@@ -557,7 +660,9 @@ namespace MQPMTool2
 
             Outfit plparts_dlb0_plym0_def_v00 = new Outfit();
             plparts_dlb0_plym0_def_v00.name = "plparts_dlb0_plym0_def_v00";
-            plparts_dlb0_plym0_def_v00.outfitPath = @"\Assets\tpp\chara\dlb\Scenes\dlb0_plym0_def";
+            plparts_dlb0_plym0_def_v00.outfitPath = @"\Assets\tpp\chara\dlb\Scenes\dlb0_plym0_def.fmdl";
+            plparts_dlb0_plym0_def_v00.fcnpPath = @"\Assets\tpp\chara\dlb\Scenes\dlb0_plym0_def.fcnp";
+            plparts_dlb0_plym0_def_v00.frdvPath = @"\Assets\tpp\chara\dlb\Scenes\dlb0_plym0_def.frdv";
             plparts_dlb0_plym0_def_v00.simPath = @"\Assets\tpp\chara\dlb\Fox_files\dlb0_main0_item.sim";
             plparts_dlb0_plym0_def_v00.simPath2 = @"\Assets\tpp\chara\dlb\Fox_files\dlb0_main0_asr.sim";
             plparts_dlb0_plym0_def_v00.outfitType = (int)OutfitType.HEAD_NO_ARM;
@@ -566,7 +671,9 @@ namespace MQPMTool2
             //The Boss (Closed)
             Outfit plparts_dlc0_plyf0_def_v00 = new Outfit();
             plparts_dlc0_plyf0_def_v00.name = "plparts_dlc0_plyf0_def_v00";
-            plparts_dlc0_plyf0_def_v00.outfitPath = @"\Assets\tpp\chara\dlc\Scenes\dlc0_plyf0_def";
+            plparts_dlc0_plyf0_def_v00.outfitPath = @"\Assets\tpp\chara\dlc\Scenes\dlc0_plyf0_def.fmdl";
+            plparts_dlc0_plyf0_def_v00.fcnpPath = @"\Assets\tpp\chara\dlc\Scenes\dlc0_plyf0_def.fcnp";
+            plparts_dlc0_plyf0_def_v00.frdvPath = @"\Assets\tpp\chara\dlc\Scenes\dlc0_plyf0_def.frdv";
             plparts_dlc0_plyf0_def_v00.simPath = @"\Assets\tpp\chara\dlc\Fox_files\dlc0_body0_def.sim";
             plparts_dlc0_plyf0_def_v00.simPath2 = @"\Assets\tpp\chara\dlc\Fox_files\dlc0_bust0_def.sim";
             plparts_dlc0_plyf0_def_v00.outfitType = (int)OutfitType.HEAD_NO_ARM;
@@ -575,7 +682,9 @@ namespace MQPMTool2
             //The Boss (Open)
             Outfit plparts_dlc1_plyf0_def_v00 = new Outfit();
             plparts_dlc1_plyf0_def_v00.name = "plparts_dlc1_plyf0_def_v00";
-            plparts_dlc1_plyf0_def_v00.outfitPath = @"\Assets\tpp\chara\dlc\Scenes\dlc1_plyf0_def";
+            plparts_dlc1_plyf0_def_v00.outfitPath = @"\Assets\tpp\chara\dlc\Scenes\dlc1_plyf0_def.fmdl";
+            plparts_dlc1_plyf0_def_v00.fcnpPath = @"\Assets\tpp\chara\dlc\Scenes\dlc1_plyf0_def.fcnp";
+            plparts_dlc1_plyf0_def_v00.frdvPath = @"\Assets\tpp\chara\dlc\Scenes\dlc1_plyf0_def.frdv";
             plparts_dlc1_plyf0_def_v00.simPath = @"\Assets\tpp\chara\dlc\Fox_files\dlc0_body0_def.sim";
             plparts_dlc1_plyf0_def_v00.simPath2 = @"\Assets\tpp\chara\dlc\Fox_files\dlc1_belt0_def.sim";
             plparts_dlc1_plyf0_def_v00.outfitType = (int)OutfitType.HEAD_NO_ARM;
@@ -584,7 +693,9 @@ namespace MQPMTool2
             //Tuxedo (NS)
             Outfit plparts_dld0_main0_def_v00 = new Outfit();
             plparts_dld0_main0_def_v00.name = "plparts_dld0_main0_def_v00";
-            plparts_dld0_main0_def_v00.outfitPath = @"\Assets\tpp\chara\dld\Scenes\dld0_main0_def";
+            plparts_dld0_main0_def_v00.outfitPath = @"\Assets\tpp\chara\dld\Scenes\dld0_main0_def.fmdl";
+            plparts_dld0_main0_def_v00.fcnpPath = @"\Assets\tpp\chara\dld\Scenes\dld0_main0_def.fcnp";
+            plparts_dld0_main0_def_v00.frdvPath = @"\Assets\tpp\chara\dld\Scenes\dld0_main0_def.frdv";
             plparts_dld0_main0_def_v00.simPath = @"\Assets\tpp\chara\dld\FOX_files\dld0_hair0_def.sim";
             plparts_dld0_main0_def_v00.simPath2 = @"\Assets\tpp\chara\dld\FOX_files\dld0_body0_def.sim";
             plparts_dld0_main0_def_v00.outfitType = (int)OutfitType.HEAD_ARM;
@@ -592,7 +703,9 @@ namespace MQPMTool2
 
             Outfit plparts_dld0_plym0_def_v00 = new Outfit();
             plparts_dld0_plym0_def_v00.name = "plparts_dld0_plym0_def_v00";
-            plparts_dld0_plym0_def_v00.outfitPath = @"\Assets\tpp\chara\dla\Scenes\dld0_plym0_def";
+            plparts_dld0_plym0_def_v00.outfitPath = @"\Assets\tpp\chara\dla\Scenes\dld0_plym0_def.fmdl";
+            plparts_dld0_plym0_def_v00.fcnpPath = @"\Assets\tpp\chara\dla\Scenes\dld0_plym0_def.fcnp";
+            plparts_dld0_plym0_def_v00.frdvPath = @"\Assets\tpp\chara\dla\Scenes\dld0_plym0_def.frdv";
             plparts_dld0_plym0_def_v00.simPath = @"\Assets\tpp\chara\dld\FOX_files\dld0_body0_def.sim";
             plparts_dld0_plym0_def_v00.simPath2 = @"\Assets\tpp\chara\dld\FOX_files\dld0_asrt0_def.sim";
             plparts_dld0_plym0_def_v00.outfitType = (int)OutfitType.HEAD_NO_ARM;
@@ -601,7 +714,9 @@ namespace MQPMTool2
             //EVA (Closed)
             Outfit plparts_dle0_plyf0_def_v00 = new Outfit();
             plparts_dle0_plyf0_def_v00.name = "plparts_dle0_plyf0_def_v00";
-            plparts_dle0_plyf0_def_v00.outfitPath = @"\Assets\tpp\chara\dle\Scenes\dle0_plyf0_def";
+            plparts_dle0_plyf0_def_v00.outfitPath = @"\Assets\tpp\chara\dle\Scenes\dle0_plyf0_def.fmdl";
+            plparts_dle0_plyf0_def_v00.fcnpPath = @"\Assets\tpp\chara\dle\Scenes\dle0_plyf0_def.fcnp";
+            plparts_dle0_plyf0_def_v00.frdvPath = @"\Assets\tpp\chara\dle\Scenes\dle0_plyf0_def.frdv";
             plparts_dle0_plyf0_def_v00.simPath = @"\Assets\tpp\chara\dle\Fox_files\dle0_body0_def.sim";
             plparts_dle0_plyf0_def_v00.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_asr.sim";
             plparts_dle0_plyf0_def_v00.outfitType = (int)OutfitType.HEAD_NO_ARM;
@@ -610,7 +725,9 @@ namespace MQPMTool2
             //EVA (Open)
             Outfit plparts_dle1_plyf0_def_v00 = new Outfit();
             plparts_dle1_plyf0_def_v00.name = "plparts_dle1_plyf0_def_v00";
-            plparts_dle1_plyf0_def_v00.outfitPath = @"\Assets\tpp\chara\dle\Scenes\dle1_plyf0_def";
+            plparts_dle1_plyf0_def_v00.outfitPath = @"\Assets\tpp\chara\dle\Scenes\dle1_plyf0_def.fmdl";
+            plparts_dle1_plyf0_def_v00.fcnpPath = @"\Assets\tpp\chara\dle\Scenes\dle1_plyf0_def.fcnp";
+            plparts_dle1_plyf0_def_v00.frdvPath = @"\Assets\tpp\chara\dle\Scenes\dle1_plyf0_def.frdv";
             plparts_dle1_plyf0_def_v00.simPath = @"\Assets\tpp\chara\dle\Fox_files\dle1_body0_def.sim";
             plparts_dle1_plyf0_def_v00.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_asr.sim";
             plparts_dle1_plyf0_def_v00.outfitType = (int)OutfitType.HEAD_NO_ARM;
