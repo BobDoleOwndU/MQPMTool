@@ -465,6 +465,16 @@ namespace MQPMTool2
             plparts_ocelot.outfitType = (int)OutfitType.NO_HEAD_NO_ARM;
             outfits.Add(plparts_ocelot);
 
+            Outfit plparts_quiet = new Outfit();
+            plparts_ocelot.name = "plparts_quiet";
+            plparts_ocelot.outfitPath = @"\Assets\tpp\chara\qui\Scenes\quip_main0_def0.fmdl";
+            plparts_ocelot.fcnpPath = @"\Assets\tpp\chara\qui\Scenes\quip_main0_def0.fcnp";
+            plparts_ocelot.frdvPath = @"\Assets\tpp\chara\qui\Scenes\quip_main0_def0.frdv";
+            plparts_ocelot.simPath = @"\Assets\tpp\chara\qui\Fox_files\quip_main0_def.sim.sim";
+            plparts_ocelot.simPath2 = @"\Assets\tpp\chara\sna\Fox_files\sna0_main0_asr.sim";
+            plparts_ocelot.outfitType = (int)OutfitType.NO_HEAD_NO_ARM;
+            outfits.Add(plparts_quiet);
+
             Outfit plparts_dd_female = new Outfit();
             plparts_dd_female.name = "plparts_dd_female";
             plparts_dd_female.outfitPath = @"\Assets\tpp\chara\dds\Scenes\dds6_main0_def.fmdl";

@@ -216,7 +216,7 @@
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MQPM Tool v2.1.3";
+            this.Text = "MQPM Tool v2.3";
             this.CharacterGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
