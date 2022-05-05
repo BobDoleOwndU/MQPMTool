@@ -89,6 +89,7 @@
 
             dataSetEntity.StaticProperties = new StaticProperties();
             dataSetEntity.StaticProperties.Property = new List<Property>(0);
+            dataSetEntity.DynamicProperties = "";
 
             {
                 Property property = new Property();
@@ -397,6 +398,8 @@
                     property.Value.Add(value);
                     entity.StaticProperties.Property.Add(property);
                 } //block
+
+                entity.DynamicProperties = "";
 
                 Value entityValue = new Value();
                 entityValue.Key = entity.StaticProperties.Property.Find(x => x.Name == "name").Value[0].Text;
