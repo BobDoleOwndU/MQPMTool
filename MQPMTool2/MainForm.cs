@@ -1,8 +1,8 @@
-﻿using MQPMTool2.Static;
+﻿using FoxTool.Fox;
+using MQPMTool2.Static;
+using System;
 using System.IO;
 using System.Windows.Forms;
-using System.Xml.Serialization;
-using Xml2CSharp;
 
 namespace MQPMTool2
 {
@@ -13,13 +13,23 @@ namespace MQPMTool2
             InitializeComponent();
         } //MainForm
 
-        private void button1_Click(object sender, System.EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(Fox));
+            string name = $"{Path.GetFileNameWithoutExtension(textBox2.Text)}.parts";
 
-            using (FileStream stream = new FileStream("test.xml", FileMode.Create))
+            using (FileStream stream = new FileStream(name, FileMode.Create))
             {
-                xmlSerializer.Serialize(stream, PartsConverter.ConvertToFox());
+                try
+                {
+                    FoxFile foxFile = PartsConverter.GetFoxFile(textBox1.Text, textBox2.Text);
+                    foxFile.CalculateHashes();
+                    foxFile.CollectStringLookupLiterals();
+                    foxFile.Write(stream);
+                } //try
+                finally
+                {
+                    stream.Close();
+                } //finally
             } //using
         } //button1_Click
     } //partial class MainForm ends
