@@ -35,6 +35,8 @@ namespace MQPMTool2.Static
         private static FoxEntity baseDataSet;
         private static FoxEntity baseModelDescription;
         private static FoxEntity baseTargetDescription;
+        private static FoxEntity basePhysicsDescription;
+        private static FoxEntity baseEffectDescription;
 
         static PartsConverter()
         {
@@ -56,7 +58,7 @@ namespace MQPMTool2.Static
             foxFile.entities = new List<FoxEntity>();
 
             //DATA SET
-            FoxEntity dataSet = baseDataSet;
+            FoxEntity dataSet = baseDataSet.Copy();
             dataSet.Address = address;
             dataSet.Unknown2 = unknown;
             dataList = dataSet.staticProperties[2].Container as FoxStringMap<FoxEntityPtr>;
@@ -65,7 +67,7 @@ namespace MQPMTool2.Static
             unknown++;
 
             //MODEL DESCRIPTION
-            FoxEntity modelDescription = baseModelDescription;
+            FoxEntity modelDescription = baseModelDescription.Copy();
             modelDescription.Address = address;
             modelDescription.Unknown2 = unknown;
             {
@@ -233,7 +235,7 @@ namespace MQPMTool2.Static
             unknown++;
             targetDescriptionCount++;
 
-            //TARGET DESCRIPTION 4
+            /*//TARGET DESCRIPTION 4
             FoxEntity targetDescription4 = baseTargetDescription.Copy();
             targetDescription4.Address = address;
             targetDescription4.Unknown2 = unknown;
@@ -266,7 +268,7 @@ namespace MQPMTool2.Static
             foxFile.entities.Add(targetDescription4);
             address += ENTITY_SIZE;
             unknown++;
-            targetDescriptionCount++;
+            targetDescriptionCount++;*/
 
             //TARGET DESCRIPTION 5
             FoxEntity targetDescription5 = baseTargetDescription.Copy();
@@ -299,6 +301,30 @@ namespace MQPMTool2.Static
                 dataList.map.Add(stringLiteral, entityPtr);
             } //block
             foxFile.entities.Add(targetDescription5);
+            address += ENTITY_SIZE;
+            unknown++;
+            targetDescriptionCount++;
+
+            //PHYSICS DESCRIPTION
+            FoxEntity physicsDescription = basePhysicsDescription.Copy();
+            physicsDescription.Address = address;
+            physicsDescription.Unknown2 = unknown;
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = physicsDescription.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = physicsDescription.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(physicsDescription);
+            physicsAddress = address;
             address += ENTITY_SIZE;
             unknown++;
             targetDescriptionCount++;
@@ -572,7 +598,7 @@ namespace MQPMTool2.Static
                 baseModelDescription.staticProperties.Add(property);
             } //property block
 
-            {
+            { 
                 FoxProperty property = new FoxProperty();
                 property.Name = "lipAdjustBinaryFile";
                 property.DataType = FoxDataType.FoxFilePtr;
@@ -583,7 +609,7 @@ namespace MQPMTool2.Static
                 staticArray.values = new List<FoxFilePtr>();
                 FoxFilePtr filePtr = new FoxFilePtr();
                 filePtr.StringLiteral = new FoxStringLiteral();
-                filePtr.StringLiteral.Literal = "";
+                filePtr.StringLiteral.Literal = "/Assets/tpp/motion/lip_adjust_data/sna0.ladb";
                 staticArray.values.Add(filePtr);
 
                 baseModelDescription.staticProperties.Add(property);
@@ -810,6 +836,428 @@ namespace MQPMTool2.Static
                 staticArray.values.Add(filePtr);
 
                 baseTargetDescription.staticProperties.Add(property);
+            } //property block
+
+            //PHYSICS DESCRIPTION
+            basePhysicsDescription = new FoxEntity();
+            basePhysicsDescription.ClassName = classPhysicsDescription.Name;
+            basePhysicsDescription.Version = short.Parse(classPhysicsDescription.Version);
+            basePhysicsDescription.Address = 0;
+            basePhysicsDescription.Unknown1 = PHYSICS_DESCRIPTION_UNKNOWN;
+            basePhysicsDescription.Unknown2 = 0;
+
+            basePhysicsDescription.staticProperties = new List<FoxProperty>();
+
+            {
+                FoxProperty property = new FoxProperty();
+                property.Name = "name";
+                property.DataType = FoxDataType.FoxString;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxString>();
+
+                FoxStaticArray<FoxString> staticArray = property.Container as FoxStaticArray<FoxString>;
+                staticArray.values = new List<FoxString>();
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "PhysicsDescription0000";
+                staticArray.values.Add(foxString);
+
+                basePhysicsDescription.staticProperties.Add(property);
+            } //property block
+
+            {
+                FoxProperty property = new FoxProperty();
+                property.Name = "dataSet";
+                property.DataType = FoxDataType.FoxEntityHandle;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxEntityHandle>();
+
+                FoxStaticArray<FoxEntityHandle> staticArray = property.Container as FoxStaticArray<FoxEntityHandle>;
+                staticArray.values = new List<FoxEntityHandle>();
+                FoxEntityHandle entityHandle = new FoxEntityHandle();
+                entityHandle.Handle = BASE_ADDRESS;
+                staticArray.values.Add(entityHandle);
+
+                basePhysicsDescription.staticProperties.Add(property);
+            } //property block
+
+            { //2
+                FoxProperty property = new FoxProperty();
+                property.Name = "depends";
+                property.DataType = FoxDataType.FoxEntityLink;
+                property.ContainerType = FoxContainerType.DynamicArray;
+                property.Container = new FoxDynamicArray<FoxEntityLink>();
+
+                FoxDynamicArray<FoxEntityLink> dynamicArray = property.Container as FoxDynamicArray<FoxEntityLink>;
+                dynamicArray.values = new List<FoxEntityLink>();
+                FoxEntityLink entityLink = new FoxEntityLink();
+                entityLink.PackagePathLiteral = new FoxStringLiteral();
+                entityLink.ArchivePathLiteral = new FoxStringLiteral();
+                entityLink.NameInArchiveLiteral = new FoxStringLiteral();
+                entityLink.PackagePathLiteral.Literal = "";
+                entityLink.ArchivePathLiteral.Literal = "";
+                entityLink.NameInArchiveLiteral.Literal = "ModelDescription0000";
+                entityLink.EntityHandle = 0;
+                dynamicArray.values.Add(entityLink);
+
+                basePhysicsDescription.staticProperties.Add(property);
+            } //property block
+
+            {
+                FoxProperty property = new FoxProperty();
+                property.Name = "partName";
+                property.DataType = FoxDataType.FoxString;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxString>();
+
+                FoxStaticArray<FoxString> staticArray = property.Container as FoxStaticArray<FoxString>;
+                staticArray.values = new List<FoxString>();
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "Ragdoll";
+                staticArray.values.Add(foxString);
+
+                basePhysicsDescription.staticProperties.Add(property);
+            } //property block
+
+            {
+                FoxProperty property = new FoxProperty();
+                property.Name = "buildType";
+                property.DataType = FoxDataType.FoxString;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxString>();
+
+                FoxStaticArray<FoxString> staticArray = property.Container as FoxStaticArray<FoxString>;
+                staticArray.values = new List<FoxString>();
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "";
+                staticArray.values.Add(foxString);
+
+                basePhysicsDescription.staticProperties.Add(property);
+            } //property block
+
+            {
+                FoxProperty property = new FoxProperty();
+                property.Name = "physicsFile";
+                property.DataType = FoxDataType.FoxFilePtr;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxFilePtr>();
+
+                FoxStaticArray<FoxFilePtr> staticArray = property.Container as FoxStaticArray<FoxFilePtr>;
+                staticArray.values = new List<FoxFilePtr>();
+                FoxFilePtr filePtr = new FoxFilePtr();
+                filePtr.StringLiteral = new FoxStringLiteral();
+                filePtr.StringLiteral.Literal = "/Assets/tpp/parts/chara/sna/sna0_v01.ph";
+                staticArray.values.Add(filePtr);
+
+                basePhysicsDescription.staticProperties.Add(property);
+            } //property block
+
+            //EFFECT DESCRIPTION
+            baseEffectDescription = new FoxEntity();
+            baseEffectDescription.ClassName = classPhysicsDescription.Name;
+            baseEffectDescription.Version = short.Parse(classPhysicsDescription.Version);
+            baseEffectDescription.Address = 0;
+            baseEffectDescription.Unknown1 = PHYSICS_DESCRIPTION_UNKNOWN;
+            baseEffectDescription.Unknown2 = 0;
+
+            baseEffectDescription.staticProperties = new List<FoxProperty>();
+
+            { //0
+                FoxProperty property = new FoxProperty();
+                property.Name = "name";
+                property.DataType = FoxDataType.FoxString;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxString>();
+
+                FoxStaticArray<FoxString> staticArray = property.Container as FoxStaticArray<FoxString>;
+                staticArray.values = new List<FoxString>();
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "EffectDescription";
+                staticArray.values.Add(foxString);
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            {
+                FoxProperty property = new FoxProperty();
+                property.Name = "dataSet";
+                property.DataType = FoxDataType.FoxEntityHandle;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxEntityHandle>();
+
+                FoxStaticArray<FoxEntityHandle> staticArray = property.Container as FoxStaticArray<FoxEntityHandle>;
+                staticArray.values = new List<FoxEntityHandle>();
+                FoxEntityHandle entityHandle = new FoxEntityHandle();
+                entityHandle.Handle = BASE_ADDRESS;
+                staticArray.values.Add(entityHandle);
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            { //2
+                FoxProperty property = new FoxProperty();
+                property.Name = "depends";
+                property.DataType = FoxDataType.FoxEntityLink;
+                property.ContainerType = FoxContainerType.DynamicArray;
+                property.Container = new FoxDynamicArray<FoxEntityLink>();
+
+                FoxDynamicArray<FoxEntityLink> dynamicArray = property.Container as FoxDynamicArray<FoxEntityLink>;
+                dynamicArray.values = new List<FoxEntityLink>();
+                FoxEntityLink entityLink = new FoxEntityLink();
+                entityLink.PackagePathLiteral = new FoxStringLiteral();
+                entityLink.ArchivePathLiteral = new FoxStringLiteral();
+                entityLink.NameInArchiveLiteral = new FoxStringLiteral();
+                entityLink.PackagePathLiteral.Literal = "";
+                entityLink.ArchivePathLiteral.Literal = "";
+                entityLink.NameInArchiveLiteral.Literal = "ModelDescription0000";
+                entityLink.EntityHandle = 0;
+                dynamicArray.values.Add(entityLink);
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            { //3
+                FoxProperty property = new FoxProperty();
+                property.Name = "partName";
+                property.DataType = FoxDataType.FoxString;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxString>();
+
+                FoxStaticArray<FoxString> staticArray = property.Container as FoxStaticArray<FoxString>;
+                staticArray.values = new List<FoxString>();
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "";
+                staticArray.values.Add(foxString);
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            {
+                FoxProperty property = new FoxProperty();
+                property.Name = "buildType";
+                property.DataType = FoxDataType.FoxString;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxString>();
+
+                FoxStaticArray<FoxString> staticArray = property.Container as FoxStaticArray<FoxString>;
+                staticArray.values = new List<FoxString>();
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "";
+                staticArray.values.Add(foxString);
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            { //5
+                FoxProperty property = new FoxProperty();
+                property.Name = "connectDestinationSkelNames";
+                property.DataType = FoxDataType.FoxString;
+                property.ContainerType = FoxContainerType.DynamicArray;
+                property.Container = new FoxDynamicArray<FoxString>();
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            { //6
+                FoxProperty property = new FoxProperty();
+                property.Name = "connectDestinationCnpNames";
+                property.DataType = FoxDataType.FoxString;
+                property.ContainerType = FoxContainerType.DynamicArray;
+                property.Container = new FoxDynamicArray<FoxString>();
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            { //7
+                FoxProperty property = new FoxProperty();
+                property.Name = "offsetSkelPositions";
+                property.DataType = FoxDataType.FoxVector3;
+                property.ContainerType = FoxContainerType.DynamicArray;
+                property.Container = new FoxDynamicArray<FoxVector3>();
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            { //8
+                FoxProperty property = new FoxProperty();
+                property.Name = "offsetCnpPositions";
+                property.DataType = FoxDataType.FoxVector3;
+                property.ContainerType = FoxContainerType.DynamicArray;
+                property.Container = new FoxDynamicArray<FoxVector3>();
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            { //9
+                FoxProperty property = new FoxProperty();
+                property.Name = "generalSkelParameters";
+                property.DataType = FoxDataType.FoxVector4;
+                property.ContainerType = FoxContainerType.DynamicArray;
+                property.Container = new FoxDynamicArray<FoxVector4>();
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            { //10
+                FoxProperty property = new FoxProperty();
+                property.Name = "generalCnpParameters";
+                property.DataType = FoxDataType.FoxVector4;
+                property.ContainerType = FoxContainerType.DynamicArray;
+                property.Container = new FoxDynamicArray<FoxVector4>();
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            { //11
+                FoxProperty property = new FoxProperty();
+                property.Name = "effectConnect";
+                property.DataType = FoxDataType.FoxBool;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxBool>();
+
+                FoxStaticArray<FoxBool> staticArray = property.Container as FoxStaticArray<FoxBool>;
+                staticArray.values = new List<FoxBool>();
+                FoxBool foxBool = new FoxBool();
+                foxBool.Value = true;
+                staticArray.values.Add(foxBool);
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            { //12
+                FoxProperty property = new FoxProperty();
+                property.Name = "changeEffectConnectSetting";
+                property.DataType = FoxDataType.FoxBool;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxBool>();
+
+                FoxStaticArray<FoxBool> staticArray = property.Container as FoxStaticArray<FoxBool>;
+                staticArray.values = new List<FoxBool>();
+                FoxBool foxBool = new FoxBool();
+                foxBool.Value = false;
+                staticArray.values.Add(foxBool);
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            { //13
+                FoxProperty property = new FoxProperty();
+                property.Name = "visibleModelWithEffect";
+                property.DataType = FoxDataType.FoxBool;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxBool>();
+
+                FoxStaticArray<FoxBool> staticArray = property.Container as FoxStaticArray<FoxBool>;
+                staticArray.values = new List<FoxBool>();
+                FoxBool foxBool = new FoxBool();
+                foxBool.Value = true;
+                staticArray.values.Add(foxBool);
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            { //14
+                FoxProperty property = new FoxProperty();
+                property.Name = "createStartEffect";
+                property.DataType = FoxDataType.FoxBool;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxBool>();
+
+                FoxStaticArray<FoxBool> staticArray = property.Container as FoxStaticArray<FoxBool>;
+                staticArray.values = new List<FoxBool>();
+                FoxBool foxBool = new FoxBool();
+                foxBool.Value = false;
+                staticArray.values.Add(foxBool);
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            { //15
+                FoxProperty property = new FoxProperty();
+                property.Name = "effectRandomSeed";
+                property.DataType = FoxDataType.FoxUInt32;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxUInt32>();
+
+                FoxStaticArray<FoxUInt32> staticArray = property.Container as FoxStaticArray<FoxUInt32>;
+                staticArray = new FoxStaticArray<FoxUInt32>();
+                FoxUInt32 foxUInt32 = new FoxUInt32();
+                foxUInt32.Value = 0;
+                staticArray.values.Add(foxUInt32);
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            { //16
+                FoxProperty property = new FoxProperty();
+                property.Name = "effectKind";
+                property.DataType = FoxDataType.FoxUInt32;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxUInt32>();
+
+                FoxStaticArray<FoxUInt32> staticArray = property.Container as FoxStaticArray<FoxUInt32>;
+                staticArray = new FoxStaticArray<FoxUInt32>();
+                FoxUInt32 foxUInt32 = new FoxUInt32();
+                foxUInt32.Value = 0;
+                staticArray.values.Add(foxUInt32);
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            { //17
+                FoxProperty property = new FoxProperty();
+                property.Name = "effectVariationName";
+                property.DataType = FoxDataType.FoxString;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxString>();
+
+                FoxStaticArray<FoxString> staticArray = property.Container as FoxStaticArray<FoxString>;
+                staticArray.values = new List<FoxString>();
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "";
+                staticArray.values.Add(foxString);
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            { //18
+                FoxProperty property = new FoxProperty();
+                property.Name = "effectFileFromVfxFileLoader";
+                property.DataType = FoxDataType.FoxString;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxString>();
+
+                FoxStaticArray<FoxString> staticArray = property.Container as FoxStaticArray<FoxString>;
+                staticArray.values = new List<FoxString>();
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "";
+                staticArray.values.Add(foxString);
+
+                baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            { //19
+                FoxProperty property = new FoxProperty();
+                property.Name = "effectFileFromFilePtr";
+                property.DataType = FoxDataType.FoxFilePtr;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxFilePtr>();
+
+                FoxStaticArray<FoxFilePtr> staticArray = property.Container as FoxStaticArray<FoxFilePtr>;
+                staticArray.values = new List<FoxFilePtr>();
+                FoxFilePtr filePtr = new FoxFilePtr();
+                filePtr.StringLiteral = new FoxStringLiteral();
+                filePtr.StringLiteral.Literal = "/Assets/tpp/effect/vfx_data/smoke/fx_tpp_smkchrbrt01_s0GM.vfx";
+                staticArray.values.Add(filePtr);
+
+                baseEffectDescription.staticProperties.Add(property);
             } //property block
         } //InitializeBaseEntities
     } //class

@@ -32,5 +32,5 @@ namespace MQPMTool2
                 } //finally
             } //using
         } //button1_Click
-    } //partial class MainForm ends
-} //namespace MQPMTool2 ends
+    } //class ends
+}//namespace ends
