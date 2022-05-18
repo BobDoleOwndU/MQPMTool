@@ -3,9 +3,9 @@ using FoxTool.Fox.Containers;
 using FoxTool.Fox.Types;
 using FoxTool.Fox.Types.Structs;
 using FoxTool.Fox.Types.Values;
+using MQPMTool2.Classes;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace MQPMTool2.Static
 {
@@ -37,13 +37,14 @@ namespace MQPMTool2.Static
         private static FoxEntity baseTargetDescription;
         private static FoxEntity basePhysicsDescription;
         private static FoxEntity baseEffectDescription;
+        private static FoxEntity baseSimDescription;
 
         static PartsConverter()
         {
             InitializeBaseValues();
         } //constructor
 
-        public static FoxFile GetFoxFile(string modelPath, string partsPath)
+        public static FoxFile GetFoxFile(Parts parts, Outfit outfit)
         {
             uint address = BASE_ADDRESS;
             int unknown = 37243;
@@ -53,6 +54,7 @@ namespace MQPMTool2.Static
 
             int targetDescriptionCount = 0;
             int effectDescriptionCount = 0;
+            int simDescriptionCount = 0;
 
             FoxFile foxFile = new FoxFile();
             foxFile.classes = classes;
@@ -73,15 +75,15 @@ namespace MQPMTool2.Static
             modelDescription.Unknown2 = unknown;
             {
                 FoxStaticArray<FoxFilePtr> staticArray = modelDescription.staticProperties[5].Container as FoxStaticArray<FoxFilePtr>;
-                staticArray.values[0].StringLiteral.Literal = $"{modelPath}.fmdl";
+                staticArray.values[0].StringLiteral.Literal = outfit.mdlPath;
             } //block
             {
                 FoxStaticArray<FoxFilePtr> staticArray = modelDescription.staticProperties[6].Container as FoxStaticArray<FoxFilePtr>;
-                staticArray.values[0].StringLiteral.Literal = $"{modelPath}.fcnp";
+                staticArray.values[0].StringLiteral.Literal = outfit.cnpPath;
             } //block
             {
                 FoxStaticArray<FoxFilePtr> staticArray = modelDescription.staticProperties[8].Container as FoxStaticArray<FoxFilePtr>;
-                staticArray.values[0].StringLiteral.Literal = $"{modelPath}.frdv";
+                staticArray.values[0].StringLiteral.Literal = outfit.rdvPath;
             } //block
             {
                 FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
@@ -106,7 +108,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = targetDescription0.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -141,7 +143,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = targetDescription1.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -176,7 +178,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = targetDescription2.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -211,7 +213,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = targetDescription3.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -246,7 +248,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = targetDescription4.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -281,7 +283,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = targetDescription5.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -312,7 +314,7 @@ namespace MQPMTool2.Static
             physicsDescription.Unknown2 = unknown;
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = physicsDescription.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -339,7 +341,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription0.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -398,7 +400,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription1.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -457,7 +459,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription2.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -492,7 +494,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription3.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -527,7 +529,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription4.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -586,7 +588,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription5.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -621,7 +623,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription6.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -656,7 +658,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription7.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -687,7 +689,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription8.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -718,7 +720,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription9.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -777,7 +779,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription10.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -836,7 +838,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription11.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -1279,7 +1281,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription12.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -1338,7 +1340,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription13.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -1397,7 +1399,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription14.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -1460,7 +1462,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription15.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -1519,7 +1521,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription16.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -1578,7 +1580,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription17.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -1769,7 +1771,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription19.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -1828,7 +1830,7 @@ namespace MQPMTool2.Static
             } //block
             {
                 FoxDynamicArray<FoxEntityLink> staticArray = effectDescription20.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
-                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
                 staticArray.values[0].EntityHandle = modelAddress;
             } //block
             {
@@ -1903,6 +1905,48 @@ namespace MQPMTool2.Static
             address += ENTITY_SIZE;
             unknown++;
             effectDescriptionCount++;
+
+            //SIM DESCRIPTIONS
+            foreach (Sim sim in outfit.sims)
+            {
+                FoxEntity simDescription = baseSimDescription.Copy();
+                simDescription.Address = address;
+                simDescription.Unknown2 = unknown;
+                {
+                    FoxStaticArray<FoxString> staticArray = simDescription.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                    staticArray.values[0].StringLiteral.Literal += simDescriptionCount.ToString("0000");
+                } //block
+                {
+                    FoxDynamicArray<FoxEntityLink> staticArray = simDescription.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                    staticArray.values[0].ArchivePathLiteral.Literal = parts.partsPath;
+                    staticArray.values[0].EntityHandle = modelAddress;
+                } //block
+                {
+                    FoxStaticArray<FoxString> staticArray = simDescription.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                    staticArray.values[0].StringLiteral.Literal += sim.name;
+                } //block
+                {
+                    FoxStaticArray<FoxFilePtr> staticArray = simDescription.staticProperties[5].Container as FoxStaticArray<FoxFilePtr>;
+                    staticArray.values[0].StringLiteral.Literal = sim.path;
+                } //block
+                {
+                    FoxStaticArray<FoxBool> staticArray = simDescription.staticProperties[6].Container as FoxStaticArray<FoxBool>;
+                    staticArray.values[0].Value = sim.isActive;
+                } //block
+                {
+                    FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                    FoxEntityPtr entityPtr = new FoxEntityPtr();
+                    FoxStaticArray<FoxString> staticArray = simDescription.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                    stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                    entityPtr.EntityPtr = address;
+
+                    dataList.map.Add(stringLiteral, entityPtr);
+                } //block
+                foxFile.entities.Add(simDescription);
+                address += ENTITY_SIZE;
+                unknown++;
+                simDescriptionCount++;
+            } //foreach
 
             return foxFile;
         } //GetFoxFile
@@ -2833,6 +2877,138 @@ namespace MQPMTool2.Static
                 staticArray.values.Add(filePtr);
 
                 baseEffectDescription.staticProperties.Add(property);
+            } //property block
+
+            //SIM DESCRIPTION
+            baseSimDescription = new FoxEntity();
+            baseSimDescription.ClassName = classSimDescription.Name;
+            baseSimDescription.Version = short.Parse(classSimDescription.Version);
+            baseSimDescription.Address = 0;
+            baseSimDescription.Unknown1 = SIM_DESCRIPTION_UNKNOWN;
+            baseSimDescription.Unknown2 = 0;
+
+            baseSimDescription.staticProperties = new List<FoxProperty>();
+
+            { //0
+                FoxProperty property = new FoxProperty();
+                property.Name = "name";
+                property.DataType = FoxDataType.FoxString;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxString>();
+
+                FoxStaticArray<FoxString> staticArray = property.Container as FoxStaticArray<FoxString>;
+                staticArray.values = new List<FoxString>();
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "SimDescription";
+                staticArray.values.Add(foxString);
+
+                baseSimDescription.staticProperties.Add(property);
+            } //property block
+
+            { //1
+                FoxProperty property = new FoxProperty();
+                property.Name = "dataSet";
+                property.DataType = FoxDataType.FoxEntityHandle;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxEntityHandle>();
+
+                FoxStaticArray<FoxEntityHandle> staticArray = property.Container as FoxStaticArray<FoxEntityHandle>;
+                staticArray.values = new List<FoxEntityHandle>();
+                FoxEntityHandle entityHandle = new FoxEntityHandle();
+                entityHandle.Handle = BASE_ADDRESS;
+                staticArray.values.Add(entityHandle);
+
+                baseSimDescription.staticProperties.Add(property);
+            } //property block
+
+            { //2
+                FoxProperty property = new FoxProperty();
+                property.Name = "depends";
+                property.DataType = FoxDataType.FoxEntityLink;
+                property.ContainerType = FoxContainerType.DynamicArray;
+                property.Container = new FoxDynamicArray<FoxEntityLink>();
+
+                FoxDynamicArray<FoxEntityLink> dynamicArray = property.Container as FoxDynamicArray<FoxEntityLink>;
+                dynamicArray.values = new List<FoxEntityLink>();
+                FoxEntityLink entityLink = new FoxEntityLink();
+                entityLink.PackagePathLiteral = new FoxStringLiteral();
+                entityLink.ArchivePathLiteral = new FoxStringLiteral();
+                entityLink.NameInArchiveLiteral = new FoxStringLiteral();
+                entityLink.PackagePathLiteral.Literal = "";
+                entityLink.ArchivePathLiteral.Literal = "";
+                entityLink.NameInArchiveLiteral.Literal = "ModelDescription0000";
+                entityLink.EntityHandle = 0;
+                dynamicArray.values.Add(entityLink);
+
+                baseSimDescription.staticProperties.Add(property);
+            } //property block
+
+            { //3
+                FoxProperty property = new FoxProperty();
+                property.Name = "partName";
+                property.DataType = FoxDataType.FoxString;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxString>();
+
+                FoxStaticArray<FoxString> staticArray = property.Container as FoxStaticArray<FoxString>;
+                staticArray.values = new List<FoxString>();
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "";
+                staticArray.values.Add(foxString);
+
+                baseSimDescription.staticProperties.Add(property);
+            } //property block
+
+            { //4
+                FoxProperty property = new FoxProperty();
+                property.Name = "buildType";
+                property.DataType = FoxDataType.FoxString;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxString>();
+
+                FoxStaticArray<FoxString> staticArray = property.Container as FoxStaticArray<FoxString>;
+                staticArray.values = new List<FoxString>();
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "";
+                staticArray.values.Add(foxString);
+
+                baseSimDescription.staticProperties.Add(property);
+            } //property block
+
+            { //5
+                FoxProperty property = new FoxProperty();
+                property.Name = "simFile";
+                property.DataType = FoxDataType.FoxFilePtr;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxFilePtr>();
+
+                FoxStaticArray<FoxFilePtr> staticArray = property.Container as FoxStaticArray<FoxFilePtr>;
+                staticArray.values = new List<FoxFilePtr>();
+                FoxFilePtr filePtr = new FoxFilePtr();
+                filePtr.StringLiteral = new FoxStringLiteral();
+                filePtr.StringLiteral.Literal = "";
+                staticArray.values.Add(filePtr);
+
+                baseSimDescription.staticProperties.Add(property);
+            } //property block
+
+            { //6
+                FoxProperty property = new FoxProperty();
+                property.Name = "isActive";
+                property.DataType = FoxDataType.FoxBool;
+                property.ContainerType = FoxContainerType.StaticArray;
+                property.Container = new FoxStaticArray<FoxBool>();
+
+                FoxStaticArray<FoxBool> staticArray = property.Container as FoxStaticArray<FoxBool>;
+                staticArray.values = new List<FoxBool>();
+                FoxBool foxBool = new FoxBool();
+                foxBool.Value = true;
+                staticArray.values.Add(foxBool);
+
+                baseSimDescription.staticProperties.Add(property);
             } //property block
         } //InitializeBaseEntities
     } //class
