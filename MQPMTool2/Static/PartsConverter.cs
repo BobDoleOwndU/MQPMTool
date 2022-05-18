@@ -52,6 +52,7 @@ namespace MQPMTool2.Static
             FoxStringMap<FoxEntityPtr> dataList;
 
             int targetDescriptionCount = 0;
+            int effectDescriptionCount = 0;
 
             FoxFile foxFile = new FoxFile();
             foxFile.classes = classes;
@@ -327,7 +328,1581 @@ namespace MQPMTool2.Static
             physicsAddress = address;
             address += ENTITY_SIZE;
             unknown++;
-            targetDescriptionCount++;
+
+            //EFFECT DESCRIPTION 0
+            FoxEntity effectDescription0 = baseEffectDescription.Copy();
+            effectDescription0.Address = address;
+            effectDescription0.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription0.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription0.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription0.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "breath";
+            } //block
+            {
+                FoxDynamicArray<FoxString> dynamicArray = effectDescription0.staticProperties[6].Container as FoxDynamicArray<FoxString>;
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "CNP_MOUTH";
+                dynamicArray.values.Add(foxString);
+            } //block
+            {
+                FoxDynamicArray<FoxVector3> dynamicArray = effectDescription0.staticProperties[8].Container as FoxDynamicArray<FoxVector3>;
+                FoxVector3 vector3 = new FoxVector3();
+                vector3.X = 0f;
+                vector3.Y = 0f;
+                vector3.Z = 0f;
+                dynamicArray.values.Add(vector3);
+            } //block
+            {
+                FoxDynamicArray<FoxVector4> dynamicArray = effectDescription0.staticProperties[10].Container as FoxDynamicArray<FoxVector4>;
+                FoxVector4 vector4 = new FoxVector4();
+                vector4.X = 0f;
+                vector4.Y = 0f;
+                vector4.Z = 0f;
+                vector4.W = 0f;
+                dynamicArray.values.Add(vector4);
+            } //block
+            {
+                FoxStaticArray<FoxFilePtr> staticArray = effectDescription0.staticProperties[19].Container as FoxStaticArray<FoxFilePtr>;
+                staticArray.values[0].StringLiteral.Literal = "/Assets/tpp/effect/vfx_data/smoke/fx_tpp_smkchrbrt01_s0GM.vfx";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription0.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription0);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 1
+            FoxEntity effectDescription1 = baseEffectDescription.Copy();
+            effectDescription1.Address = address;
+            effectDescription1.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription1.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription1.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription1.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "DiveSmoke";
+            } //block
+            {
+                FoxDynamicArray<FoxString> dynamicArray = effectDescription1.staticProperties[5].Container as FoxDynamicArray<FoxString>;
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "SKL_000_WAIST";
+                dynamicArray.values.Add(foxString);
+            } //block
+            {
+                FoxDynamicArray<FoxVector3> dynamicArray = effectDescription1.staticProperties[7].Container as FoxDynamicArray<FoxVector3>;
+                FoxVector3 vector3 = new FoxVector3();
+                vector3.X = 0f;
+                vector3.Y = 0f;
+                vector3.Z = 0f;
+                dynamicArray.values.Add(vector3);
+            } //block
+            {
+                FoxDynamicArray<FoxVector4> dynamicArray = effectDescription1.staticProperties[9].Container as FoxDynamicArray<FoxVector4>;
+                FoxVector4 vector4 = new FoxVector4();
+                vector4.X = 0f;
+                vector4.Y = 0f;
+                vector4.Z = 0f;
+                vector4.W = 0f;
+                dynamicArray.values.Add(vector4);
+            } //block
+            {
+                FoxStaticArray<FoxFilePtr> staticArray = effectDescription1.staticProperties[19].Container as FoxStaticArray<FoxFilePtr>;
+                staticArray.values[0].StringLiteral.Literal = "/Assets/tpp/effect/vfx_data/chara/fx_tpp_chrdivsmk01_s1.vfx";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription1.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription1);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 2
+            FoxEntity effectDescription2 = baseEffectDescription.Copy();
+            effectDescription2.Address = address;
+            effectDescription2.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription2.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription2.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription2.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "Hang";
+            } //block
+            {
+                FoxStaticArray<FoxFilePtr> staticArray = effectDescription2.staticProperties[19].Container as FoxStaticArray<FoxFilePtr>;
+                staticArray.values[0].StringLiteral.Literal = "/Assets/tpp/effect/vfx_data/chara/fx_tpp_chrdsthnd01_s0LG.vfx";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription2.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription2);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 3
+            FoxEntity effectDescription3 = baseEffectDescription.Copy();
+            effectDescription3.Address = address;
+            effectDescription3.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription3.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription3.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription3.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "Climb";
+            } //block
+            {
+                FoxStaticArray<FoxFilePtr> staticArray = effectDescription3.staticProperties[19].Container as FoxStaticArray<FoxFilePtr>;
+                staticArray.values[0].StringLiteral.Literal = "/Assets/tpp/effect/vfx_data/chara/fx_tpp_chrdstwst01_s1LG.vfx";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription3.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription3);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 4
+            FoxEntity effectDescription4 = baseEffectDescription.Copy();
+            effectDescription4.Address = address;
+            effectDescription4.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription4.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription4.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription4.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "Sandstorm";
+            } //block
+            {
+                FoxDynamicArray<FoxString> dynamicArray = effectDescription4.staticProperties[6].Container as FoxDynamicArray<FoxString>;
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "CNP_CHEST";
+                dynamicArray.values.Add(foxString);
+            } //block
+            {
+                FoxDynamicArray<FoxVector3> dynamicArray = effectDescription4.staticProperties[8].Container as FoxDynamicArray<FoxVector3>;
+                FoxVector3 vector3 = new FoxVector3();
+                vector3.X = 0f;
+                vector3.Y = 0f;
+                vector3.Z = 0f;
+                dynamicArray.values.Add(vector3);
+            } //block
+            {
+                FoxDynamicArray<FoxVector4> dynamicArray = effectDescription4.staticProperties[10].Container as FoxDynamicArray<FoxVector4>;
+                FoxVector4 vector4 = new FoxVector4();
+                vector4.X = 0f;
+                vector4.Y = 0f;
+                vector4.Z = 0f;
+                vector4.W = 0f;
+                dynamicArray.values.Add(vector4);
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription4.staticProperties[18].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "fx_tpp_chrsndstm02_s1LG";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription4.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription4);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 5
+            FoxEntity effectDescription5 = baseEffectDescription.Copy();
+            effectDescription5.Address = address;
+            effectDescription5.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription5.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription5.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription5.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "EludeSplashM";
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription5.staticProperties[18].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "fx_tpp_chrdsthndspl01_s0";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription5.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription5);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 6
+            FoxEntity effectDescription6 = baseEffectDescription.Copy();
+            effectDescription6.Address = address;
+            effectDescription6.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription6.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription6.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription6.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "EludeSplashS";
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription6.staticProperties[18].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "fx_tpp_chrdsthndspl02_s0";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription6.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription6);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 7
+            FoxEntity effectDescription7 = baseEffectDescription.Copy();
+            effectDescription7.Address = address;
+            effectDescription7.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription7.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription7.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription7.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "EludeSplashM2";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription7.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription7);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 8
+            FoxEntity effectDescription8 = baseEffectDescription.Copy();
+            effectDescription8.Address = address;
+            effectDescription8.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription8.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription8.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription8.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "EludeSplashS2";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription8.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription8);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 9
+            FoxEntity effectDescription9 = baseEffectDescription.Copy();
+            effectDescription9.Address = address;
+            effectDescription9.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription9.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription9.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription9.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "EmblemFlare";
+            } //block
+            {
+                FoxDynamicArray<FoxString> dynamicArray = effectDescription9.staticProperties[5].Container as FoxDynamicArray<FoxString>;
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "SKL_011_LUARM";
+                dynamicArray.values.Add(foxString);
+            } //block
+            {
+                FoxDynamicArray<FoxVector3> dynamicArray = effectDescription9.staticProperties[7].Container as FoxDynamicArray<FoxVector3>;
+                FoxVector3 vector3 = new FoxVector3();
+                vector3.X = 0.1038f;
+                vector3.Y = 0.0729f;
+                vector3.Z = -0.0256f;
+                dynamicArray.values.Add(vector3);
+            } //block
+            {
+                FoxDynamicArray<FoxVector4> dynamicArray = effectDescription9.staticProperties[9].Container as FoxDynamicArray<FoxVector4>;
+                FoxVector4 vector4 = new FoxVector4();
+                vector4.X = 0f;
+                vector4.Y = 0f;
+                vector4.Z = 0f;
+                vector4.W = 0f;
+                dynamicArray.values.Add(vector4);
+            } //block
+            {
+                FoxStaticArray<FoxFilePtr> staticArray = effectDescription9.staticProperties[19].Container as FoxStaticArray<FoxFilePtr>;
+                staticArray.values[0].StringLiteral.Literal = "/Assets/tpp/effect/vfx_data/flare/fx_tpp_flrdia02_s1.vfx";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription9.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription9);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 10
+            FoxEntity effectDescription10 = baseEffectDescription.Copy();
+            effectDescription10.Address = address;
+            effectDescription10.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription10.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription10.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription10.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "Knock";
+            } //block
+            {
+                FoxDynamicArray<FoxString> dynamicArray = effectDescription10.staticProperties[5].Container as FoxDynamicArray<FoxString>;
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "SKL_012_LFARM";
+                dynamicArray.values.Add(foxString);
+            } //block
+            {
+                FoxDynamicArray<FoxVector3> dynamicArray = effectDescription10.staticProperties[7].Container as FoxDynamicArray<FoxVector3>;
+                FoxVector3 vector3 = new FoxVector3();
+                vector3.X = 0.255f;
+                vector3.Y = 0f;
+                vector3.Z = 0f;
+                dynamicArray.values.Add(vector3);
+            } //block
+            {
+                FoxDynamicArray<FoxVector4> dynamicArray = effectDescription10.staticProperties[9].Container as FoxDynamicArray<FoxVector4>;
+                FoxVector4 vector4 = new FoxVector4();
+                vector4.X = 0f;
+                vector4.Y = 0f;
+                vector4.Z = 0f;
+                vector4.W = 0f;
+                dynamicArray.values.Add(vector4);
+            } //block
+            {
+                FoxStaticArray<FoxFilePtr> staticArray = effectDescription10.staticProperties[19].Container as FoxStaticArray<FoxFilePtr>;
+                staticArray.values[0].StringLiteral.Literal = "/Assets/tpp/effect/vfx_data/chara/fx_tpp_chrspkhnd01_s0.vfx";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription10.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription10);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 11
+            FoxEntity effectDescription11 = baseEffectDescription.Copy();
+            effectDescription11.Address = address;
+            effectDescription11.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription11.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription11.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription11.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "RainSplash";
+            } //block
+            {
+                FoxDynamicArray<FoxString> dynamicArray = effectDescription11.staticProperties[5].Container as FoxDynamicArray<FoxString>;
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_400_HEADROOT";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_010_LSHLD";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_020_RSHLD";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_011_LUARM";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_021_RUARM";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_002_CHEST";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_002_CHEST";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_030_LTHIGH";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_040_RTHIGH";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_031_LLEG";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_041_RLEG";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_620_ITEM_SIM";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_620_ITEM_SIM";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_000_WAIST";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_000_WAIST";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_030_LTHIGH";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_040_RTHIGH";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_002_CHEST";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_004_HEAD";
+                    dynamicArray.values.Add(foxString);
+                } //block
+            } //block
+            {
+                FoxDynamicArray<FoxVector3> dynamicArray = effectDescription11.staticProperties[7].Container as FoxDynamicArray<FoxVector3>;
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0;
+                    vector3.Y = 0.1f;
+                    vector3.Z = 0.03f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0.05f;
+                    vector3.Y = -0.02f;
+                    vector3.Z = -0.05f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = -0.05f;
+                    vector3.Y = -0.02f;
+                    vector3.Z = -0.05f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = -0.01f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = -0.01f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0.07f;
+                    vector3.Y = 0.09f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = -0.07f;
+                    vector3.Y = 0.09f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = -0.07f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = -0.07f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = 0f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = 0f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0.08f;
+                    vector3.Y = -0.05f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = -0.08f;
+                    vector3.Y = -0.05f;
+                    vector3.Z = -0.05f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0.05f;
+                    vector3.Y = 0.1f;
+                    vector3.Z = 0.02f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = -0.05f;
+                    vector3.Y = 0.1f;
+                    vector3.Z = 0.02f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = -0.25f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = -0.25f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = 0.2f;
+                    vector3.Z = -0.04f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = 0.02f;
+                    vector3.Z = -0.02f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+            } //block
+            {
+                FoxDynamicArray<FoxVector4> dynamicArray = effectDescription11.staticProperties[9].Container as FoxDynamicArray<FoxVector4>;
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.1f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.11f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.11f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.06f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.06f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.11f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.11f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.1f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.1f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.08f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.08f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.1f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.1f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.1f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.1f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.09f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.09f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.08f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0.08f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription11.staticProperties[18].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "fx_tpp_rinspl00_s0MG";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription11.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription11);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 12
+            FoxEntity effectDescription12 = baseEffectDescription.Copy();
+            effectDescription12.Address = address;
+            effectDescription12.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription12.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription12.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription12.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "RainSplashSoundLeft";
+            } //block
+            {
+                FoxDynamicArray<FoxString> dynamicArray = effectDescription12.staticProperties[5].Container as FoxDynamicArray<FoxString>;
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "SKL_011_LUARM";
+                dynamicArray.values.Add(foxString);
+            } //block
+            {
+                FoxDynamicArray<FoxVector3> dynamicArray = effectDescription12.staticProperties[7].Container as FoxDynamicArray<FoxVector3>;
+                FoxVector3 vector3 = new FoxVector3();
+                vector3.X = 0f;
+                vector3.Y = 0.1f;
+                vector3.Z = 0f;
+                dynamicArray.values.Add(vector3);
+            } //block
+            {
+                FoxDynamicArray<FoxVector4> dynamicArray = effectDescription12.staticProperties[9].Container as FoxDynamicArray<FoxVector4>;
+                FoxVector4 vector4 = new FoxVector4();
+                vector4.X = 0f;
+                vector4.Y = 0f;
+                vector4.Z = 0f;
+                vector4.W = 0f;
+                dynamicArray.values.Add(vector4);
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription12.staticProperties[18].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "fx_tpp_rinspl00sndl_s0MG";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription12.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription12);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 13
+            FoxEntity effectDescription13 = baseEffectDescription.Copy();
+            effectDescription13.Address = address;
+            effectDescription13.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription13.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription13.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription13.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "RainSplashSoundRight";
+            } //block
+            {
+                FoxDynamicArray<FoxString> dynamicArray = effectDescription13.staticProperties[5].Container as FoxDynamicArray<FoxString>;
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "SKL_021_RUARM";
+                dynamicArray.values.Add(foxString);
+            } //block
+            {
+                FoxDynamicArray<FoxVector3> dynamicArray = effectDescription13.staticProperties[7].Container as FoxDynamicArray<FoxVector3>;
+                FoxVector3 vector3 = new FoxVector3();
+                vector3.X = 0f;
+                vector3.Y = 0.1f;
+                vector3.Z = 0f;
+                dynamicArray.values.Add(vector3);
+            } //block
+            {
+                FoxDynamicArray<FoxVector4> dynamicArray = effectDescription13.staticProperties[9].Container as FoxDynamicArray<FoxVector4>;
+                FoxVector4 vector4 = new FoxVector4();
+                vector4.X = 0f;
+                vector4.Y = 0f;
+                vector4.Z = 0f;
+                vector4.W = 0f;
+                dynamicArray.values.Add(vector4);
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription13.staticProperties[18].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "fx_tpp_rinspl00sndr_s0MG";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription13.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription13);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 14
+            FoxEntity effectDescription14 = baseEffectDescription.Copy();
+            effectDescription14.Address = address;
+            effectDescription14.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription14.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription14.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription14.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "Flare1";
+            } //block
+            {
+                FoxDynamicArray<FoxString> dynamicArray = effectDescription14.staticProperties[5].Container as FoxDynamicArray<FoxString>;
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "SKL_004_HEAD";
+                dynamicArray.values.Add(foxString);
+            } //block
+            {
+                FoxDynamicArray<FoxVector3> dynamicArray = effectDescription14.staticProperties[7].Container as FoxDynamicArray<FoxVector3>;
+                FoxVector3 vector3 = new FoxVector3();
+                vector3.X = 0f;
+                vector3.Y = 0.1f;
+                vector3.Z = 0f;
+                dynamicArray.values.Add(vector3);
+            } //block
+            {
+                FoxDynamicArray<FoxVector4> dynamicArray = effectDescription14.staticProperties[9].Container as FoxDynamicArray<FoxVector4>;
+                FoxVector4 vector4 = new FoxVector4();
+                vector4.X = 0f;
+                vector4.Y = 0.2f;
+                vector4.Z = 0f;
+                vector4.W = 0f;
+                dynamicArray.values.Add(vector4);
+            } //block
+            {
+                FoxStaticArray<FoxInt32> staticArray = effectDescription14.staticProperties[16].Container as FoxStaticArray<FoxInt32>;
+                staticArray.values[0].Value = 1;
+            } //block
+            {
+                FoxStaticArray<FoxFilePtr> staticArray = effectDescription14.staticProperties[19].Container as FoxStaticArray<FoxFilePtr>;
+                staticArray.values[0].StringLiteral.Literal = "/Assets/tpp/effect/vfx_data/flare/fx_tpp_flrlgt24_m1LD.vfx";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription14.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription14);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 15
+            FoxEntity effectDescription15 = baseEffectDescription.Copy();
+            effectDescription15.Address = address;
+            effectDescription15.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription15.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription15.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription15.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "DiveSplash";
+            } //block
+            {
+                FoxDynamicArray<FoxString> dynamicArray = effectDescription15.staticProperties[5].Container as FoxDynamicArray<FoxString>;
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "SKL_000_WAIST";
+                dynamicArray.values.Add(foxString);
+            } //block
+            {
+                FoxDynamicArray<FoxVector3> dynamicArray = effectDescription15.staticProperties[7].Container as FoxDynamicArray<FoxVector3>;
+                FoxVector3 vector3 = new FoxVector3();
+                vector3.X = 0f;
+                vector3.Y = 0f;
+                vector3.Z = 0f;
+                dynamicArray.values.Add(vector3);
+            } //block
+            {
+                FoxDynamicArray<FoxVector4> dynamicArray = effectDescription15.staticProperties[9].Container as FoxDynamicArray<FoxVector4>;
+                FoxVector4 vector4 = new FoxVector4();
+                vector4.X = 0f;
+                vector4.Y = 0f;
+                vector4.Z = 0f;
+                vector4.W = 0f;
+                dynamicArray.values.Add(vector4);
+            } //block
+            {
+                FoxStaticArray<FoxFilePtr> staticArray = effectDescription15.staticProperties[19].Container as FoxStaticArray<FoxFilePtr>;
+                staticArray.values[0].StringLiteral.Literal = "/Assets/tpp/effect/vfx_data/chara/fx_tpp_chrdivspl01_s1.vfx";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription15.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription15);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 16
+            FoxEntity effectDescription16 = baseEffectDescription.Copy();
+            effectDescription16.Address = address;
+            effectDescription16.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription16.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription16.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription16.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "DiveRiver";
+            } //block
+            {
+                FoxDynamicArray<FoxString> dynamicArray = effectDescription16.staticProperties[5].Container as FoxDynamicArray<FoxString>;
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "SKL_000_WAIST";
+                dynamicArray.values.Add(foxString);
+            } //block
+            {
+                FoxDynamicArray<FoxVector3> dynamicArray = effectDescription16.staticProperties[7].Container as FoxDynamicArray<FoxVector3>;
+                FoxVector3 vector3 = new FoxVector3();
+                vector3.X = 0f;
+                vector3.Y = 0f;
+                vector3.Z = 0f;
+                dynamicArray.values.Add(vector3);
+            } //block
+            {
+                FoxDynamicArray<FoxVector4> dynamicArray = effectDescription16.staticProperties[9].Container as FoxDynamicArray<FoxVector4>;
+                FoxVector4 vector4 = new FoxVector4();
+                vector4.X = 0f;
+                vector4.Y = 0f;
+                vector4.Z = 0f;
+                vector4.W = 0f;
+                dynamicArray.values.Add(vector4);
+            } //block
+            {
+                FoxStaticArray<FoxFilePtr> staticArray = effectDescription16.staticProperties[19].Container as FoxStaticArray<FoxFilePtr>;
+                staticArray.values[0].StringLiteral.Literal = "/Assets/tpp/effect/vfx_data/chara/fx_tpp_chrdivspl02_s1.vfx";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription16.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription16);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 17
+            FoxEntity effectDescription17 = baseEffectDescription.Copy();
+            effectDescription17.Address = address;
+            effectDescription17.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription17.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription17.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription17.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "Burn";
+            } //block
+            {
+                FoxDynamicArray<FoxString> dynamicArray = effectDescription17.staticProperties[5].Container as FoxDynamicArray<FoxString>;
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_041_RLEG";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_031_LLEG";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_040_RTHIGH";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_030_LTHIGH";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_021_RUARM";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_011_LUARM";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "SKL_000_WAIST";
+                    dynamicArray.values.Add(foxString);
+                } //block
+            } //block
+            {
+                FoxDynamicArray<FoxVector3> dynamicArray = effectDescription17.staticProperties[7].Container as FoxDynamicArray<FoxVector3>;
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = -0.3f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = -0.3f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = -0.2f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = -0.2f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = 0f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = 0f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = 0f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+            } //block
+            {
+                FoxDynamicArray<FoxVector4> dynamicArray = effectDescription17.staticProperties[9].Container as FoxDynamicArray<FoxVector4>;
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                }
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                }
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                }
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                }
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                }
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                }
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                }
+            } //block
+            {
+                FoxStaticArray<FoxFilePtr> staticArray = effectDescription17.staticProperties[19].Container as FoxStaticArray<FoxFilePtr>;
+                staticArray.values[0].StringLiteral.Literal = "/Assets/tpp/effect/vfx_data/fire/fx_tpp_firchr02_s2.vfx";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription17.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription17);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 19 (Didn't skip 18. It doesn't exist in ref file.)
+            FoxEntity effectDescription19 = baseEffectDescription.Copy();
+            effectDescription19.Address = address;
+            effectDescription19.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription19.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription19.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription19.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "ChickenHeadFeather";
+            } //block
+            {
+                FoxDynamicArray<FoxString> dynamicArray = effectDescription19.staticProperties[5].Container as FoxDynamicArray<FoxString>;
+                FoxString foxString = new FoxString();
+                foxString.StringLiteral = new FoxStringLiteral();
+                foxString.StringLiteral.Literal = "SKL_004_HEAD";
+                dynamicArray.values.Add(foxString);
+            } //block
+            {
+                FoxDynamicArray<FoxVector3> dynamicArray = effectDescription19.staticProperties[7].Container as FoxDynamicArray<FoxVector3>;
+                FoxVector3 vector3 = new FoxVector3();
+                vector3.X = 0f;
+                vector3.Y = 0f;
+                vector3.Z = 0f;
+                dynamicArray.values.Add(vector3);
+            } //block
+            {
+                FoxDynamicArray<FoxVector4> dynamicArray = effectDescription19.staticProperties[9].Container as FoxDynamicArray<FoxVector4>;
+                FoxVector4 vector4 = new FoxVector4();
+                vector4.X = 0f;
+                vector4.Y = 0f;
+                vector4.Z = 0f;
+                vector4.W = 0f;
+                dynamicArray.values.Add(vector4);
+            } //block
+            {
+                FoxStaticArray<FoxFilePtr> staticArray = effectDescription19.staticProperties[19].Container as FoxStaticArray<FoxFilePtr>;
+                staticArray.values[0].StringLiteral.Literal = "/Assets/tpp/effect/vfx_data/item/fx_tpp_itmmskwng01_s1.vfx";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription19.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription19);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
+
+            //EFFECT DESCRIPTION 20
+            FoxEntity effectDescription20 = baseEffectDescription.Copy();
+            effectDescription20.Address = address;
+            effectDescription20.Unknown2 = unknown;
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription20.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal += effectDescriptionCount.ToString("0000");
+            } //block
+            {
+                FoxDynamicArray<FoxEntityLink> staticArray = effectDescription20.staticProperties[2].Container as FoxDynamicArray<FoxEntityLink>;
+                staticArray.values[0].ArchivePathLiteral.Literal = $"{partsPath}.parts";
+                staticArray.values[0].EntityHandle = modelAddress;
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription20.staticProperties[3].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "fx_tpp_chrfotlpb01_s0";
+            } //block
+            {
+                FoxDynamicArray<FoxString> dynamicArray = effectDescription20.staticProperties[6].Container as FoxDynamicArray<FoxString>;
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "CNP_LOW_RHEEL";
+                    dynamicArray.values.Add(foxString);
+                } //block
+                {
+                    FoxString foxString = new FoxString();
+                    foxString.StringLiteral = new FoxStringLiteral();
+                    foxString.StringLiteral.Literal = "CNP_LOW_LHEEL";
+                    dynamicArray.values.Add(foxString);
+                } //block
+            } //block
+            {
+                FoxDynamicArray<FoxVector3> dynamicArray = effectDescription20.staticProperties[8].Container as FoxDynamicArray<FoxVector3>;
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = 0.15f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+                {
+                    FoxVector3 vector3 = new FoxVector3();
+                    vector3.X = 0f;
+                    vector3.Y = 0.15f;
+                    vector3.Z = 0f;
+                    dynamicArray.values.Add(vector3);
+                } //block
+            } //block
+            {
+                FoxDynamicArray<FoxVector4> dynamicArray = effectDescription20.staticProperties[10].Container as FoxDynamicArray<FoxVector4>;
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+                {
+                    FoxVector4 vector4 = new FoxVector4();
+                    vector4.X = 0f;
+                    vector4.Y = 0f;
+                    vector4.Z = 0f;
+                    vector4.W = 0f;
+                    dynamicArray.values.Add(vector4);
+                } //block
+            } //block
+            {
+                FoxStaticArray<FoxString> staticArray = effectDescription20.staticProperties[18].Container as FoxStaticArray<FoxString>;
+                staticArray.values[0].StringLiteral.Literal = "fx_tpp_chrfotlpb01_s0";
+            } //block
+            {
+                FoxStringLookupLiteral stringLiteral = new FoxStringLookupLiteral();
+                FoxEntityPtr entityPtr = new FoxEntityPtr();
+                FoxStaticArray<FoxString> staticArray = effectDescription20.staticProperties[0].Container as FoxStaticArray<FoxString>;
+                stringLiteral.Literal = staticArray.values[0].StringLiteral.Literal;
+                entityPtr.EntityPtr = address;
+
+                dataList.map.Add(stringLiteral, entityPtr);
+            } //block
+            foxFile.entities.Add(effectDescription20);
+            address += ENTITY_SIZE;
+            unknown++;
+            effectDescriptionCount++;
 
             return foxFile;
         } //GetFoxFile
@@ -956,10 +2531,10 @@ namespace MQPMTool2.Static
 
             //EFFECT DESCRIPTION
             baseEffectDescription = new FoxEntity();
-            baseEffectDescription.ClassName = classPhysicsDescription.Name;
-            baseEffectDescription.Version = short.Parse(classPhysicsDescription.Version);
+            baseEffectDescription.ClassName = classEffectDescription.Name;
+            baseEffectDescription.Version = short.Parse(classEffectDescription.Version);
             baseEffectDescription.Address = 0;
-            baseEffectDescription.Unknown1 = PHYSICS_DESCRIPTION_UNKNOWN;
+            baseEffectDescription.Unknown1 = EFFECT_DESCRIPTION_UNKNOWN;
             baseEffectDescription.Unknown2 = 0;
 
             baseEffectDescription.staticProperties = new List<FoxProperty>();
@@ -1185,7 +2760,7 @@ namespace MQPMTool2.Static
                 property.Container = new FoxStaticArray<FoxUInt32>();
 
                 FoxStaticArray<FoxUInt32> staticArray = property.Container as FoxStaticArray<FoxUInt32>;
-                staticArray = new FoxStaticArray<FoxUInt32>();
+                staticArray.values = new List<FoxUInt32>();
                 FoxUInt32 foxUInt32 = new FoxUInt32();
                 foxUInt32.Value = 0;
                 staticArray.values.Add(foxUInt32);
@@ -1196,15 +2771,15 @@ namespace MQPMTool2.Static
             { //16
                 FoxProperty property = new FoxProperty();
                 property.Name = "effectKind";
-                property.DataType = FoxDataType.FoxUInt32;
+                property.DataType = FoxDataType.FoxInt32;
                 property.ContainerType = FoxContainerType.StaticArray;
-                property.Container = new FoxStaticArray<FoxUInt32>();
+                property.Container = new FoxStaticArray<FoxInt32>();
 
-                FoxStaticArray<FoxUInt32> staticArray = property.Container as FoxStaticArray<FoxUInt32>;
-                staticArray = new FoxStaticArray<FoxUInt32>();
-                FoxUInt32 foxUInt32 = new FoxUInt32();
-                foxUInt32.Value = 0;
-                staticArray.values.Add(foxUInt32);
+                FoxStaticArray<FoxInt32> staticArray = property.Container as FoxStaticArray<FoxInt32>;
+                staticArray.values = new List<FoxInt32>();
+                FoxInt32 foxInt32 = new FoxInt32();
+                foxInt32.Value = 0;
+                staticArray.values.Add(foxInt32);
 
                 baseEffectDescription.staticProperties.Add(property);
             } //property block
@@ -1254,7 +2829,7 @@ namespace MQPMTool2.Static
                 staticArray.values = new List<FoxFilePtr>();
                 FoxFilePtr filePtr = new FoxFilePtr();
                 filePtr.StringLiteral = new FoxStringLiteral();
-                filePtr.StringLiteral.Literal = "/Assets/tpp/effect/vfx_data/smoke/fx_tpp_smkchrbrt01_s0GM.vfx";
+                filePtr.StringLiteral.Literal = "";
                 staticArray.values.Add(filePtr);
 
                 baseEffectDescription.staticProperties.Add(property);
