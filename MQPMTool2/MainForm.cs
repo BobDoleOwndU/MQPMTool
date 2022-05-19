@@ -1,4 +1,5 @@
 ﻿using FoxTool.Fox;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using MQPMTool2.Classes;
 using MQPMTool2.Static;
 using System;
@@ -25,14 +26,35 @@ namespace MQPMTool2
                 outfitComboBox.Items.Add(outfit.name);
         } //InitializeComboBox
 
-        private void button1_Click(object sender, EventArgs e)
+        private void outputTestButton_Click(object sender, EventArgs e)
         {
+            string outputFolder = outputFolderTextBox.Text;
             Parts parts = Globals.partsList.list[partsComboBox.SelectedIndex];
             Outfit outfit = Globals.outfitList.list[outfitComboBox.SelectedIndex];
 
-            string name = Path.GetFileName(parts.partsPath);
+            string mdlPath = $"{outputFolder}{parts.fpkPath}_fpk{outfit.mdlPath}";
+            Directory.CreateDirectory(Path.GetDirectoryName(mdlPath));
+            File.Copy(outfit.mdlPath.Substring(1), mdlPath);
 
-            using (FileStream stream = new FileStream(name, FileMode.Create))
+            string cnpPath = $"{outputFolder}{parts.fpkPath}_fpk{outfit.cnpPath}";
+            Directory.CreateDirectory(Path.GetDirectoryName(cnpPath));
+            File.Copy(outfit.cnpPath.Substring(1), cnpPath);
+
+            string rdvPath = $"{outputFolder}{parts.fpkPath}_fpk{outfit.rdvPath}";
+            Directory.CreateDirectory(Path.GetDirectoryName(rdvPath));
+            File.Copy(outfit.rdvPath.Substring(1), rdvPath);
+
+            foreach(Sim sim in outfit.sims)
+            {
+                string simPath = $"{outputFolder}{parts.fpkPath}_fpkd{sim.path}";
+                Directory.CreateDirectory(Path.GetDirectoryName(simPath));
+                File.Copy(sim.path.Substring(1), simPath);
+            } //foreach
+
+            string partsPath = $"{outputFolder}{parts.fpkPath}_fpkd{parts.partsPath}";
+            Directory.CreateDirectory(Path.GetDirectoryName(partsPath));
+
+            using (FileStream stream = new FileStream(partsPath, FileMode.Create))
             {
                 try
                 {
@@ -46,54 +68,16 @@ namespace MQPMTool2
                     stream.Close();
                 } //finally
             } //using
-        } //button1_Click
+        } //outputTestButton_Click
 
-        private void partsListWriteTestButton_Click(object sender, EventArgs e)
+        private void outputFolderButton_Click(object sender, EventArgs e)
         {
-            Parts parts0 = new Parts();
-            parts0.name = "Snake - Fatigues";
-            parts0.fpkPath = "/Assets/tpp/pack/player/parts/plparts_normal";
-            parts0.partsPath = "/Assets/tpp/parts/chara/sna/sna0_main0_def_v00.parts";
-            Globals.partsList.list.Add(parts0);
-
-            Parts parts1 = new Parts();
-            parts1.name = "Snake - Sneaking Suit";
-            parts1.fpkPath = "/Assets/tpp/pack/player/parts/plparts_venom";
-            parts1.partsPath = "/Assets/tpp/parts/chara/sna/sna4_main0_def_v00.parts";
-            Globals.partsList.list.Add(parts1);
-
-            Globals.WriteList<PartsList>(Globals.partsList, "PartsList.xml");
-        } //partsListWriteTestButton_Click
-
-        private void outfitListWriteTestButton_Click(object sender, EventArgs e)
-        {
-            Outfit outfit0 = new Outfit();
-            outfit0.name = "Quiet - Default";
-            outfit0.mdlPath = "/Assets/tpp/chara/qui/Scenes/qui0_main0_def.fmdl";
-            outfit0.cnpPath = "/Assets/tpp/chara/qui/Scenes/qui0_main0_def.fcnp";
-            outfit0.rdvPath = "/Assets/tpp/chara/qui/Scenes/qui0_main0_def.frdv";
-            outfit0.sims = new List<Sim>();
-
-            Sim sim0 = new Sim();
-            sim0.name = "Sim_asr";
-            sim0.path = "/Assets/tpp/chara/sna/Fox_files/sna0_main0_asr.sim";
-            sim0.isActive = true;
-            outfit0.sims.Add(sim0);
-
-            Sim sim1 = new Sim();
-            sim1.name = "Sim_broken_arm";
-            sim1.path = "/Assets/tpp/chara/sna/Fox_files/sna0_broken_arm_r.sim";
-            sim1.isActive = false;
-            outfit0.sims.Add(sim1);
-
-            Sim sim2 = new Sim();
-            sim2.name = "SimQuiet";
-            sim2.path = "/Assets/tpp/chara/qui/Fox_files/quip_main0_def.sim";
-            sim2.isActive = true;
-            outfit0.sims.Add(sim2);
-
-            Globals.outfitList.list.Add(outfit0);
-            Globals.WriteList<OutfitList>(Globals.outfitList, "OutfitList.xml");
-        }
+            CommonOpenFileDialog folderDialog = new CommonOpenFileDialog();
+            folderDialog.IsFolderPicker = true;
+            if(folderDialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                outputFolderTextBox.Text = folderDialog.FileName;
+            } //if
+        } //outputFolderButton_Click
     } //class ends
 }//namespace ends
