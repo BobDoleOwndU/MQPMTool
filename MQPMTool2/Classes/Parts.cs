@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace MQPMTool2.Classes
 {
@@ -13,5 +14,8 @@ namespace MQPMTool2.Classes
 
         [XmlElement(ElementName = "PartsPath")]
         public string partsPath;
+
+        [XmlArray(ElementName = "Fovas")]
+        public List<string> fovas;
     } //class
 } //namespace

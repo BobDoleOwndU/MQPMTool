@@ -20,5 +20,8 @@ namespace MQPMTool2.Classes
 
         [XmlArray(ElementName = "Sims")]
         public List<Sim> sims;
+
+        [XmlArray(ElementName = "AdditionalFiles")]
+        public List<AdditionalFile> additionalFiles;
     } //class
 } //namespace
