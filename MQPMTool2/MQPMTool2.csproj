@@ -89,6 +89,7 @@
     <Compile Include="Classes\AdditionalFileDefault.cs" />
     <Compile Include="Classes\AdditionalFileFova.cs" />
     <Compile Include="Classes\AdditionalFileFovaFmdl.cs" />
+    <Compile Include="Classes\AdditionalFilePftxs.cs" />
     <Compile Include="Classes\Outfit.cs" />
     <Compile Include="Classes\OutfitList.cs" />
     <Compile Include="Classes\Parts.cs" />

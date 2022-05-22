@@ -3,7 +3,7 @@
 namespace MQPMTool2.Classes
 {
     [XmlType]
-    [XmlInclude(typeof(AdditionalFileDefault)), XmlInclude(typeof(AdditionalFileFova)), XmlInclude(typeof(AdditionalFileFovaFmdl))]
+    [XmlInclude(typeof(AdditionalFileDefault)), XmlInclude(typeof(AdditionalFileFova)), XmlInclude(typeof(AdditionalFileFovaFmdl)), XmlInclude(typeof(AdditionalFilePftxs))]
     public abstract class AdditionalFile
     {
         [XmlElement(ElementName = "SourcePath")]

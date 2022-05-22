@@ -14,6 +14,10 @@ namespace MQPMTool2
         public MainForm()
         {
             InitializeComponent();
+
+            //PartsCreationTest();
+            //OutfitCreationTest();
+
             InitializeComboBox();
         } //MainForm
 
@@ -28,148 +32,300 @@ namespace MQPMTool2
 
         private void PartsCreationTest()
         {
-            Parts parts = new Parts();
-            parts.name = "Snake - Fatigues";
-            parts.fpkPath = "/Assets/tpp/pack/player/parts/plparts_normal";
-            parts.partsPath = "/Assets/tpp/parts/chara/sna/sna0_main0_def_v00.parts";
-            parts.fovas = new List<string>();
-            parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm0_v00.fv2");
-            parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm1_v00.fv2");
-            parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm2_v00.fv2");
-            parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm3_v00.fv2");
-            parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm4_v00.fv2");
-            parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm6_v00.fv2");
-            parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm7_v00.fv2");
-            parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face0_v00.fv2");
-            parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face1_v00.fv2");
-            parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face2_v00.fv2");
-            parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face4_v00.fv2");
-            parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face5_v00.fv2");
-            parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face6_v00.fv2");
-
             Globals.partsList = new PartsList();
             Globals.partsList.list = new List<Parts>();
-            Globals.partsList.list.Add(parts);
+
+            {
+                Parts parts = new Parts();
+                parts.name = "Snake - Fatigues";
+                parts.fpkPath = "/Assets/tpp/pack/player/parts/plparts_normal";
+                parts.partsPath = "/Assets/tpp/parts/chara/sna/sna0_main0_def_v00.parts";
+                parts.fovas = new List<string>();
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm0_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm1_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm2_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm3_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm4_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm6_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm7_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face0_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face1_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face2_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face4_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face5_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face6_v00.fv2");
+                Globals.partsList.list.Add(parts);
+            } //block
+            {
+                Parts parts = new Parts();
+                parts.name = "Snake - Sneaking Suit";
+                parts.fpkPath = "/Assets/tpp/pack/player/parts/plparts_venom";
+                parts.partsPath = "/Assets/tpp/parts/chara/sna/sna4_main0_def_v00.parts";
+                parts.fovas = new List<string>();
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm0_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm1_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm2_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm3_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm4_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm6_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_arm7_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face0_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face1_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face2_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face4_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face5_v00.fv2");
+                parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face6_v00.fv2");
+                Globals.partsList.list.Add(parts);
+            } //block
 
             Globals.WriteList(Globals.partsList, "PartsList.xml");
         } //PartsCreationTest
 
         private void OutfitCreationTest()
         {
-            Outfit outfit = new Outfit();
-            outfit.name = "Quiet";
-            outfit.mdlPath = "/Assets/tpp/chara/qui/Scenes/qui0_main0_def.fmdl";
-            outfit.cnpPath = "/Assets/tpp/chara/qui/Scenes/qui0_main0_def.fcnp";
-            outfit.rdvPath = "/Assets/tpp/chara/qui/Scenes/qui0_main0_def.frdv";
-
-            outfit.sims = new List<Sim>();
-
-            {
-                Sim sim = new Sim();
-                sim.name = "Sim_asr";
-                sim.path = "/Assets/tpp/chara/sna/Fox_files/sna0_main0_asr.sim";
-                sim.isActive = true;
-                outfit.sims.Add(sim);
-            }//block
-            {
-                Sim sim = new Sim();
-                sim.name = "Sim_broken_arm";
-                sim.path = "/Assets/tpp/chara/sna/Fox_files/sna0_broken_arm_r.sim";
-                sim.isActive = false;
-                outfit.sims.Add(sim);
-            }//block
-            {
-                Sim sim = new Sim();
-                sim.name = "SimQuiet";
-                sim.path = "/Assets/tpp/chara/qui/Fox_files/quip_main0_def.sim";
-                sim.isActive = true;
-                outfit.sims.Add(sim);
-            }//block
-
-            outfit.additionalFiles = new List<AdditionalFile>();
-
-            {
-                AdditionalFileFova additionalFile = new AdditionalFileFova();
-                additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
-                additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm0_v00.fv2";
-                outfit.additionalFiles.Add(additionalFile);
-            } //block
-            {
-                AdditionalFileFova additionalFile = new AdditionalFileFova();
-                additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
-                additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm1_v00.fv2";
-                outfit.additionalFiles.Add(additionalFile);
-            } //block
-            {
-                AdditionalFileFova additionalFile = new AdditionalFileFova();
-                additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
-                additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm2_v00.fv2";
-                outfit.additionalFiles.Add(additionalFile);
-            } //block
-            {
-                AdditionalFileFova additionalFile = new AdditionalFileFova();
-                additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
-                additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm3_v00.fv2";
-                outfit.additionalFiles.Add(additionalFile);
-            } //block
-            {
-                AdditionalFileFova additionalFile = new AdditionalFileFova();
-                additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
-                additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm4_v00.fv2";
-                outfit.additionalFiles.Add(additionalFile);
-            } //block
-            {
-                AdditionalFileFova additionalFile = new AdditionalFileFova();
-                additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
-                additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm6_v00.fv2";
-                outfit.additionalFiles.Add(additionalFile);
-            } //block
-            {
-                AdditionalFileFova additionalFile = new AdditionalFileFova();
-                additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
-                additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm7_v00.fv2";
-                outfit.additionalFiles.Add(additionalFile);
-            } //block
-            {
-                AdditionalFileFova additionalFile = new AdditionalFileFova();
-                additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
-                additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face0_v00.fv2";
-                outfit.additionalFiles.Add(additionalFile);
-            } //block
-            {
-                AdditionalFileFova additionalFile = new AdditionalFileFova();
-                additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
-                additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face1_v00.fv2";
-                outfit.additionalFiles.Add(additionalFile);
-            } //block
-            {
-                AdditionalFileFova additionalFile = new AdditionalFileFova();
-                additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
-                additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face2_v00.fv2";
-                outfit.additionalFiles.Add(additionalFile);
-            } //block
-            {
-                AdditionalFileFova additionalFile = new AdditionalFileFova();
-                additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
-                additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face4_v00.fv2";
-                outfit.additionalFiles.Add(additionalFile);
-            } //block
-            {
-                AdditionalFileFova additionalFile = new AdditionalFileFova();
-                additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
-                additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face5_v00.fv2";
-                outfit.additionalFiles.Add(additionalFile);
-            } //block
-            {
-                AdditionalFileFova additionalFile = new AdditionalFileFova();
-                additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
-                additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face6_v00.fv2";
-                outfit.additionalFiles.Add(additionalFile);
-            } //block
-
             Globals.outfitList = new OutfitList();
             Globals.outfitList.list = new List<Outfit>();
-            Globals.outfitList.list.Add(outfit);
+
+            {
+                Outfit outfit = new Outfit();
+                outfit.name = "Quiet - Default";
+                outfit.mdlPath = "/Assets/tpp/chara/qui/Scenes/qui0_main0_def.fmdl";
+                outfit.cnpPath = "/Assets/tpp/chara/qui/Scenes/qui0_main0_def.fcnp";
+                outfit.rdvPath = "/Assets/tpp/chara/qui/Scenes/qui0_main0_def.frdv";
+
+                outfit.sims = new List<Sim>();
+
+                {
+                    Sim sim = new Sim();
+                    sim.name = "Sim_asr";
+                    sim.path = "/Assets/tpp/chara/sna/Fox_files/sna0_main0_asr.sim";
+                    sim.isActive = true;
+                    outfit.sims.Add(sim);
+                }//block
+                {
+                    Sim sim = new Sim();
+                    sim.name = "Sim_broken_arm";
+                    sim.path = "/Assets/tpp/chara/sna/Fox_files/sna0_broken_arm_r.sim";
+                    sim.isActive = false;
+                    outfit.sims.Add(sim);
+                }//block
+                {
+                    Sim sim = new Sim();
+                    sim.name = "SimQuiet";
+                    sim.path = "/Assets/tpp/chara/qui/Fox_files/quip_main0_def.sim";
+                    sim.isActive = true;
+                    outfit.sims.Add(sim);
+                }//block
+
+                outfit.additionalFiles = new List<AdditionalFile>();
+
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm0_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm1_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm2_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm3_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm4_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm6_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm7_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face0_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face1_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face2_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face4_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face5_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face6_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+
+                Globals.outfitList.list.Add(outfit);
+            } //block
+
+            {
+                Outfit outfit = new Outfit();
+                outfit.name = "Quiet - XOF";
+                outfit.mdlPath = "/Assets/tpp/mqpm/body-xof.fmdl";
+                outfit.cnpPath = "/Assets/tpp/mqpm/femaleinvisible.fcnp";
+                outfit.rdvPath = "/Assets/tpp/mqpm/xof.frdv";
+
+                outfit.sims = new List<Sim>();
+
+                {
+                    Sim sim = new Sim();
+                    sim.name = "Sim_asr";
+                    sim.path = "/Assets/tpp/chara/sna/Fox_files/sna0_main0_asr.sim";
+                    sim.isActive = true;
+                    outfit.sims.Add(sim);
+                }//block
+                {
+                    Sim sim = new Sim();
+                    sim.name = "Sim_broken_arm";
+                    sim.path = "/Assets/tpp/chara/sna/Fox_files/sna0_broken_arm_r.sim";
+                    sim.isActive = false;
+                    outfit.sims.Add(sim);
+                }//block
+                {
+                    Sim sim = new Sim();
+                    sim.name = "SimQuiet";
+                    sim.path = "/Assets/tpp/chara/qui/Fox_files/quip_main0_def.sim";
+                    sim.isActive = true;
+                    outfit.sims.Add(sim);
+                }//block
+
+                outfit.additionalFiles = new List<AdditionalFile>();
+
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm0_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm1_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm2_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm3_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm4_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm6_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/empty.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_arm7_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/headtest.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face0_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/headtest.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face1_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/headtest.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face2_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/headtest.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face4_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/headtest.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face5_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileFova additionalFile = new AdditionalFileFova();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/headtest.fv2";
+                    additionalFile.targetPath = "/Assets/tpp/fova/chara/sna/sna0_face6_v00.fv2";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFileDefault additionalFile = new AdditionalFileDefault();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/head.fmdl";
+                    additionalFile.destinationPath = "/Assets/tpp/mqpm/head.fmdl";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+                {
+                    AdditionalFilePftxs additionalFile = new AdditionalFilePftxs();
+                    additionalFile.sourcePath = "/Assets/tpp/mqpm/xof.pftxs";
+                    outfit.additionalFiles.Add(additionalFile);
+                } //block
+
+                Globals.outfitList.list.Add(outfit);
+            } //block
 
             Globals.WriteList(Globals.outfitList, "OutfitList.xml");
         } //OutfitCreationTest
@@ -201,15 +357,35 @@ namespace MQPMTool2
 
             foreach(AdditionalFile additionalFile in outfit.additionalFiles)
             {
-                if(additionalFile is AdditionalFileFova afFova)
+                switch(additionalFile)
                 {
-                    if(parts.fovas.Contains(afFova.targetPath))
-                    {
-                        string fovaPath = $"{outputFolder}{parts.fpkPath}_fpk{afFova.targetPath}";
-                        Directory.CreateDirectory(Path.GetDirectoryName(fovaPath));
-                        File.Copy(afFova.sourcePath.Substring(1), fovaPath, true);
-                    } //if
-                } //if
+                    case AdditionalFileDefault afDefault:
+                        string filePath = $"{outputFolder}{parts.fpkPath}_fpk{afDefault.destinationPath}";
+                        Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+                        File.Copy(afDefault.sourcePath.Substring(1), filePath, true);
+                        break;
+                    case AdditionalFileFova afFova:
+                        if (parts.fovas.Contains(afFova.targetPath))
+                        {
+                            string fovaPath = $"{outputFolder}{parts.fpkPath}_fpk{afFova.targetPath}";
+                            Directory.CreateDirectory(Path.GetDirectoryName(fovaPath));
+                            File.Copy(afFova.sourcePath.Substring(1), fovaPath, true);
+                        } //if
+                        break;
+                    case AdditionalFileFovaFmdl afFovaFmdl:
+                        if (parts.fovas.Contains(afFovaFmdl.targetPath))
+                        {
+                            string fmdlPath = $"{outputFolder}{parts.fpkPath}_fpk{afFovaFmdl.destinationPath}";
+                            Directory.CreateDirectory(Path.GetDirectoryName(fmdlPath));
+                            File.Copy(afFovaFmdl.sourcePath.Substring(1), fmdlPath, true);
+                        } //if
+                        break;
+                    case AdditionalFilePftxs afPftxs:
+                        string pftxsPath = $"{outputFolder}{parts.fpkPath}.pftxs";
+                        Directory.CreateDirectory(Path.GetDirectoryName(pftxsPath));
+                        File.Copy(afPftxs.sourcePath.Substring(1), pftxsPath, true);
+                        break;
+                } //switch
             } //foreach
 
             string partsPath = $"{outputFolder}{parts.fpkPath}_fpkd{parts.partsPath}";
