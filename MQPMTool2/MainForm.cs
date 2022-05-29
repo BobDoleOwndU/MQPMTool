@@ -77,6 +77,13 @@ namespace MQPMTool2
                 parts.fovas.Add("/Assets/tpp/fova/chara/sna/sna0_face6_v00.fv2");
                 Globals.partsList.list.Add(parts);
             } //block
+            {
+                Parts parts = new Parts();
+                parts.name = "Quiet - Default";
+                parts.fpkPath = "/Assets/tpp/pack/buddy/quiet/buddy_quiet2_00";
+                parts.partsPath = "/Assets/tpp/parts/chara/qui/qui0_main0_def_v00.parts";
+                Globals.partsList.list.Add(parts);
+            } //block
 
             Globals.WriteList(Globals.partsList, "PartsList.xml");
         } //PartsCreationTest
